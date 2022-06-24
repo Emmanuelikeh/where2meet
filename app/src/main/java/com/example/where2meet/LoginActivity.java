@@ -28,10 +28,10 @@ public class LoginActivity extends AppCompatActivity {
         // Check if there's a user logged in
         // if there is, take them to MainActivity
 
-//        if(ParseUser.getCurrentUser() != null){
-//            // getCurrentUser would be null if user is not logged in already
-//            goMainActivity();
-//        }
+        if(ParseUser.getCurrentUser() != null){
+            // getCurrentUser would be null if user is not logged in already
+            goMainActivity();
+        }
 
 
         activityLoginBinding.btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -64,15 +64,11 @@ public class LoginActivity extends AppCompatActivity {
                 // parse always takes in exception, if there wasn't any problem
                 // the exception will be null;
                 if(e != null) {
-                    Log.e("LoginActivity", "This is an error", e);
                     Toast.makeText(LoginActivity.this, "Issue with Login", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 goMainActivity();
                 Toast.makeText(LoginActivity.this,"Login Success", Toast.LENGTH_SHORT).show();
-
-
-
 
             }
         });
