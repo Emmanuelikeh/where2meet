@@ -79,9 +79,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
 // log's out the current user and navigate back to the login screen
-    private void onLogout() {
+    public void onLogout() {
         ParseUser.logOut();
-        Intent i = new Intent(MainActivity.this, LoginActivity.class);
+        Intent i = new Intent(this, LoginActivity.class);
         startActivity(i);
         finish();
     }

@@ -65,7 +65,10 @@ public class SignupActivity extends AppCompatActivity {
             public void done(ParseException e) {
                 if(e == null){
                     Toast.makeText(SignupActivity.this, "Account Created, Login!", Toast.LENGTH_SHORT).show();
+                    ParseUser.logOut();
                     goLoginActivity();
+
+
 
                 }
                 else{
