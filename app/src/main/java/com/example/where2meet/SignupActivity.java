@@ -73,6 +73,7 @@ public class SignupActivity extends AppCompatActivity {
                 }
                 else{
                     e.printStackTrace();
+                    Toast.makeText(SignupActivity.this, "Failed! to create account" , Toast.LENGTH_SHORT).show();
                 }
             }
         });
