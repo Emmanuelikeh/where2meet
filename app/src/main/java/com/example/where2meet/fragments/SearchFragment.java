@@ -88,6 +88,7 @@ public class SearchFragment extends Fragment {
         params.put("query", query);
         params.put("limit",limit);
         headers.put("Authorization", "fsq3HapICxpWstVvgaSOAlrzGLoCv7IypLnr82Q3c0AVzDk=");
+
         client.get(hostLink,headers,params, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Headers headers, JSON json) {

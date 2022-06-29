@@ -1,13 +1,25 @@
 package com.example.where2meet;
 
+import android.util.Log;
+
+import com.bumptech.glide.Glide;
+import com.codepath.asynchttpclient.AsyncHttpClient;
+import com.codepath.asynchttpclient.RequestHeaders;
+import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.parceler.Parcel;
 
 
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.Headers;
+
+
+@Parcel
 public class SearchResult {
     String name;
     String fsqId;
@@ -45,6 +57,11 @@ public class SearchResult {
         }
         return searchResults;
     }
+
+
+
+
+
 
 
     public String getName(){

@@ -67,9 +67,6 @@ public class SignupActivity extends AppCompatActivity {
                     Toast.makeText(SignupActivity.this, "Account Created, Login!", Toast.LENGTH_SHORT).show();
                     ParseUser.logOut();
                     goLoginActivity();
-
-
-
                 }
                 else{
                     e.printStackTrace();
