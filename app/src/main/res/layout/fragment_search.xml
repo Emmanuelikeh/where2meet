@@ -6,42 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".fragments.SearchFragment">
 
-
-
-<!--    <EditText-->
-<!--        android:id="@+id/etSearchBox"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginStart="4dp"-->
-<!--        android:layout_marginTop="4dp"-->
-<!--        android:ems="10"-->
-<!--        android:inputType="textPersonName"-->
-<!--        android:minHeight="48dp"-->
-<!--        android:layout_constraintStart_toEndOf="@+id/imgBtnSearchBtn"-->
-<!--        android:layout_constraintTop_toTopOf="parent"-->
-<!--        tools:text="Where do you want to go" />-->
-
-<!--    <ImageButton-->
-<!--        android:id="@+id/imgBtnSearchBtn"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginStart="16dp"-->
-<!--        android:src="@android:drawable/ic_menu_search"-->
-<!--        android:layout_constraintStart_toStartOf="parent"-->
-<!--        android:layout_constraintTop_toTopOf="parent"-->
-<!--        tools:ignore="SpeakableTextPresentCheck" />-->
-
-<!--    <androidx.recyclerview.widget.RecyclerView-->
-<!--        android:id="@+id/rvSearchItems"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="16dp"-->
-<!--        android:layout_constraintEnd_toEndOf="parent"-->
-<!--        android:layout_constraintHorizontal_bias="0.0"-->
-<!--        android:layout_constraintStart_toStartOf="parent"-->
-<!--        android:layout_constraintTop_toBottomOf="@+id/etSearchBox" />-->
-
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvSearchItems"
         android:layout_width="match_parent"
@@ -73,4 +37,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="SpeakableTextPresentCheck" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
