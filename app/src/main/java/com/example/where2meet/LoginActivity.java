@@ -23,7 +23,6 @@ public class LoginActivity extends AppCompatActivity {
         View view = activityLoginBinding.getRoot();
         setContentView(view);
 
-
         // In order to avoid repetition in the loginIn process
         // Check if there's a user logged in
         // if there is, take them to MainActivity
@@ -32,7 +31,6 @@ public class LoginActivity extends AppCompatActivity {
             // getCurrentUser would be null if user is not logged in already
             goMainActivity();
         }
-
 
         activityLoginBinding.btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override

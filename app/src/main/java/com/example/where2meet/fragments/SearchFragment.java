@@ -16,10 +16,8 @@ import com.codepath.asynchttpclient.AsyncHttpClient;
 import com.codepath.asynchttpclient.RequestHeaders;
 import com.codepath.asynchttpclient.RequestParams;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
-import com.example.where2meet.R;
 import com.example.where2meet.SearchResult;
 import com.example.where2meet.SearchResultAdapter;
-import com.example.where2meet.databinding.FragmentProfileBinding;
 import com.example.where2meet.databinding.FragmentSearchBinding;
 
 import org.json.JSONArray;
@@ -57,7 +55,6 @@ public class SearchFragment extends Fragment {
         fragmentSearchBinding = null;
     }
 
-
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -65,20 +62,14 @@ public class SearchFragment extends Fragment {
         adapter = new SearchResultAdapter(getContext(), searchResultList);
         fragmentSearchBinding.rvSearchItems.setAdapter(adapter);
         fragmentSearchBinding.rvSearchItems.setLayoutManager(new LinearLayoutManager(getContext()));
-
-
+        querySearchResults("", "https://api.foursquare.com/v3/places/search");
         fragmentSearchBinding.imgBtnSearchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String searchquery = fragmentSearchBinding.etSearchBox.getText().toString();
-                fragmentSearchBinding.etSearchBox.setText("");
-                adapter.clear();
-                querySearchResults(searchquery, "https://api.foursquare.com/v3/places/search");
+                performSearch();
             }
         });
     }
-
-
 
     public void querySearchResults(String query, String hostLink){
         int limit = 10;
@@ -98,8 +89,6 @@ public class SearchFragment extends Fragment {
                     JSONArray results = jsonObject.getJSONArray("results");
                     searchResultList.addAll(SearchResult.fromJsonArray(results));
                     adapter.notifyDataSetChanged();
-                    Log.i(TAG,"SearchResults: " + searchResultList.size());
-
                 } catch (JSONException e) {
                     Log.e(TAG,"Hit Json exception", e);
                     e.printStackTrace();
@@ -111,6 +100,12 @@ public class SearchFragment extends Fragment {
                 Log.d(TAG,"onFailure");
             }
         });
+    }
 
+    private void performSearch(){
+        String searchquery = fragmentSearchBinding.etSearchBox.getText().toString();
+        fragmentSearchBinding.etSearchBox.setText("");
+        adapter.clear();
+        querySearchResults(searchquery, "https://api.foursquare.com/v3/places/search");
     }
 }

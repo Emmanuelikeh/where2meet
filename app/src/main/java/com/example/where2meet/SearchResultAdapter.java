@@ -20,10 +20,7 @@ import java.util.List;
 
 public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapter.ViewHolder> {
     private Context context;
-
     private List<SearchResult> searchResults;
-
-
 
     public SearchResultAdapter(Context context, List<SearchResult> searchResults){
         this.context = context;
@@ -51,7 +48,6 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
     }
 
     public class ViewHolder extends  RecyclerView.ViewHolder implements View.OnClickListener{
-
         private ItemSearchresultBinding itemSearchresultBinding;
 
         public ViewHolder(@NonNull ItemSearchresultBinding itemSearchresultBinding) {
@@ -65,13 +61,11 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
             itemSearchresultBinding.tvAddress.setText(searchResult.getAddress());
             itemSearchresultBinding.tvDistance.setText(searchResult.getDistance());
             Glide.with(context).load(searchResult.getIcon()).override(100,200).centerCrop().into(itemSearchresultBinding.ivIcon);
-
         }
 
         @Override
         public void onClick(View v) {
             Toast.makeText(context,"this clicks",Toast.LENGTH_SHORT).show();
-
             int position = getAdapterPosition();
             if(position != RecyclerView.NO_POSITION){
                 SearchResult searchResult = searchResults.get(position);
@@ -79,12 +73,9 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
                 i.putExtra(SearchResult.class.getSimpleName(), Parcels.wrap (searchResult));
                 context.startActivity(i);
             }
-
-
-
-
         }
     }
+
     public void clear() {
         searchResults.clear();
         notifyDataSetChanged();

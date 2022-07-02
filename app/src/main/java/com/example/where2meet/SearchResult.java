@@ -18,7 +18,6 @@ import java.util.List;
 
 import okhttp3.Headers;
 
-
 @Parcel
 public class SearchResult {
     String name;
@@ -32,7 +31,6 @@ public class SearchResult {
     // no-arg, empty constructor required for Parceler
     public SearchResult() {}
 
-
     public SearchResult(JSONObject jsonObject) throws JSONException{
         name = jsonObject.getString("name");
         fsqId = jsonObject.getString("fsq_id");
@@ -42,13 +40,10 @@ public class SearchResult {
         JSONObject icon = firstItem.getJSONObject("icon");
         iconPrefix = icon.getString("prefix");
         iconSuffix = icon.getString("suffix");
-
         JSONObject location = jsonObject.getJSONObject("location");
         formattedAddress = location.getString("formatted_address");
         address = location.getString("address");
-
     }
-
 
     public static List<SearchResult> fromJsonArray(JSONArray searchResultJsonArray) throws JSONException{
         List<SearchResult> searchResults = new ArrayList<>();

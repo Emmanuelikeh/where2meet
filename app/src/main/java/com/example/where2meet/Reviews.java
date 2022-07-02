@@ -11,8 +11,6 @@ public class Reviews {
     String createdAt;
     String commentary;
 
-
-
     public Reviews(JSONObject jsonObject) throws JSONException {
         createdAt = jsonObject.getString("created_at");
         commentary = jsonObject.getString("text");
@@ -26,7 +24,6 @@ public class Reviews {
         }
         return reviews;
     }
-
 
     public String getCreatedAt(){
         return  createdAt;

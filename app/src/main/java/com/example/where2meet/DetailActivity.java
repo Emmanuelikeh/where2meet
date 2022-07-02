@@ -44,13 +44,10 @@ public class DetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         activityDetailBinding = ActivityDetailBinding.inflate(getLayoutInflater());
         setContentView(activityDetailBinding.getRoot());
-
         searchResult = (SearchResult) Parcels.unwrap(getIntent().getParcelableExtra(SearchResult.class.getSimpleName()));
-        activityDetailBinding.tvFormattedAddress.setText("Address: " + searchResult.getFormattedAddress());
-        activityDetailBinding.tvDetailName.setText("Name: " + searchResult.getName());
+        activityDetailBinding.tvFormattedAddress.setText(searchResult.getFormattedAddress());
+        activityDetailBinding.tvDetailName.setText(searchResult.getName());
         String id = searchResult.getFsqId();
-
-
         String hostLink = formHostLink(id,"https://api.foursquare.com/v3/places/","/photos" );
         queryOtherDetails(hostLink);
 
@@ -83,16 +80,12 @@ public class DetailActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
             }
-
             @Override
             public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
                 Log.d("check this ", "Failed ");
 
             }
         });
-
-
-
     }
 
     private void showAlertDialog(){
@@ -100,7 +93,6 @@ public class DetailActivity extends AppCompatActivity {
        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
        alertDialogBuilder.setView(dialogInviteBinding.getRoot());
        final AlertDialog alertDialog = alertDialogBuilder.create();
-
 
         dialogInviteBinding.etInviteAddress.setText(searchResult.getFormattedAddress());
         
@@ -116,7 +108,6 @@ public class DetailActivity extends AppCompatActivity {
                 dialog.cancel();
             }
         });
-
 
         dialogInviteBinding.btnSelectFriend.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -144,7 +135,7 @@ public class DetailActivity extends AppCompatActivity {
                     JSONObject firstItem = jsonArray.getJSONObject(0);
                     String imagePrefix = firstItem.getString("prefix");
                     String imageSuffix = firstItem.getString("suffix");
-                    Glide.with(DetailActivity.this).load(imagePrefix+"original"+imageSuffix).override(1200,900).centerCrop().into(activityDetailBinding.ivPlaceImage);
+                    Glide.with(DetailActivity.this).load(imagePrefix+"original"+imageSuffix).centerCrop().into(activityDetailBinding.ivPlaceImage);
 
 
                 } catch (JSONException e) {
@@ -161,12 +152,4 @@ public class DetailActivity extends AppCompatActivity {
         });
 
     }
-
-
-
-
-
-
-
-
 }

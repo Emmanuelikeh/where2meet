@@ -14,15 +14,12 @@ import java.util.List;
 
 public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ViewHolder> {
     private Context context;
-
     private List<Reviews> reviews;
-
 
     public ReviewsAdapter(Context context, List<Reviews> reviews){
         this.context = context;
         this.reviews = reviews;
     }
-
 
     @NonNull
     @Override
@@ -36,7 +33,6 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ViewHold
     public void onBindViewHolder(@NonNull ReviewsAdapter.ViewHolder holder, int position) {
         Reviews review = reviews.get(position);
         holder.bind(review);
-
     }
 
     @Override
@@ -52,7 +48,6 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ViewHold
             this.itemReviewBinding = itemReviewBinding;
 
         }
-
 
         public void bind(Reviews review) {
             itemReviewBinding.etCommentary.setText(review.getCommentary());

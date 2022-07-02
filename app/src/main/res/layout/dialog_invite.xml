@@ -14,7 +14,7 @@
         android:scaleType="center" />
 
     <EditText
-        android:id="@+id/tvInviteTitle"
+        android:id="@+id/etInviteTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="4dp"
@@ -22,25 +22,33 @@
         android:layout_marginRight="4dp"
         android:layout_marginBottom="4dp"
         android:hint="Title"
+        android:inputType="textShortMessage"
         android:minHeight="48dp" />
 
     <EditText
-        android:id="@+id/tvInviteTime"
+        android:id="@+id/etInviteDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="4dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginRight="4dp"
-        android:layout_marginBottom="16dp"
-        android:fontFamily="sans-serif"
+        android:ems="10"
+        android:hint="Date"
+        android:inputType="date"
+        android:minHeight="48dp" />
+
+    <EditText
+        android:id="@+id/etInviteTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
         android:hint="Time"
+        android:inputType="time"
         android:minHeight="48dp" />
 
     <TextView
         android:id="@+id/etInviteAddress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="addy" />
+        android:textSize="20sp"
+        tools:text="Address" />
 
     <Button
         android:id="@+id/btnSelectFriend"
