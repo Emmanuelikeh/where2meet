@@ -11,7 +11,7 @@ public class ParseApplication extends Application {
         super.onCreate();
 
         //Register my parse models
-
+        ParseObject.registerSubclass(Invite.class);
         Parse.initialize(new Parse.Configuration.Builder(this)
                 .applicationId(getString(R.string.back4app_app_id))
                 .clientKey(getString(R.string.back4app_client_key))

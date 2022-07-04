@@ -21,7 +21,7 @@ public class FriendSearchActivity extends AppCompatActivity {
     public static final String TAG = "Friend";
     private ActivityFriendSearchBinding activityFriendSearchBinding;
     private FriendResultAdapter adapter;
-    private  List<ParseUser> parseUsers;
+    private List<ParseUser> parseUsers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +32,7 @@ public class FriendSearchActivity extends AppCompatActivity {
         adapter = new FriendResultAdapter(this, parseUsers);
         activityFriendSearchBinding.rvFriendList.setAdapter(adapter);
         activityFriendSearchBinding.rvFriendList.setLayoutManager(new LinearLayoutManager(this));
+        //first call to return a list of all friends
         queryUser("");
         activityFriendSearchBinding.btnFriendSearch.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,6 +61,7 @@ public class FriendSearchActivity extends AppCompatActivity {
         adapter.clear();
         queryUser(friendLook);
     }
+
 }
 
 

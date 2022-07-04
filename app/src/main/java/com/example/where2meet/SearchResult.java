@@ -53,12 +53,6 @@ public class SearchResult {
         return searchResults;
     }
 
-
-
-
-
-
-
     public String getName(){
         return name;
     }

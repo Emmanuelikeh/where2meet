@@ -16,7 +16,6 @@ public class Reviews {
         commentary = jsonObject.getString("text");
 
     }
-
     public static List<Reviews> fromJsonArray(JSONArray reviewsJsonArray) throws JSONException{
         List<Reviews> reviews = new ArrayList<>();
         for(int i =0; i < reviewsJsonArray.length(); i++){
