@@ -43,8 +43,11 @@ public class FriendSearchActivity extends AppCompatActivity {
     }
 
     private void queryUser(String friend) {
+        String currentUser = ParseUser.getCurrentUser().getUsername();
         ParseQuery<ParseUser> query = ParseUser.getQuery();
         query.whereContains("username", friend);
+        query.whereNotEqualTo("username", currentUser);
+
         query.findInBackground(new FindCallback<ParseUser>() {
             @Override
             public void done(List<ParseUser> objects, ParseException e) {

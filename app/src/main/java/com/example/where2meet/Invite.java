@@ -22,7 +22,6 @@ public class Invite extends ParseObject {
 
     public void setTime(Date time){
         put(KEY_TIME,time);
-
     }
 
     public void setSender(ParseUser sender){
@@ -40,5 +39,20 @@ public class Invite extends ParseObject {
         put(KEY_TITLE,title);
     }
 
+    public String getAddress(){
+        return getString(KEY_ADDRESS);
+    }
+    public Date getTime(){
+        return getDate(KEY_TIME);
+    }
+    public String getTitle(){
+        return getString(KEY_TITLE);
+    }
+    public Date getInvitationDate(){
+        return  getDate(KEY_INVITATION_DATE);
+    }
+    public ParseUser getSender(){
+        return  getParseUser(KEY_SENDER);
+    }
 
 }
