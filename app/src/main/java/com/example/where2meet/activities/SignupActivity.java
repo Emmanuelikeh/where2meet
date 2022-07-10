@@ -1,4 +1,4 @@
-package com.example.where2meet;
+package com.example.where2meet.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -28,6 +28,7 @@ public class SignupActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
 
         activitySignupBinding.btnSignup.setOnClickListener(new View.OnClickListener() {
             @Override

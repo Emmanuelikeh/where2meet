@@ -2,6 +2,7 @@ package com.example.where2meet;
 
 import android.app.Application;
 
+import com.example.where2meet.models.Invite;
 import com.parse.Parse;
 import com.parse.ParseObject;
 

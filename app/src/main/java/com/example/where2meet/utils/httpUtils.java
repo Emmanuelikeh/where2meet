@@ -1,4 +1,4 @@
-package com.example.where2meet;
+package com.example.where2meet.utils;
 
 import android.util.Log;
 
@@ -13,7 +13,7 @@ import org.json.JSONObject;
 
 import okhttp3.Headers;
 
-public class HttpUtils {
+public class httpUtils {
 
     public static void getRequest(String hostLink, JsonHttpResponseHandler handler ){
         AsyncHttpClient client = new AsyncHttpClient();
@@ -21,3 +21,4 @@ public class HttpUtils {
         headers.put("Authorization", "fsq3HapICxpWstVvgaSOAlrzGLoCv7IypLnr82Q3c0AVzDk=");
         client.get(hostLink,headers,null, handler);
 }};
+

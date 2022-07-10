@@ -5,6 +5,8 @@
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
 
     <queries>
         <intent>
@@ -25,13 +27,13 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".ComposeActivity"
+            android:name=".activities.ComposeActivity"
             android:exported="false" />
         <activity
-            android:name=".FriendSearchActivity"
+            android:name=".activities.FriendSearchActivity"
             android:exported="false" />
         <activity
-            android:name=".DetailActivity"
+            android:name=".activities.DetailActivity"
             android:exported="false" />
 
         <meta-data
@@ -45,7 +47,7 @@
             android:value="@string/back4app_client_key" />
 
         <activity
-            android:name=".LoginActivity"
+            android:name=".activities.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -53,8 +55,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
-        <activity android:name=".SignupActivity" />
+        <activity android:name=".activities.MainActivity" />
+        <activity android:name=".activities.SignupActivity" />
     </application>
 
 </manifest>

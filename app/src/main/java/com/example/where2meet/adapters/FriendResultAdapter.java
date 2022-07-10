@@ -1,9 +1,8 @@
-package com.example.where2meet;
+package com.example.where2meet.adapters;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,12 +12,11 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.where2meet.R;
 import com.example.where2meet.databinding.ItemFriendBinding;
-import com.example.where2meet.databinding.ItemSearchresultBinding;
 import com.parse.ParseFile;
 import com.parse.ParseUser;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class FriendResultAdapter extends RecyclerView.Adapter<FriendResultAdapter.ViewHolder>{
@@ -30,7 +28,6 @@ public class FriendResultAdapter extends RecyclerView.Adapter<FriendResultAdapte
          this.context = context;
          this.parseUserList = parseUserList;
      }
-
 
     @NonNull
     @Override
@@ -75,7 +72,6 @@ public class FriendResultAdapter extends RecyclerView.Adapter<FriendResultAdapte
 
         @Override
         public void onClick(View v) {
-           Toast.makeText(context, "finished", Toast.LENGTH_SHORT).show();
             int position = getAdapterPosition();
             if(position != RecyclerView.NO_POSITION){
                 //transfer selected users information to the parent fragment to continue due process

@@ -1,12 +1,12 @@
-package com.example.where2meet;
+package com.example.where2meet.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
+import com.example.where2meet.adapters.FriendResultAdapter;
 import com.example.where2meet.databinding.ActivityFriendSearchBinding;
 import com.parse.FindCallback;
 import com.parse.ParseException;

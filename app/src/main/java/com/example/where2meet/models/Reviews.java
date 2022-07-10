@@ -1,4 +1,4 @@
-package com.example.where2meet;
+package com.example.where2meet.models;
 
 import org.json.JSONArray;
 import org.json.JSONException;
