@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DetailActivity">
+    tools:context=".activities.DetailActivity">
 
     <ImageView
         android:id="@+id/ivPlaceImage"
@@ -16,16 +16,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvDetailName"
         tools:srcCompat="@tools:sample/avatars" />
-
-    <TextView
-        android:id="@+id/tvFormattedAddress"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="28dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivPlaceImage"
-        tools:text="menloPark " />
 
     <TextView
         android:id="@+id/tvDetailName"
@@ -53,16 +43,38 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvReviews"
-        android:layout_width="match_parent"
-        android:layout_height="377dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_margin="10dp"
         android:layout_marginTop="80dp"
         android:padding="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.473"
+        app:layout_constraintHorizontal_bias="0.21"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvFormattedAddress"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.737" />
+
+    <Button
+        android:id="@+id/btnVisited"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Not Visited"
+        app:layout_constraintBottom_toTopOf="@+id/tvFormattedAddress"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivPlaceImage"
+        app:layout_constraintVertical_bias="0.428" />
+
+    <TextView
+        android:id="@+id/tvFormattedAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="76dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivPlaceImage"
+        tools:text="menloPark " />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
