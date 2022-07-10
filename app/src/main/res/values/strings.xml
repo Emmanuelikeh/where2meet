@@ -8,4 +8,5 @@
     <string name="back4app_client_key">JMRkIwQPjjZrGoER328NM6aoYvko8WXpFJv9tv7b</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="ComposeTextTo">To:</string>
 </resources>

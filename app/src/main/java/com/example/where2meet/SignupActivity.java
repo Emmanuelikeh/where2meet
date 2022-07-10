@@ -21,8 +21,6 @@ public class SignupActivity extends AppCompatActivity {
         activitySignupBinding = ActivitySignupBinding.inflate(getLayoutInflater());
         View view = activitySignupBinding.getRoot();
         setContentView(view);
-
-
         activitySignupBinding.tvLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -42,11 +40,9 @@ public class SignupActivity extends AppCompatActivity {
             }
         });
 
-
     }
 
     private void signUpUser(String signupUsername, String signupEmail, String signupPassword, String signupRePassword) {
-
         // check if password and re-entered passwords match
         if (!signupPassword.equals(signupRePassword)){
             Toast.makeText(this, "Passwords do not match", Toast.LENGTH_SHORT).show();
@@ -54,7 +50,6 @@ public class SignupActivity extends AppCompatActivity {
         }
 
         ParseUser user = new ParseUser();
-
         //Set fields for the user to be created
         user.setEmail(signupEmail);
         user.setUsername(signupUsername);
@@ -67,9 +62,6 @@ public class SignupActivity extends AppCompatActivity {
                     Toast.makeText(SignupActivity.this, "Account Created, Login!", Toast.LENGTH_SHORT).show();
                     ParseUser.logOut();
                     goLoginActivity();
-
-
-
                 }
                 else{
                     e.printStackTrace();
@@ -77,7 +69,6 @@ public class SignupActivity extends AppCompatActivity {
                 }
             }
         });
-
     }
 
     private void goLoginActivity() {
