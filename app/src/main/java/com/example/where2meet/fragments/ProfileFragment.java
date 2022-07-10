@@ -13,8 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
-import com.example.where2meet.Invite;
-import com.example.where2meet.PendingInviteAdapter;
+import com.example.where2meet.models.Invite;
+import com.example.where2meet.adapters.PendingInviteAdapter;
 import com.example.where2meet.R;
 import com.example.where2meet.databinding.FragmentProfileBinding;
 import com.parse.FindCallback;
@@ -29,8 +29,8 @@ import java.util.List;
 
 public class ProfileFragment extends Fragment {
     private FragmentProfileBinding fragmentProfileBinding;
-    List<Invite>inviteList;
-    PendingInviteAdapter adapter;
+    protected List<Invite>inviteList;
+    protected PendingInviteAdapter adapter;
 
 
 
@@ -55,9 +55,10 @@ public class ProfileFragment extends Fragment {
         adapter = new PendingInviteAdapter(getContext(),inviteList);
         fragmentProfileBinding.rvPendingInvites.setAdapter(adapter);
         fragmentProfileBinding.rvPendingInvites.setLayoutManager(new LinearLayoutManager(getContext()));
-
         getCurrentUserInformation();
         queryInvite();
+        getlocationfromactivity();
+
     }
 
 
@@ -74,7 +75,7 @@ public class ProfileFragment extends Fragment {
         // include data referred by user key
         query.include(Invite.KEY_SENDER);
         query.whereEqualTo(Invite.KEY_RECEIVER,ParseUser.getCurrentUser());
-
+        query.whereNotEqualTo(Invite.KEY_FLAG,true);
         query.findInBackground(new FindCallback<Invite>() {
             @Override
             public void done(List<Invite> objects, ParseException e) {
@@ -84,9 +85,16 @@ public class ProfileFragment extends Fragment {
                 }
                 inviteList.addAll(objects);
                 adapter.notifyDataSetChanged();
-
             }
         });
+    }
+
+    private void getlocationfromactivity(){
+        Bundle args = getArguments();
+       if (args != null){
+            String location = args.getString("currentLocation");
+            fragmentProfileBinding.tvUsersLocation.setText(location);
+        }
 
     }
 
@@ -102,4 +110,7 @@ public class ProfileFragment extends Fragment {
         }
 
     }
+
+
+
 }

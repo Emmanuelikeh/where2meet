@@ -17,7 +17,7 @@ import com.codepath.asynchttpclient.RequestHeaders;
 import com.codepath.asynchttpclient.RequestParams;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 import com.example.where2meet.SearchResult;
-import com.example.where2meet.SearchResultAdapter;
+import com.example.where2meet.adapters.SearchResultAdapter;
 import com.example.where2meet.databinding.FragmentSearchBinding;
 
 import org.json.JSONArray;
@@ -108,4 +108,6 @@ public class SearchFragment extends Fragment {
         adapter.clear();
         querySearchResults(searchquery, "https://api.foursquare.com/v3/places/search");
     }
+
+
 }

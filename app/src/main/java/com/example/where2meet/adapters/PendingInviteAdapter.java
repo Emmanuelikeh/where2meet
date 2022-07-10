@@ -1,17 +1,28 @@
-package com.example.where2meet;
+package com.example.where2meet.adapters;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.where2meet.models.Invite;
+import com.example.where2meet.R;
 import com.example.where2meet.databinding.ItemPendingInviteBinding;
+import com.parse.DeleteCallback;
+import com.parse.ParseException;
 import com.parse.ParseFile;
+import com.parse.ParseUser;
+import com.parse.SaveCallback;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 public class PendingInviteAdapter extends RecyclerView.Adapter<PendingInviteAdapter.ViewHolder> {
@@ -52,10 +63,13 @@ public class PendingInviteAdapter extends RecyclerView.Adapter<PendingInviteAdap
         }
 
         public void bind(Invite invite) {
-            Log.i("Title","location: " + invite.getTitle());
             itemPendingInviteBinding.tvPendingInviteTitle.setText(invite.getTitle());
             itemPendingInviteBinding.tvPendingInviteSendersName.setText(invite.getSender().getUsername());
             itemPendingInviteBinding.tvPendingUsersAddress.setText(invite.getAddress());
+            Date inviteDate = invite.getInvitationDate();
+            DateFormat dateFormat = new SimpleDateFormat("EEE MMM d hh:mm:ss z yyyy");
+            String strDate = dateFormat.format(inviteDate);
+            itemPendingInviteBinding.tvPendingInviteInvitationDate.setText(strDate);
 
             ParseFile image = invite.getSender().getParseFile("profileImage");
 
@@ -66,7 +80,59 @@ public class PendingInviteAdapter extends RecyclerView.Adapter<PendingInviteAdap
                 Glide.with(context).load(image.getUrl()).override(100,200).centerCrop().into(itemPendingInviteBinding.ivPendingInviteSendersProfileImage);
             }
 
+            itemPendingInviteBinding.btnInviteReject.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {deleteInvite(invite);
+                }
+            });
+
+            itemPendingInviteBinding.btnInviteAccept.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {acceptInvite(invite);
+                }
+            });
 
         }
+
+        private void acceptInvite(Invite invite){
+            queryMoveToAcceptInvitation(invite);
+        }
+
+        private void queryMoveToAcceptInvitation(Invite invite) {
+            invite.setFlag(true);
+            invite.saveInBackground(new SaveCallback() {
+                @Override
+                public void done(ParseException e) {
+                    if(e!= null){
+                        Toast.makeText(itemView.getContext(), "Error while saving ",Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+                        int pos = getAdapterPosition();
+                        inviteList.remove(pos);
+                        notifyDataSetChanged();
+                    }
+                }
+
+            });
+        }
+
+
+
+
+        private void deleteInvite(Invite invite) {
+            invite.deleteInBackground(new DeleteCallback() {
+                @Override
+                public void done(ParseException e) {
+                    if(e==null){
+                        int pos = getAdapterPosition();
+                        inviteList.remove(pos);
+                        notifyDataSetChanged();
+                    }
+                }
+            });
+        }
+
     }
+
+
 }

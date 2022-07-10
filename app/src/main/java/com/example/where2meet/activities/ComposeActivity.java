@@ -1,30 +1,39 @@
-package com.example.where2meet;
+package com.example.where2meet.activities;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.example.where2meet.fragments.DatePicker;
+import com.example.where2meet.models.Invite;
 import com.example.where2meet.databinding.ActivityComposeBinding;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-public class ComposeActivity extends AppCompatActivity {
+public class ComposeActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener{
 
-    ActivityComposeBinding activityComposeBinding;
+    private ActivityComposeBinding activityComposeBinding;
     private final int REQUEST_CODE = 20;
-    List<ParseUser> receiversList = new ArrayList<>();
+    private List<ParseUser> receiversList = new ArrayList<>();
+    private int hour, minute;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,8 +64,7 @@ public class ComposeActivity extends AppCompatActivity {
     }
 
     private void querySend() throws ParseException {
-        Date inviteDate = getDate();
-        Date inviteTime = getTime();
+        Date inviteDate = getDateAndTime();
         String title = activityComposeBinding.etComposeTitle.getText().toString();
         String address = getFormattedAddress();
         ParseUser receiver = receiversList.get(0);
@@ -65,7 +73,6 @@ public class ComposeActivity extends AppCompatActivity {
         Invite invite = new Invite();
         invite.setInvitationDate(inviteDate);
         invite.setSender(sender);
-        invite.setTime(inviteTime);
         invite.setTitle(title);
         invite.setReceiver(receiver);
         invite.setAddress(address);
@@ -86,18 +93,13 @@ public class ComposeActivity extends AppCompatActivity {
         });
     }
 
-    private Date getDate() throws ParseException {
-        String date = activityComposeBinding.etComposeDate.getText().toString();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy", Locale.getDefault());
-        return dateFormat.parse(date);
+    private Date getDateAndTime() throws ParseException {
+        String date = activityComposeBinding.tvComposeDate.getText().toString();
+        String time = activityComposeBinding.tvComposeTime.getText().toString();
+        String dateWithTime = date + " " + time;
+        SimpleDateFormat dateFormat = new SimpleDateFormat("EEE, MMM d, yyyy HH:mm", Locale.getDefault());
+        return dateFormat.parse(dateWithTime);
     }
-
-    private Date getTime() throws ParseException {
-        String time = activityComposeBinding.etComposeTime.getText().toString();
-        SimpleDateFormat timeFormat = new SimpleDateFormat("h:mm a", Locale.getDefault());
-        return timeFormat.parse(time);
-    }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -106,12 +108,18 @@ public class ComposeActivity extends AppCompatActivity {
             ParseUser parseUser = (ParseUser) data.getExtras().get("parseUser");
             //Modify datasource to include parseUser;
             activityComposeBinding.etComposerUsername.setText(parseUser.getUsername());
-            receiversList.add(0,parseUser);
-            Log.i("check this", "length: " + receiversList.size());
+            if(receiversList.size() < 1){
+                receiversList.add(0,parseUser);
+                Log.i("check this", "length: " + receiversList.size());
+            }
+            else{
+                Toast.makeText(this, "Can't send to multiple people at once" , Toast.LENGTH_SHORT).show();
+            }
+
+
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
-
 
     private void inviteCheck() throws ParseException {
         if(receiversList.size() == 0){
@@ -122,19 +130,48 @@ public class ComposeActivity extends AppCompatActivity {
             Toast.makeText(ComposeActivity.this, "please enter a valid title", Toast.LENGTH_SHORT).show();
             return;
         }
-        if(activityComposeBinding.etComposeDate.getText().toString().equals("")){
+        if(activityComposeBinding.tvComposeDate.getText().toString().equals("")){
             Toast.makeText(ComposeActivity.this, "please enter a valid date", Toast.LENGTH_SHORT).show();
             return;
         }
-        if(activityComposeBinding.etComposeTime.getText().toString().equals("")){
+        if(activityComposeBinding.tvComposeTime.getText().toString().equals("")){
             Toast.makeText(ComposeActivity.this, "please enter a valid time", Toast.LENGTH_SHORT).show();
             return;
         }
         querySend();
     }
 
-
     private String getFormattedAddress(){
         return (String) getIntent().getExtras().get("FormattedAddress");
+    }
+
+    public void popTimePicker(View view) {
+        TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker view, int selectedHour, int selectedMinute) {
+                hour = selectedHour;
+                minute = selectedMinute;
+                activityComposeBinding.tvComposeTime.setText(String.format(Locale.getDefault(), "%02d:%02d", hour,minute));
+            }
+        };
+        TimePickerDialog timePickerDialog = new TimePickerDialog(this, onTimeSetListener, hour, minute,true);
+        timePickerDialog.setTitle("Select Time");
+        timePickerDialog.show();
+    }
+
+    public void popDatePicker(View view) {
+        DatePicker datePicker;
+        datePicker = new DatePicker();
+        datePicker.show(getSupportFragmentManager(), "Date pick");
+    }
+
+    @Override
+    public void onDateSet(android.widget.DatePicker view, int year, int month, int dayOfMonth) {
+        Calendar mCalendar = Calendar.getInstance();
+        mCalendar.set(Calendar.YEAR, year);
+        mCalendar.set(Calendar.MONTH, month);
+        mCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+        String selectedDate = DateFormat.getDateInstance(DateFormat.FULL).format(mCalendar.getTime());
+        activityComposeBinding.tvComposeDate.setText(selectedDate);
     }
 }

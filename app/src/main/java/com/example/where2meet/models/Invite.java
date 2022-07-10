@@ -1,4 +1,4 @@
-package com.example.where2meet;
+package com.example.where2meet.models;
 
 import com.parse.ParseClassName;
 import com.parse.ParseObject;
@@ -11,17 +11,13 @@ import java.util.Date;
 public class Invite extends ParseObject {
 
     public static final String KEY_ADDRESS = "Address";
-    public static final String KEY_TIME = "Time";
     public static final String KEY_SENDER = "Sender";
     public static final String KEY_RECEIVER = "Receiver";
     public static final String KEY_INVITATION_DATE = "invitationDate";
     public static final String KEY_TITLE = "Title";
+    public static final String KEY_FLAG = "Flag";
     public void setAddress(String address){
         put(KEY_ADDRESS,address);
-    }
-
-    public void setTime(Date time){
-        put(KEY_TIME,time);
     }
 
     public void setSender(ParseUser sender){
@@ -30,6 +26,10 @@ public class Invite extends ParseObject {
 
     public void setReceiver(ParseUser receiver){
         put(KEY_RECEIVER, receiver);
+    }
+
+    public void setFlag(Boolean flag){
+        put(KEY_FLAG,flag);
     }
 
     public  void setInvitationDate(Date invitationDate){
@@ -42,9 +42,6 @@ public class Invite extends ParseObject {
     public String getAddress(){
         return getString(KEY_ADDRESS);
     }
-    public Date getTime(){
-        return getDate(KEY_TIME);
-    }
     public String getTitle(){
         return getString(KEY_TITLE);
     }
@@ -53,6 +50,11 @@ public class Invite extends ParseObject {
     }
     public ParseUser getSender(){
         return  getParseUser(KEY_SENDER);
+    }
+
+
+    public  ParseUser getReceiver(){
+        return getParseUser(KEY_RECEIVER);
     }
 
 }

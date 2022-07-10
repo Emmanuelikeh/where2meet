@@ -1,10 +1,9 @@
-package com.example.where2meet;
+package com.example.where2meet.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -26,7 +25,6 @@ public class LoginActivity extends AppCompatActivity {
         // In order to avoid repetition in the loginIn process
         // Check if there's a user logged in
         // if there is, take them to MainActivity
-
         if(ParseUser.getCurrentUser() != null){
             // getCurrentUser would be null if user is not logged in already
             goMainActivity();
@@ -44,17 +42,13 @@ public class LoginActivity extends AppCompatActivity {
         activityLoginBinding.tvSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this,SignupActivity.class);
+                Intent intent = new Intent(LoginActivity.this, SignupActivity.class);
                 startActivity(intent);
             }
         });
-
-
-
     }
 
     private void logInUser(String username, String password){
-
         // preferred to ParseUser.logIn for better user experience
         ParseUser.logInInBackground(username, password, new LogInCallback() {
             @Override
