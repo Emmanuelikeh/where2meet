@@ -2,6 +2,7 @@ package com.example.where2meet.models;
 
 
 import com.parse.ParseClassName;
+import com.parse.ParseFile;
 import com.parse.ParseObject;
 
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ import java.util.List;
 public class Groups extends ParseObject {
     public static final String KEY_GROUP_NAME = "groupName";
     public static final String KEY_GROUP_MEMBERS = "groupMembers";
+    public static final String  KEY_IMAGE = "groupImage";
 
 
     public void setGroupName(String groupName){
@@ -23,6 +25,10 @@ public class Groups extends ParseObject {
 
     public String getGroupName(){
         return getString(KEY_GROUP_NAME);
+    }
+
+    public ParseFile getImage(){
+        return getParseFile(KEY_IMAGE);
     }
 
 

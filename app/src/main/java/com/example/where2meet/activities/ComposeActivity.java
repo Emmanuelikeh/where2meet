@@ -43,6 +43,7 @@ public class ComposeActivity extends AppCompatActivity implements DatePickerDial
         setContentView(activityComposeBinding.getRoot());
         String formattedAddress = getFormattedAddress();
         activityComposeBinding.etComposeAddress.setText(formattedAddress);
+
         activityComposeBinding.btnFriendSelect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -4,8 +4,10 @@ import android.app.Application;
 
 import com.example.where2meet.models.Groups;
 import com.example.where2meet.models.Invite;
+import com.example.where2meet.models.Messages;
 import com.parse.Parse;
 import com.parse.ParseObject;
+import com.parse.ParseUser;
 
 public class ParseApplication extends Application {
     @Override
@@ -15,6 +17,7 @@ public class ParseApplication extends Application {
         //Register my parse models
         ParseObject.registerSubclass(Invite.class);
         ParseObject.registerSubclass(Groups.class);
+        ParseObject.registerSubclass(Messages.class);
         Parse.initialize(new Parse.Configuration.Builder(this)
                 .applicationId(getString(R.string.back4app_app_id))
                 .clientKey(getString(R.string.back4app_client_key))

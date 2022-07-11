@@ -1,6 +1,7 @@
 package com.example.where2meet.adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,8 +9,11 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.example.where2meet.R;
 import com.example.where2meet.databinding.ItemGroupBinding;
 import com.example.where2meet.models.Groups;
+import com.parse.ParseFile;
 
 import java.util.List;
 
@@ -52,6 +56,18 @@ public class GroupsAdapter extends RecyclerView.Adapter<GroupsAdapter.ViewHolder
 
         public void bind(Groups group) {
             itemGroupBinding.tvGroupName.setText(group.getGroupName());
+            getImage(group);
+        }
+
+        private void getImage(Groups group) {
+            ParseFile image = group.getImage();
+            Log.i("check this ", " image " + image);
+            if(image != null){
+                Glide.with(context).load(image.getUrl()).override(200,200).centerCrop().into(itemGroupBinding.ivGroupImage);
+            }
+            else{
+                Glide.with(context).load(R.drawable.ic_baseline_group_24).override(200,200).centerCrop().into(itemGroupBinding.ivGroupImage);
+            }
 
         }
     }
