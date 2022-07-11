@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.example.where2meet.R;
 import com.example.where2meet.databinding.ActivityMainBinding;
 import com.example.where2meet.fragments.CalendarFragment;
+import com.example.where2meet.fragments.ChatFragment;
 import com.example.where2meet.fragments.ProfileFragment;
 import com.example.where2meet.fragments.SearchFragment;
 import com.google.android.gms.location.LocationServices;
@@ -63,6 +64,9 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.action_calendar:
                         fragment = new CalendarFragment();
+                        break;
+                    case R.id.action_chat:
+                        fragment = new ChatFragment();
                         break;
                     default:
                         fragment = new ProfileFragment();

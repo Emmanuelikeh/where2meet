@@ -56,8 +56,8 @@ public class ProfileFragment extends Fragment {
 
     private void addFragment() {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
-        adapter.addFragment(new PendingInviteFragment(), "PendingInvite");
-        adapter.addFragment(new SentInviteFragment(), "SentInvite");
+        adapter.addFragment(new PendingInviteFragment(), "Invites sent to you");
+        adapter.addFragment(new SentInviteFragment(), "Pending Sent Invites");
         fragmentProfileBinding.viewPager.setAdapter(adapter);
         fragmentProfileBinding.tabLayout.setupWithViewPager(fragmentProfileBinding.viewPager);
 

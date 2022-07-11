@@ -13,6 +13,7 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.where2meet.fragments.DatePicker;
+import com.example.where2meet.fragments.SearchFragment;
 import com.example.where2meet.models.Invite;
 import com.example.where2meet.databinding.ActivityComposeBinding;
 import com.parse.ParseUser;
@@ -85,7 +86,7 @@ public class ComposeActivity extends AppCompatActivity implements DatePickerDial
                 }
                 else{
                     Toast.makeText(ComposeActivity.this,"success ",Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(ComposeActivity.this, DetailActivity.class);
+                    Intent intent = new Intent(ComposeActivity.this, MainActivity.class);
                     startActivity(intent);
                     finish();
                 }

@@ -16,6 +16,11 @@
         app:showAsAction="always" />
 
     <item
+        android:id="@+id/action_chat"
+        android:icon="@drawable/ic_baseline_chat_24"
+        android:title="chat"
+        app:showAsAction="always" />
+    <item
         android:id="@+id/action_calendar"
         android:icon="@android:drawable/ic_menu_my_calendar"
         android:title="calendar"

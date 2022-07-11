@@ -10,12 +10,14 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.where2meet.models.Groups;
 import com.example.where2meet.models.Invite;
 import com.example.where2meet.R;
 import com.example.where2meet.databinding.ItemPendingInviteBinding;
 import com.parse.DeleteCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
@@ -109,6 +111,7 @@ public class PendingInviteAdapter extends RecyclerView.Adapter<PendingInviteAdap
                     else{
                         int pos = getAdapterPosition();
                         inviteList.remove(pos);
+                        queryCreateGroup(invite);
                         notifyDataSetChanged();
                     }
                 }
@@ -117,6 +120,22 @@ public class PendingInviteAdapter extends RecyclerView.Adapter<PendingInviteAdap
         }
 
 
+        public void queryCreateGroup(Invite invite){
+            String senderId = invite.getSender().getObjectId();
+            String receiverId = invite.getReceiver().getObjectId();
+            Groups group = new Groups();
+            group.setGroupName(invite.getTitle());
+            group.setGroupMembers(Arrays.asList(senderId,receiverId));
+            group.saveInBackground(new SaveCallback() {
+                @Override
+                public void done(ParseException e) {
+                    if(e != null){
+                        Toast.makeText(context,"Failed to create group", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+
+        }
 
 
         private void deleteInvite(Invite invite) {
