@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
+import com.example.where2meet.adapters.ViewPagerAdapter;
 import com.example.where2meet.models.Invite;
 import com.example.where2meet.adapters.PendingInviteAdapter;
 import com.example.where2meet.R;
@@ -29,10 +30,6 @@ import java.util.List;
 
 public class ProfileFragment extends Fragment {
     private FragmentProfileBinding fragmentProfileBinding;
-    protected List<Invite>inviteList;
-    protected PendingInviteAdapter adapter;
-
-
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -51,16 +48,20 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        inviteList = new ArrayList<>();
-        adapter = new PendingInviteAdapter(getContext(),inviteList);
-        fragmentProfileBinding.rvPendingInvites.setAdapter(adapter);
-        fragmentProfileBinding.rvPendingInvites.setLayoutManager(new LinearLayoutManager(getContext()));
         getCurrentUserInformation();
-        queryInvite();
         getlocationfromactivity();
+        addFragment();
 
     }
 
+    private void addFragment() {
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
+        adapter.addFragment(new PendingInviteFragment(), "PendingInvite");
+        adapter.addFragment(new SentInviteFragment(), "SentInvite");
+        fragmentProfileBinding.viewPager.setAdapter(adapter);
+        fragmentProfileBinding.tabLayout.setupWithViewPager(fragmentProfileBinding.viewPager);
+
+    }
 
 
     @Override
@@ -69,25 +70,6 @@ public class ProfileFragment extends Fragment {
         fragmentProfileBinding = null;
     }
 
-    private void queryInvite() {
-        // specify what type of data we want to query - Post.class
-        ParseQuery<Invite> query = ParseQuery.getQuery(Invite.class);
-        // include data referred by user key
-        query.include(Invite.KEY_SENDER);
-        query.whereEqualTo(Invite.KEY_RECEIVER,ParseUser.getCurrentUser());
-        query.whereNotEqualTo(Invite.KEY_FLAG,true);
-        query.findInBackground(new FindCallback<Invite>() {
-            @Override
-            public void done(List<Invite> objects, ParseException e) {
-                if(e != null){
-                    Log.e("check this ", "Issue with getting posts", e);
-                    return;
-                }
-                inviteList.addAll(objects);
-                adapter.notifyDataSetChanged();
-            }
-        });
-    }
 
     private void getlocationfromactivity(){
         Bundle args = getArguments();

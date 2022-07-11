@@ -45,7 +45,7 @@ public class SignupActivity extends AppCompatActivity {
 
     private void signUpUser(String signupUsername, String signupEmail, String signupPassword, String signupRePassword) {
         // check if password and re-entered passwords match
-        if (!signupPassword.equals(signupRePassword)){
+        if (!signupPassword.equals(signupRePassword) && !signupPassword.equals("")){
             Toast.makeText(this, "Passwords do not match", Toast.LENGTH_SHORT).show();
             return;
         }
