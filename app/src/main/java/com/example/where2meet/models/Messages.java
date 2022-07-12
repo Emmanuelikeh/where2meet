@@ -27,4 +27,10 @@ public class Messages extends ParseObject {
     public ParseUser getMessageSender(){
         return getParseUser(KEY_MESSAGE_SENDER);
     }
+
+    public String getMessageBody(){
+        return getString(KEY_BODY);
+    }
+
+
 }

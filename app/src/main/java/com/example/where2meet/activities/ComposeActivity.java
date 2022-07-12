@@ -7,14 +7,14 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+
 import android.view.View;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.where2meet.R;
 import com.example.where2meet.fragments.DatePicker;
-import com.example.where2meet.fragments.SearchFragment;
+
 import com.example.where2meet.models.Invite;
 import com.example.where2meet.databinding.ActivityComposeBinding;
 import com.parse.ParseUser;

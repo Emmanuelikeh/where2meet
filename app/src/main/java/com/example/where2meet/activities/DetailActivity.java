@@ -5,7 +5,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -18,7 +17,6 @@ import com.example.where2meet.adapters.ReviewsAdapter;
 import com.example.where2meet.SearchResult;
 import com.example.where2meet.databinding.ActivityDetailBinding;
 import com.parse.ParseException;
-import com.parse.ParseObject;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
@@ -77,7 +75,7 @@ public class DetailActivity extends AppCompatActivity {
                         }
                         else{
                             activityDetailBinding.btnVisited.setBackgroundColor(-65536);
-                            activityDetailBinding.btnVisited.setText("ViSITED");
+                            activityDetailBinding.btnVisited.setText(R.string.visited);
                         }
                     }
                 });

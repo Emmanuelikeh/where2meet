@@ -18,7 +18,6 @@ import java.util.List;
 
 public class FriendSearchActivity extends AppCompatActivity {
 
-    public static final String TAG = "Friend";
     private ActivityFriendSearchBinding activityFriendSearchBinding;
     private FriendResultAdapter adapter;
     private List<ParseUser> parseUsers;
