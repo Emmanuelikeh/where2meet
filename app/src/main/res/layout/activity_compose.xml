@@ -13,7 +13,7 @@
         android:layout_marginStart="28dp"
         android:layout_marginTop="120dp"
         android:ems="10"
-        android:hint="Title"
+        android:hint="@string/compose_title_hint"
         android:inputType="textPersonName"
         android:minHeight="48dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -71,7 +71,7 @@
         android:ems="10"
         android:minHeight="48dp"
         android:onClick="popDatePicker"
-        android:text="Select Date"
+        android:text="@string/select_date"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etComposeTitle" />
 
@@ -84,7 +84,7 @@
         android:ems="10"
         android:minHeight="48dp"
         android:onClick="popTimePicker"
-        android:text="Select Time"
+        android:text="@string/select_time"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etComposeDate" />
 
@@ -94,7 +94,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
         android:layout_marginTop="156dp"
-        android:text="SEND"
+        android:text="@string/btn_send"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 

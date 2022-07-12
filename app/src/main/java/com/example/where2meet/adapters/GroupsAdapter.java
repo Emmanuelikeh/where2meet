@@ -61,7 +61,6 @@ public class GroupsAdapter extends RecyclerView.Adapter<GroupsAdapter.ViewHolder
 
         private void getImage(Groups group) {
             ParseFile image = group.getImage();
-            Log.i("check this ", " image " + image);
             if(image != null){
                 Glide.with(context).load(image.getUrl()).override(200,200).centerCrop().into(itemGroupBinding.ivGroupImage);
             }

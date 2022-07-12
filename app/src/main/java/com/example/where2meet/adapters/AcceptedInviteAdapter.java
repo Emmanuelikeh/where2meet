@@ -26,6 +26,7 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 
 public class AcceptedInviteAdapter extends RecyclerView.Adapter<AcceptedInviteAdapter.ViewHolder> {
@@ -67,7 +68,7 @@ public class AcceptedInviteAdapter extends RecyclerView.Adapter<AcceptedInviteAd
             itemAcceptedInviteBinding.tvAcceptedInviteTitle.setText(invite.getTitle());
             itemAcceptedInviteBinding.tvAcceptedInviteAddress.setText(invite.getAddress());
             Date inviteDate = invite.getInvitationDate();
-            DateFormat dateFormat = new SimpleDateFormat("EEE MMM d hh:mm:ss z yyyy");
+            DateFormat dateFormat = new SimpleDateFormat("EEE MMM d hh:mm:ss z yyyy", Locale.getDefault());
             String strDate = dateFormat.format(inviteDate);
             itemAcceptedInviteBinding.tvAcceptedInviteDate.setText(strDate);
             if(!Objects.equals(invite.getSender().getUsername(), ParseUser.getCurrentUser().getUsername())){

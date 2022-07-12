@@ -18,6 +18,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class SentInviteAdapter extends RecyclerView.Adapter<SentInviteAdapter.ViewHolder> {
     private Context context;
@@ -68,7 +69,7 @@ public class SentInviteAdapter extends RecyclerView.Adapter<SentInviteAdapter.Vi
         }
 
         private String getDate(Date date ) {
-            DateFormat dateFormat = new SimpleDateFormat("EEE MMM d hh:mm:ss z yyyy");
+            DateFormat dateFormat = new SimpleDateFormat("EEE MMM d hh:mm:ss z yyyy", Locale.getDefault());
             String strDate = dateFormat.format(date);
             return strDate;
         }

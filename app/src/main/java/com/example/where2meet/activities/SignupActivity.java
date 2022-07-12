@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.where2meet.R;
 import com.example.where2meet.databinding.ActivitySignupBinding;
 import com.parse.ParseException;
 import com.parse.ParseUser;
@@ -46,7 +47,7 @@ public class SignupActivity extends AppCompatActivity {
     private void signUpUser(String signupUsername, String signupEmail, String signupPassword, String signupRePassword) {
         // check if password and re-entered passwords match
         if (!signupPassword.equals(signupRePassword) && !signupPassword.equals("")){
-            Toast.makeText(this, "Passwords do not match", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.password_mismatch), Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -60,13 +61,13 @@ public class SignupActivity extends AppCompatActivity {
             @Override
             public void done(ParseException e) {
                 if(e == null){
-                    Toast.makeText(SignupActivity.this, "Account Created, Login!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignupActivity.this,getString(R.string.signup_success), Toast.LENGTH_SHORT).show();
                     ParseUser.logOut();
                     goLoginActivity();
                 }
                 else{
                     e.printStackTrace();
-                    Toast.makeText(SignupActivity.this, "Failed! to create account" , Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignupActivity.this,getString(R.string.signup_failure), Toast.LENGTH_SHORT).show();
                 }
             }
         });

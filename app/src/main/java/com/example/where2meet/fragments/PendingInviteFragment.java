@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.where2meet.R;
 import com.example.where2meet.adapters.PendingInviteAdapter;
@@ -70,7 +71,7 @@ public class PendingInviteFragment extends Fragment {
             @Override
             public void done(List<Invite> objects, ParseException e) {
                 if(e != null){
-                    Log.e("check this ", "Issue with getting posts", e);
+                    Toast.makeText(getContext(),getString(R.string.error_info), Toast.LENGTH_SHORT).show();
                     return;
                 }
                 inviteList.addAll(objects);

@@ -78,7 +78,6 @@ public class CalendarFragment extends Fragment {
             @Override
             public void done(List<Invite> objects, ParseException e) {
                 if(e != null){
-                    Log.e("check this ", "Issue with getting posts", e);
                     return;
                 }
                 inviteList.addAll(objects);

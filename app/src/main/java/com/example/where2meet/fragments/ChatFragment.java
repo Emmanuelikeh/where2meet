@@ -60,7 +60,7 @@ public class ChatFragment extends Fragment {
             @Override
             public void done(List<Groups> objects, ParseException e) {
                 if (e != null){
-                    Toast.makeText(getContext(), "Failed to load groups", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(),getString(R.string.error_info), Toast.LENGTH_SHORT).show();
                     return;
                 }
                 groupsList.addAll(objects);

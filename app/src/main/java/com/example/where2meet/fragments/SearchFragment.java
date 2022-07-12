@@ -90,7 +90,6 @@ public class SearchFragment extends Fragment {
                     searchResultList.addAll(SearchResult.fromJsonArray(results));
                     adapter.notifyDataSetChanged();
                 } catch (JSONException e) {
-                    Log.e(TAG,"Hit Json exception", e);
                     e.printStackTrace();
                 }
             }

@@ -23,4 +23,8 @@ public class Messages extends ParseObject {
     public void setKeyBody(String body){
         put(KEY_BODY, body);
     }
+
+    public ParseUser getMessageSender(){
+        return getParseUser(KEY_MESSAGE_SENDER);
+    }
 }
