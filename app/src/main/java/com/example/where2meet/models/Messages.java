@@ -12,8 +12,8 @@ public class Messages extends ParseObject {
     public static final String KEY_BODY = "Body";
 
 
-    public void setGroup(Groups groups){
-        put(KEY_GROUP_ID, groups);
+    public void setGroupId(Invite invite){
+        put(KEY_GROUP_ID, invite);
     }
 
     public void setMessageSender(ParseUser sender){
