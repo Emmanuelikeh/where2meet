@@ -9,6 +9,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.where2meet.R;
 import com.example.where2meet.databinding.IncomingMessagesBinding;
 import com.example.where2meet.databinding.OutgoingMessagesBinding;
 import com.example.where2meet.models.Messages;
@@ -94,10 +95,8 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
         @Override
         public void bind(Messages messages) {
             incomingMessagesBinding.tvIMBody.setText(messages.getMessageBody());
-//            incomingMessagesBinding.tvIMUserName.setText(messages.getMessageSender().getObjectId());
-            String name = "";
             try {
-                name = messages.getMessageSender().fetchIfNeeded().getUsername();
+               String name = messages.getMessageSender().fetchIfNeeded().getUsername();
                 incomingMessagesBinding.tvIMUserName.setText(name);
             } catch (ParseException e) {
                 e.printStackTrace();
@@ -117,7 +116,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
         @Override
         public void bind(Messages messages) {
             outgoingMessagesBinding.tvOMBody.setText(messages.getMessageBody());
-            outgoingMessagesBinding.tvOMUserName.setText("You");
+            outgoingMessagesBinding.tvOMUserName.setText(R.string.current_user_chat_name);
         }
     }
 

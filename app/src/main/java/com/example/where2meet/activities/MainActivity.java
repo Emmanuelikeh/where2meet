@@ -22,7 +22,6 @@ import android.widget.Toast;
 import com.example.where2meet.R;
 import com.example.where2meet.databinding.ActivityMainBinding;
 import com.example.where2meet.fragments.CalendarFragment;
-import com.example.where2meet.fragments.ChatFragment;
 import com.example.where2meet.fragments.ProfileFragment;
 import com.example.where2meet.fragments.SearchFragment;
 import com.google.android.gms.location.LocationServices;
@@ -65,9 +64,6 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.action_calendar:
                         fragment = new CalendarFragment();
                         break;
-                    case R.id.action_chat:
-                        fragment = new ChatFragment();
-                        break;
                     default:
                         fragment = new ProfileFragment();
                         break;
@@ -91,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if(item.getItemId() == R.id.logout){
-            Toast.makeText(MainActivity.this, "logout successful", Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.this,R.string.log_out_success, Toast.LENGTH_SHORT).show();
             onLogout();
             return true;
         }
@@ -115,11 +111,7 @@ public class MainActivity extends AppCompatActivity {
                         Geocoder geocoder = new Geocoder(MainActivity.this, Locale.getDefault());
                         try {
                             List<Address> addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
-//                            Bundle bundle = new Bundle();
-//                            bundle.putString("currentLocation", addresses.get(0).getAddressLine(0));
-//                            ProfileFragment profileFragment = new ProfileFragment();
-//                            profileFragment.setArguments(bundle);
-                        } catch (IOException e) {
+                   } catch (IOException e) {
                             e.printStackTrace();
                         }}
                 }

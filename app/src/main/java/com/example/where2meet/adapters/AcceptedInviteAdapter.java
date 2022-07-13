@@ -1,7 +1,7 @@
 package com.example.where2meet.adapters;
 
 import android.content.Context;
-import android.util.Log;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,9 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.where2meet.R;
-import com.example.where2meet.databinding.FragmentCalendarBinding;
+import com.example.where2meet.activities.ChatActivity;
 import com.example.where2meet.databinding.ItemAcceptedInviteBinding;
-import com.example.where2meet.fragments.CalendarFragment;
 import com.example.where2meet.models.Invite;
 import com.parse.ParseException;
 import com.parse.ParseFile;
@@ -81,8 +80,21 @@ public class AcceptedInviteAdapter extends RecyclerView.Adapter<AcceptedInviteAd
                 ParseFile image = invite.getReceiver().getParseFile("profileImage");
                 getImage(image);
             }
+
+            itemAcceptedInviteBinding.btnInviteChat.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    openChatroom(invite);
+                }
+            });
             queryUpdatedVisited(invite);
 
+        }
+
+        private void openChatroom(Invite invite) {
+            Intent intent = new Intent(context, ChatActivity.class);
+            intent.putExtra("inviteInfo",invite);
+            context.startActivity(intent);
         }
 
         private void queryUpdatedVisited(Invite invite) {

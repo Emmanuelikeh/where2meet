@@ -79,7 +79,7 @@ public class ComposeActivity extends AppCompatActivity implements DatePickerDial
         invite.setTitle(title);
         invite.setReceiver(receiver);
         invite.setAddress(address);
-
+        invite.setFlag(null);
         invite.saveInBackground(new SaveCallback() {
             @Override
             public void done(com.parse.ParseException e) {
@@ -117,8 +117,6 @@ public class ComposeActivity extends AppCompatActivity implements DatePickerDial
             else{
                 Toast.makeText(this,getString(R.string.multiple_user_warning), Toast.LENGTH_SHORT).show();
             }
-
-
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
@@ -142,6 +140,7 @@ public class ComposeActivity extends AppCompatActivity implements DatePickerDial
         }
         querySend();
     }
+
 
     private String getFormattedAddress(){
         return (String) getIntent().getExtras().get("FormattedAddress");

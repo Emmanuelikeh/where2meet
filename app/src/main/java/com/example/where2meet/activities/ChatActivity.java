@@ -4,17 +4,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import com.example.where2meet.R;
 import com.example.where2meet.adapters.ChatAdapter;
 import com.example.where2meet.databinding.ActivityChatBinding;
-import com.example.where2meet.models.Groups;
+import com.example.where2meet.fragments.RescheduleDialogFragment;
+import com.example.where2meet.models.Invite;
 import com.example.where2meet.models.Messages;
 import com.parse.FindCallback;
-import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
@@ -44,6 +43,14 @@ public class ChatActivity extends AppCompatActivity {
                 processMessage();
             }
         });
+        activityChatBinding.btnRescheduleInvite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(ChatActivity.this,R.string.item_clicked,Toast.LENGTH_SHORT).show();
+                openResheduleDialog();
+
+            }
+        });
         messagesList = new ArrayList<>();
         adapter = new ChatAdapter(ChatActivity.this,messagesList);
         activityChatBinding.rvChats.setAdapter(adapter);
@@ -52,17 +59,21 @@ public class ChatActivity extends AppCompatActivity {
         liveQueries();
     }
 
+    private void openResheduleDialog() {
+        RescheduleDialogFragment rescheduleDialogFragment = new RescheduleDialogFragment();
+        rescheduleDialogFragment.show(getSupportFragmentManager(),"checkthis");
+    }
+
     private void liveQueries() {
-        String websocketUrl = "wss://where2meetemmanuel.b4a.io";
         ParseLiveQueryClient parseLiveQueryClient = null;
         try {
-            parseLiveQueryClient = ParseLiveQueryClient.Factory.getClient(new URI(websocketUrl));
+            parseLiveQueryClient = ParseLiveQueryClient.Factory.getClient(new URI(getString(R.string.web_socket_url)));
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
         ParseQuery<Messages> parseQuery = ParseQuery.getQuery(Messages.class);
         parseQuery.include(Messages.KEY_MESSAGE_SENDER);
-        Groups currentGroup = getGroup();
+        Invite currentGroup = getGroup();
         parseQuery.whereEqualTo(Messages.KEY_GROUP_ID,currentGroup);
         SubscriptionHandling<Messages> subscriptionHandling = parseLiveQueryClient.subscribe(parseQuery);
         subscriptionHandling.handleEvent(SubscriptionHandling.Event.CREATE, new SubscriptionHandling.HandleEventCallback<Messages>() {
@@ -83,14 +94,14 @@ public class ChatActivity extends AppCompatActivity {
 
     private void processMessage() {
         String userInputChat = activityChatBinding.etChatBox.getText().toString();
-        Groups specificGroup = getGroup();
+        Invite specificGroup = getGroup();
         if(userInputChat.equals("")){
             Toast.makeText(this,getString(R.string.empty_chat_message),Toast.LENGTH_SHORT).show();
             return;
         }
         Messages messages = new Messages();
         messages.setMessageSender(ParseUser.getCurrentUser());
-        messages.setGroup(specificGroup);
+        messages.setGroupId(specificGroup);
         messages.setBody(userInputChat);
         messages.saveInBackground(new SaveCallback() {
             @Override
@@ -104,14 +115,14 @@ public class ChatActivity extends AppCompatActivity {
         });
     }
 
-    private Groups getGroup() {
-        return (Groups) getIntent().getExtras().get("groupInfo");
+    private Invite getGroup() {
+        return (Invite) getIntent().getExtras().get("inviteInfo");
     }
 
     private void queryChats() {
         ParseQuery<Messages> query = ParseQuery.getQuery(Messages.class);
-        Groups currentGroup = getGroup();
-        query.whereEqualTo(Messages.KEY_GROUP_ID,currentGroup);
+        Invite currentGroupId = getGroup();
+        query.whereEqualTo(Messages.KEY_GROUP_ID,currentGroupId);
         query.include(Messages.KEY_MESSAGE_SENDER);
         query.findInBackground(new FindCallback<Messages>() {
             @Override
@@ -127,10 +138,5 @@ public class ChatActivity extends AppCompatActivity {
         });
 
     }
-
-
-
-
-
 
 }
