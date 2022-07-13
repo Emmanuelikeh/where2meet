@@ -1,6 +1,7 @@
 package com.example.where2meet.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.where2meet.R;
+import com.example.where2meet.activities.ChatActivity;
 import com.example.where2meet.databinding.ItemGroupBinding;
 import com.example.where2meet.models.Groups;
 import com.parse.ParseFile;
@@ -47,11 +49,12 @@ public class GroupsAdapter extends RecyclerView.Adapter<GroupsAdapter.ViewHolder
         return groupList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         ItemGroupBinding itemGroupBinding;
         public ViewHolder(@NonNull ItemGroupBinding itemGroupBinding) {
             super(itemGroupBinding.getRoot());
             this.itemGroupBinding = itemGroupBinding;
+            itemView.setOnClickListener(this);
         }
 
         public void bind(Groups group) {
@@ -66,6 +69,18 @@ public class GroupsAdapter extends RecyclerView.Adapter<GroupsAdapter.ViewHolder
             }
             else{
                 Glide.with(context).load(R.drawable.ic_baseline_group_24).override(200,200).centerCrop().into(itemGroupBinding.ivGroupImage);
+            }
+
+        }
+
+        @Override
+        public void onClick(View v) {
+            int position = getAdapterPosition();
+            if(position != RecyclerView.NO_POSITION){
+                Groups groups = groupList.get(position);
+                Intent intent = new Intent(context, ChatActivity.class);
+                intent.putExtra("groupInfo",groups);
+                context.startActivity(intent);
             }
 
         }

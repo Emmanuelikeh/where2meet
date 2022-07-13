@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -11,6 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.where2meet.databinding.IncomingMessagesBinding;
 import com.example.where2meet.databinding.OutgoingMessagesBinding;
 import com.example.where2meet.models.Messages;
+import com.parse.ParseException;
+import com.parse.ParseObject;
 import com.parse.ParseUser;
 
 import java.util.List;
@@ -77,7 +80,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
         }
-        // abstract method declaration (subclasser responsibility )
+        // abstract method declaration (subclasser responsibility)
         abstract void bind(Messages messages);
     }
       // special holder for incoming messages
@@ -91,7 +94,14 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
         @Override
         public void bind(Messages messages) {
             incomingMessagesBinding.tvIMBody.setText(messages.getMessageBody());
-            incomingMessagesBinding.tvIMUserName.setText(messages.getMessageSender().getUsername());
+//            incomingMessagesBinding.tvIMUserName.setText(messages.getMessageSender().getObjectId());
+            String name = "";
+            try {
+                name = messages.getMessageSender().fetchIfNeeded().getUsername();
+                incomingMessagesBinding.tvIMUserName.setText(name);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
 
         }
     }
@@ -107,8 +117,10 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
         @Override
         public void bind(Messages messages) {
             outgoingMessagesBinding.tvOMBody.setText(messages.getMessageBody());
-            outgoingMessagesBinding.tvOMUserName.setText(messages.getMessageSender().getUsername());
-
+            outgoingMessagesBinding.tvOMUserName.setText("You");
         }
     }
+
+
+
 }
