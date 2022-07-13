@@ -70,7 +70,8 @@ public class AcceptedInviteAdapter extends RecyclerView.Adapter<AcceptedInviteAd
             DateFormat dateFormat = new SimpleDateFormat("EEE MMM d hh:mm:ss z yyyy", Locale.getDefault());
             String strDate = dateFormat.format(inviteDate);
             itemAcceptedInviteBinding.tvAcceptedInviteDate.setText(strDate);
-            if(!Objects.equals(invite.getSender().getUsername(), ParseUser.getCurrentUser().getUsername())){
+
+            if(inviteNotFromCurrentUser(invite)){
                 itemAcceptedInviteBinding.tvAccptedInviteName.setText(invite.getSender().getUsername());
                 ParseFile image = invite.getSender().getParseFile("profileImage");
                 getImage(image);
@@ -84,14 +85,18 @@ public class AcceptedInviteAdapter extends RecyclerView.Adapter<AcceptedInviteAd
             itemAcceptedInviteBinding.btnInviteChat.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    openChatroom(invite);
+                    openChatActivity(invite);
                 }
             });
             queryUpdatedVisited(invite);
 
         }
 
-        private void openChatroom(Invite invite) {
+        public boolean inviteNotFromCurrentUser(Invite invite){
+            return !Objects.equals(invite.getSender().getUsername(), ParseUser.getCurrentUser().getUsername());
+        }
+
+        private void openChatActivity(Invite invite) {
             Intent intent = new Intent(context, ChatActivity.class);
             intent.putExtra("inviteInfo",invite);
             context.startActivity(intent);

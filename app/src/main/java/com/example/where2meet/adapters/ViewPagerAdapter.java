@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import java.util.ArrayList;
 
 public class ViewPagerAdapter extends FragmentPagerAdapter {
+    //move between the two fragments present in the profile Fragment
     private final ArrayList<Fragment> fragmentArrayList = new ArrayList<>();
     private final  ArrayList<String> fragmentTitle = new ArrayList<>();
 

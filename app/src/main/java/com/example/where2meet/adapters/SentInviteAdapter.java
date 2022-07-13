@@ -24,7 +24,6 @@ public class SentInviteAdapter extends RecyclerView.Adapter<SentInviteAdapter.Vi
     private Context context;
     private List<Invite> inviteList;
 
-
     public SentInviteAdapter(Context context, List<Invite> inviteList){
         this.context = context;
         this.inviteList = inviteList;
@@ -42,7 +41,6 @@ public class SentInviteAdapter extends RecyclerView.Adapter<SentInviteAdapter.Vi
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Invite invite = inviteList.get(position);
         holder.bind(invite);
-
     }
 
     @Override

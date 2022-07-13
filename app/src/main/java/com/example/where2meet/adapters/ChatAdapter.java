@@ -101,7 +101,6 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-
         }
     }
      // special holder for outgoing messages

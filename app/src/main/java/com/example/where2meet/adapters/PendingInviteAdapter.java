@@ -64,19 +64,9 @@ public class PendingInviteAdapter extends RecyclerView.Adapter<PendingInviteAdap
             itemPendingInviteBinding.tvPendingInviteTitle.setText(invite.getTitle());
             itemPendingInviteBinding.tvPendingInviteSendersName.setText(invite.getSender().getUsername());
             itemPendingInviteBinding.tvPendingUsersAddress.setText(invite.getAddress());
-            Date inviteDate = invite.getInvitationDate();
-            DateFormat dateFormat = new SimpleDateFormat("EEE MMM d hh:mm:ss z yyyy",Locale.getDefault());
-            String strDate = dateFormat.format(inviteDate);
-            itemPendingInviteBinding.tvPendingInviteInvitationDate.setText(strDate);
 
-            ParseFile image = invite.getSender().getParseFile("profileImage");
-
-            if(image == null){
-                Glide.with(context).load(R.drawable.ic_baseline_person_24).override(100,200).centerCrop().into(itemPendingInviteBinding.ivPendingInviteSendersProfileImage);
-            }
-            else{
-                Glide.with(context).load(image.getUrl()).override(100,200).centerCrop().into(itemPendingInviteBinding.ivPendingInviteSendersProfileImage);
-            }
+            getDateFromInvite(invite);
+            loadImageFromInvite(invite);
 
             itemPendingInviteBinding.btnInviteReject.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -93,10 +83,6 @@ public class PendingInviteAdapter extends RecyclerView.Adapter<PendingInviteAdap
         }
 
         private void acceptInvite(Invite invite){
-            queryMoveToAcceptInvitation(invite);
-        }
-
-        private void queryMoveToAcceptInvitation(Invite invite) {
             invite.setFlag(true);
             invite.saveInBackground(new SaveCallback() {
                 @Override
@@ -107,32 +93,12 @@ public class PendingInviteAdapter extends RecyclerView.Adapter<PendingInviteAdap
                     else{
                         int pos = getAdapterPosition();
                         inviteList.remove(pos);
-//                        queryCreateGroup(invite);
                         notifyDataSetChanged();
                     }
                 }
 
-            });
+            });;
         }
-
-
-//        public void queryCreateGroup(Invite invite){
-//            String senderId = invite.getSender().getObjectId();
-//            String receiverId = invite.getReceiver().getObjectId();
-//            Groups group = new Groups();
-//            group.setGroupName(invite.getTitle());
-//            group.setGroupMembers(Arrays.asList(senderId,receiverId));
-//            group.saveInBackground(new SaveCallback() {
-//                @Override
-//                public void done(ParseException e) {
-//                    if(e != null){
-//                        Toast.makeText(context,"Failed to create group", Toast.LENGTH_SHORT).show();
-//                    }
-//                }
-//            });
-//
-//        }
-
 
         private void rejectInvite(Invite invite) {
             invite.setFlag(false);
@@ -144,10 +110,28 @@ public class PendingInviteAdapter extends RecyclerView.Adapter<PendingInviteAdap
                         inviteList.remove(pos);
                         notifyDataSetChanged();
                     }
-
                 }
             });
         }
+
+        private void getDateFromInvite(Invite invite){
+            Date inviteDate = invite.getInvitationDate();
+            DateFormat dateFormat = new SimpleDateFormat("EEE MMM d hh:mm:ss z yyyy",Locale.getDefault());
+            String strDate = dateFormat.format(inviteDate);
+            itemPendingInviteBinding.tvPendingInviteInvitationDate.setText(strDate);
+        }
+
+        private  void loadImageFromInvite(Invite invite){
+            ParseFile image = invite.getSender().getParseFile("profileImage");
+
+            if(image == null){
+                Glide.with(context).load(R.drawable.ic_baseline_person_24).override(100,200).centerCrop().into(itemPendingInviteBinding.ivPendingInviteSendersProfileImage);
+            }
+            else{
+                Glide.with(context).load(image.getUrl()).override(100,200).centerCrop().into(itemPendingInviteBinding.ivPendingInviteSendersProfileImage);
+            }
+        }
+
 
     }
 
