@@ -9,9 +9,9 @@
         android:id="@+id/tvOMUserName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
         android:layout_marginTop="4dp"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginEnd="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="some stuff is here " />
 
@@ -19,12 +19,10 @@
         android:id="@+id/tvOMBody"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.011"
+        app:layout_constraintHorizontal_bias="0.896"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvOMUserName"
-        app:layout_constraintVertical_bias="0.0"
         tools:text="Great app you have here" />
 </androidx.constraintlayout.widget.ConstraintLayout>

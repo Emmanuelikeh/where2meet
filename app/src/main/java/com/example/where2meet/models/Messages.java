@@ -12,7 +12,7 @@ public class Messages extends ParseObject {
     public static final String KEY_BODY = "Body";
 
 
-    public void setGroupId(Groups groups){
+    public void setGroup(Groups groups){
         put(KEY_GROUP_ID, groups);
     }
 
@@ -20,7 +20,7 @@ public class Messages extends ParseObject {
         put(KEY_MESSAGE_SENDER, sender);
     }
 
-    public void setKeyBody(String body){
+    public void setBody(String body){
         put(KEY_BODY, body);
     }
 
