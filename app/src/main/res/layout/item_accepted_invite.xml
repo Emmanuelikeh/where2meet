@@ -55,4 +55,16 @@
         app:layout_constraintStart_toEndOf="@+id/ivAcceptedInviteFreindProfileImage"
         app:layout_constraintTop_toBottomOf="@+id/tvAcceptedInviteDate"
         tools:text="sample text" />
+
+    <ImageButton
+        android:id="@+id/btnInviteChat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.955"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvAcceptedInviteAddress"
+        app:srcCompat="@drawable/ic_baseline_chat_24" />
 </androidx.constraintlayout.widget.ConstraintLayout>
