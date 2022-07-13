@@ -3,13 +3,16 @@ package com.example.where2meet.activities;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.Toast;
 
 import com.example.where2meet.R;
 import com.example.where2meet.adapters.ChatAdapter;
 import com.example.where2meet.databinding.ActivityChatBinding;
+import com.example.where2meet.databinding.FragmentRescheduleDialogBinding;
 import com.example.where2meet.fragments.RescheduleDialogFragment;
 import com.example.where2meet.models.Invite;
 import com.example.where2meet.models.Messages;
@@ -23,10 +26,12 @@ import com.parse.livequery.SubscriptionHandling;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
-public class ChatActivity extends AppCompatActivity {
+public class ChatActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener{
     private ActivityChatBinding activityChatBinding;
     private List<Messages> messagesList;
     private ChatAdapter adapter;
@@ -139,4 +144,14 @@ public class ChatActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+        RescheduleDialogFragment rescheduleDialogFragment = new RescheduleDialogFragment();
+        Calendar mCalendar = Calendar.getInstance();
+        mCalendar.set(Calendar.YEAR, year);
+        mCalendar.set(Calendar.MONTH, month);
+        mCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+        String selectedDate = DateFormat.getDateInstance(DateFormat.FULL).format(mCalendar.getTime());
+        rescheduleDialogFragment.fragmentRescheduleDialogBinding.tvRescheduleDate.setText(selectedDate);
+    }
 }

@@ -1,6 +1,7 @@
 package com.example.where2meet.fragments;
 
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -20,8 +21,8 @@ import java.text.DateFormat;
 import java.util.Calendar;
 
 
-public class RescheduleDialogFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener{
-    FragmentRescheduleDialogBinding fragmentRescheduleDialogBinding;
+public class RescheduleDialogFragment extends DialogFragment{
+    public FragmentRescheduleDialogBinding fragmentRescheduleDialogBinding;
 
     @Nullable
     @Override
@@ -42,19 +43,16 @@ public class RescheduleDialogFragment extends DialogFragment implements DatePick
         return fragmentRescheduleDialogBinding.getRoot();
     }
 
-    public void popDatePicker() {
-        DatePicker datePicker;
-        datePicker = new DatePicker();
-        datePicker.show(getChildFragmentManager(), "Date pick");
+    public Dialog popDatePicker() {
+        Calendar mCalendar = Calendar.getInstance();
+        int year = mCalendar.get(Calendar.YEAR);
+        int month = mCalendar.get(Calendar.MONTH);
+        int dayOfMonth = mCalendar.get(Calendar.DAY_OF_MONTH);
+        DatePickerDialog dialog = new DatePickerDialog(getActivity(), (DatePickerDialog.OnDateSetListener)
+                getActivity(), year, month, dayOfMonth);
+        dialog.getDatePicker().setMinDate(System.currentTimeMillis() -1000);
+        return dialog;
+
     }
 
-    @Override
-    public void onDateSet(android.widget.DatePicker view, int year, int month, int dayOfMonth) {
-        Calendar mCalendar = Calendar.getInstance();
-        mCalendar.set(Calendar.YEAR, year);
-        mCalendar.set(Calendar.MONTH, month);
-        mCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-        String selectedDate = DateFormat.getDateInstance(DateFormat.FULL).format(mCalendar.getTime());
-        fragmentRescheduleDialogBinding.tvRescheduleDate.setText(selectedDate);
-    }
 }
