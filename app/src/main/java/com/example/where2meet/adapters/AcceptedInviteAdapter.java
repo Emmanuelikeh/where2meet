@@ -67,7 +67,7 @@ public class AcceptedInviteAdapter extends RecyclerView.Adapter<AcceptedInviteAd
             itemAcceptedInviteBinding.tvAcceptedInviteTitle.setText(invite.getTitle());
             itemAcceptedInviteBinding.tvAcceptedInviteAddress.setText(invite.getAddress());
             Date inviteDate = invite.getInvitationDate();
-            DateFormat dateFormat = new SimpleDateFormat("EEE MMM d hh:mm:ss z yyyy", Locale.getDefault());
+            DateFormat dateFormat = new SimpleDateFormat("EEE, MMM d, yyyy 'at' hh:mm a", Locale.getDefault());
             String strDate = dateFormat.format(inviteDate);
             itemAcceptedInviteBinding.tvAcceptedInviteDate.setText(strDate);
 
@@ -81,6 +81,7 @@ public class AcceptedInviteAdapter extends RecyclerView.Adapter<AcceptedInviteAd
                 ParseFile image = invite.getReceiver().getParseFile("profileImage");
                 getImage(image);
             }
+
 
             itemAcceptedInviteBinding.btnInviteChat.setOnClickListener(new View.OnClickListener() {
                 @Override

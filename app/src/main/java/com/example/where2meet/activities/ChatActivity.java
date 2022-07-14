@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.Toast;
@@ -27,9 +28,12 @@ import com.parse.livequery.SubscriptionHandling;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.text.DateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class ChatActivity extends AppCompatActivity{
     private ActivityChatBinding activityChatBinding;
@@ -60,6 +64,7 @@ public class ChatActivity extends AppCompatActivity{
         adapter = new ChatAdapter(ChatActivity.this,messagesList);
         activityChatBinding.rvChats.setAdapter(adapter);
         activityChatBinding.rvChats.setLayoutManager(new LinearLayoutManager(ChatActivity.this));
+        chatAccessibility();
         queryChats();
         liveQueries();
     }
@@ -68,6 +73,9 @@ public class ChatActivity extends AppCompatActivity{
         RescheduleDialogFragment rescheduleDialogFragment = new RescheduleDialogFragment();
         rescheduleDialogFragment.show(getSupportFragmentManager(),"checkthis");
     }
+
+
+
 
     private void liveQueries() {
         ParseLiveQueryClient parseLiveQueryClient = null;
@@ -120,9 +128,25 @@ public class ChatActivity extends AppCompatActivity{
         });
     }
 
-    private Invite getGroup() {
+    public Invite getGroup() {
         return (Invite) getIntent().getExtras().get("inviteInfo");
     }
+
+
+    public void chatAccessibility(){
+        Invite invite = getGroup();
+        Date invitationDate = invite.getInvitationDate();
+        Date date  = new Date();
+
+        if(date.compareTo(invitationDate) > 0){
+            Log.i("Dates", "value : " + date.compareTo(invitationDate));
+            activityChatBinding.etChatBox.setVisibility(View.GONE);
+            activityChatBinding.btnSendChat.setVisibility(View.GONE);
+            activityChatBinding.btnRescheduleInvite.setVisibility(View.GONE);
+        }
+    }
+
+
 
     private void queryChats() {
         ParseQuery<Messages> query = ParseQuery.getQuery(Messages.class);

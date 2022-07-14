@@ -79,7 +79,6 @@ public class ComposeActivity extends AppCompatActivity implements DatePickerDial
         invite.setTitle(title);
         invite.setReceiver(receiver);
         invite.setAddress(address);
-        invite.setFlag(null);
         invite.saveInBackground(new SaveCallback() {
             @Override
             public void done(com.parse.ParseException e) {

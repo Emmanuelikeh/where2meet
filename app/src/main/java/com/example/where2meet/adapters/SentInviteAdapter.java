@@ -1,6 +1,7 @@
 package com.example.where2meet.adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,9 +68,8 @@ public class SentInviteAdapter extends RecyclerView.Adapter<SentInviteAdapter.Vi
         }
 
         private String getDate(Date date ) {
-            DateFormat dateFormat = new SimpleDateFormat("EEE MMM d hh:mm:ss z yyyy", Locale.getDefault());
-            String strDate = dateFormat.format(date);
-            return strDate;
+            DateFormat dateFormat = new SimpleDateFormat("EEE, MMM d, yyyy 'at' hh:mm a", Locale.getDefault());
+            return dateFormat.format(date);
         }
 
         private void getImage(ParseFile image) {
