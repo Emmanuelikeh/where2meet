@@ -67,7 +67,6 @@ public class SentInviteFragment extends Fragment {
         // include data referred by user key
         query.include(Invite.KEY_RECEIVER);
         query.whereEqualTo(Invite.KEY_SENDER, ParseUser.getCurrentUser());
-//        query.whereNotEqualTo(Invite.KEY_FLAG,true);
         query.findInBackground(new FindCallback<Invite>() {
             @Override
             public void done(List<Invite> objects, ParseException e) {

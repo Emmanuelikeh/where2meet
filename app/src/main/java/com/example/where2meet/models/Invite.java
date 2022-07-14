@@ -51,6 +51,7 @@ public class Invite extends ParseObject {
     public ParseUser getSender(){
         return  getParseUser(KEY_SENDER);
     }
+    public boolean getFlag() { return  getBoolean(KEY_FLAG);}
 
 
     public  ParseUser getReceiver(){

@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,9 @@ import com.example.where2meet.R;
 import com.example.where2meet.databinding.FragmentProfileBinding;
 import com.parse.ParseFile;
 import com.parse.ParseUser;
+
+import java.text.DateFormat;
+import java.util.Calendar;
 
 
 public class ProfileFragment extends Fragment {
@@ -39,8 +43,9 @@ public class ProfileFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         getCurrentUserInformation();
-//        getlocationfromactivity();
+
         addFragment();
+
 
     }
 
@@ -60,15 +65,6 @@ public class ProfileFragment extends Fragment {
         fragmentProfileBinding = null;
     }
 
-
-//    private void getlocationfromactivity(){
-//        Bundle args = getArguments();
-//       if (args != null){
-//            String location = args.getString("currentLocation");
-//            fragmentProfileBinding.tvUsersLocation.setText(location);
-//        }
-//
-//    }
 
     public void getCurrentUserInformation(){
         ParseUser currentUser = ParseUser.getCurrentUser();
