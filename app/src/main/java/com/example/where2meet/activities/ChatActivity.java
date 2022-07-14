@@ -31,7 +31,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class ChatActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener{
+public class ChatActivity extends AppCompatActivity{
     private ActivityChatBinding activityChatBinding;
     private List<Messages> messagesList;
     private ChatAdapter adapter;
@@ -144,14 +144,4 @@ public class ChatActivity extends AppCompatActivity implements DatePickerDialog.
 
     }
 
-    @Override
-    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-        RescheduleDialogFragment rescheduleDialogFragment = new RescheduleDialogFragment();
-        Calendar mCalendar = Calendar.getInstance();
-        mCalendar.set(Calendar.YEAR, year);
-        mCalendar.set(Calendar.MONTH, month);
-        mCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-        String selectedDate = DateFormat.getDateInstance(DateFormat.FULL).format(mCalendar.getTime());
-        rescheduleDialogFragment.fragmentRescheduleDialogBinding.tvRescheduleDate.setText(selectedDate);
-    }
 }

@@ -48,7 +48,7 @@
         android:text="Send" />
 
     <TextView
-        android:id="@+id/tvReschduledDate"
+        android:id="@+id/tvNewDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
