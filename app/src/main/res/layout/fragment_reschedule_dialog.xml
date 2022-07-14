@@ -15,7 +15,7 @@
         android:layout_centerVertical="true"
         android:layout_marginStart="34dp"
         android:layout_marginTop="48dp"
-        android:text="New Date" />
+        android:text="change Date" />
 
     <TextView
         android:id="@+id/tvRescheduleDate"
@@ -33,18 +33,19 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="111dp"
-        android:layout_marginEnd="134dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="135dp"
+        android:layout_marginEnd="161dp"
         android:text="Cancel" />
 
     <Button
-        android:id="@+id/buttonSendReschedule"
+        android:id="@+id/btnUpdateNewDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="111dp"
-        android:layout_marginEnd="33dp"
+        android:layout_marginTop="128dp"
+        android:layout_marginEnd="29dp"
         android:text="Send" />
 
     <TextView
@@ -52,7 +53,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_centerVertical="true"
-        android:layout_marginStart="147dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="181dp"
+        android:layout_marginTop="65dp"
+        android:layout_marginEnd="25dp"
         tools:text="some random text would go here" />
+
 </RelativeLayout>
