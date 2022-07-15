@@ -46,5 +46,9 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="pick_date_message">Please pick a date</string>
-
+    <string name="pending_status">Pending</string>
+    <string name="rejected_status">Rejected</string>
+    <string name="accepted_status">Accepted</string>
+    <string name="similar_places_message">Similar places filter: activated</string>
+    <string name="location_failure">Failed to get location</string>
 </resources>
