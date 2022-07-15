@@ -1,7 +1,7 @@
 package com.example.where2meet.adapters;
 
 import android.content.Context;
-import android.util.Log;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,9 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.where2meet.R;
-import com.example.where2meet.databinding.FragmentCalendarBinding;
+import com.example.where2meet.activities.ChatActivity;
 import com.example.where2meet.databinding.ItemAcceptedInviteBinding;
-import com.example.where2meet.fragments.CalendarFragment;
 import com.example.where2meet.models.Invite;
 import com.parse.ParseException;
 import com.parse.ParseFile;
@@ -26,6 +25,7 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 
 public class AcceptedInviteAdapter extends RecyclerView.Adapter<AcceptedInviteAdapter.ViewHolder> {
@@ -67,10 +67,11 @@ public class AcceptedInviteAdapter extends RecyclerView.Adapter<AcceptedInviteAd
             itemAcceptedInviteBinding.tvAcceptedInviteTitle.setText(invite.getTitle());
             itemAcceptedInviteBinding.tvAcceptedInviteAddress.setText(invite.getAddress());
             Date inviteDate = invite.getInvitationDate();
-            DateFormat dateFormat = new SimpleDateFormat("EEE MMM d hh:mm:ss z yyyy");
+            DateFormat dateFormat = new SimpleDateFormat("EEE, MMM d, yyyy 'at' hh:mm a", Locale.getDefault());
             String strDate = dateFormat.format(inviteDate);
             itemAcceptedInviteBinding.tvAcceptedInviteDate.setText(strDate);
-            if(!Objects.equals(invite.getSender().getUsername(), ParseUser.getCurrentUser().getUsername())){
+
+            if(inviteNotFromCurrentUser(invite)){
                 itemAcceptedInviteBinding.tvAccptedInviteName.setText(invite.getSender().getUsername());
                 ParseFile image = invite.getSender().getParseFile("profileImage");
                 getImage(image);
@@ -80,8 +81,26 @@ public class AcceptedInviteAdapter extends RecyclerView.Adapter<AcceptedInviteAd
                 ParseFile image = invite.getReceiver().getParseFile("profileImage");
                 getImage(image);
             }
+
+
+            itemAcceptedInviteBinding.btnInviteChat.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    openChatActivity(invite);
+                }
+            });
             queryUpdatedVisited(invite);
 
+        }
+
+        public boolean inviteNotFromCurrentUser(Invite invite){
+            return !Objects.equals(invite.getSender().getUsername(), ParseUser.getCurrentUser().getUsername());
+        }
+
+        private void openChatActivity(Invite invite) {
+            Intent intent = new Intent(context, ChatActivity.class);
+            intent.putExtra("inviteInfo",invite);
+            context.startActivity(intent);
         }
 
         private void queryUpdatedVisited(Invite invite) {

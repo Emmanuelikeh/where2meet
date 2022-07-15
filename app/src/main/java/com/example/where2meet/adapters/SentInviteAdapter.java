@@ -1,6 +1,7 @@
 package com.example.where2meet.adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,11 +19,11 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class SentInviteAdapter extends RecyclerView.Adapter<SentInviteAdapter.ViewHolder> {
     private Context context;
     private List<Invite> inviteList;
-
 
     public SentInviteAdapter(Context context, List<Invite> inviteList){
         this.context = context;
@@ -41,7 +42,6 @@ public class SentInviteAdapter extends RecyclerView.Adapter<SentInviteAdapter.Vi
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Invite invite = inviteList.get(position);
         holder.bind(invite);
-
     }
 
     @Override
@@ -65,12 +65,19 @@ public class SentInviteAdapter extends RecyclerView.Adapter<SentInviteAdapter.Vi
             itemRequestedInviteBinding.tvRequestedInviteeName.setText(invite.getReceiver().getUsername());
             ParseFile image = invite.getReceiver().getParseFile("profileImage");
             getImage(image);
+            getStatus(invite);
+        }
+
+        private void getStatus(Invite invite) {
+            int flag = invite.getFlag();
+            if(flag == 0){itemRequestedInviteBinding.tvInviteStatus.setText(R.string.pending_status);}
+            if(flag == 1){itemRequestedInviteBinding.tvInviteStatus.setText(R.string.rejected_status);}
+            if(flag == 2){itemRequestedInviteBinding.tvInviteStatus.setText(R.string.accepted_status);}
         }
 
         private String getDate(Date date ) {
-            DateFormat dateFormat = new SimpleDateFormat("EEE MMM d hh:mm:ss z yyyy");
-            String strDate = dateFormat.format(date);
-            return strDate;
+            DateFormat dateFormat = new SimpleDateFormat("EEE, MMM d, yyyy 'at' hh:mm a", Locale.getDefault());
+            return dateFormat.format(date);
         }
 
         private void getImage(ParseFile image) {
@@ -82,4 +89,6 @@ public class SentInviteAdapter extends RecyclerView.Adapter<SentInviteAdapter.Vi
             }
         }
     }
+
+
 }

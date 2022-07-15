@@ -7,12 +7,14 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+
 import android.view.View;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.example.where2meet.R;
 import com.example.where2meet.fragments.DatePicker;
+
 import com.example.where2meet.models.Invite;
 import com.example.where2meet.databinding.ActivityComposeBinding;
 import com.parse.ParseUser;
@@ -42,6 +44,7 @@ public class ComposeActivity extends AppCompatActivity implements DatePickerDial
         setContentView(activityComposeBinding.getRoot());
         String formattedAddress = getFormattedAddress();
         activityComposeBinding.etComposeAddress.setText(formattedAddress);
+
         activityComposeBinding.btnFriendSelect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,18 +77,18 @@ public class ComposeActivity extends AppCompatActivity implements DatePickerDial
         invite.setInvitationDate(inviteDate);
         invite.setSender(sender);
         invite.setTitle(title);
+        invite.setFlag(0);
         invite.setReceiver(receiver);
         invite.setAddress(address);
-
         invite.saveInBackground(new SaveCallback() {
             @Override
             public void done(com.parse.ParseException e) {
                 if(e != null){
-                    Toast.makeText(ComposeActivity.this,"Error while saving ",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ComposeActivity.this,getString(R.string.saving_error_message),Toast.LENGTH_SHORT).show();
                 }
                 else{
-                    Toast.makeText(ComposeActivity.this,"success ",Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(ComposeActivity.this, DetailActivity.class);
+                    Toast.makeText(ComposeActivity.this,getString(R.string.saved_success),Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(ComposeActivity.this, MainActivity.class);
                     startActivity(intent);
                     finish();
                 }
@@ -110,13 +113,10 @@ public class ComposeActivity extends AppCompatActivity implements DatePickerDial
             activityComposeBinding.etComposerUsername.setText(parseUser.getUsername());
             if(receiversList.size() < 1){
                 receiversList.add(0,parseUser);
-                Log.i("check this", "length: " + receiversList.size());
             }
             else{
-                Toast.makeText(this, "Can't send to multiple people at once" , Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,getString(R.string.multiple_user_warning), Toast.LENGTH_SHORT).show();
             }
-
-
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
@@ -141,6 +141,7 @@ public class ComposeActivity extends AppCompatActivity implements DatePickerDial
         querySend();
     }
 
+
     private String getFormattedAddress(){
         return (String) getIntent().getExtras().get("FormattedAddress");
     }
@@ -155,7 +156,7 @@ public class ComposeActivity extends AppCompatActivity implements DatePickerDial
             }
         };
         TimePickerDialog timePickerDialog = new TimePickerDialog(this, onTimeSetListener, hour, minute,true);
-        timePickerDialog.setTitle("Select Time");
+        timePickerDialog.setTitle(getString(R.string.Select_Time));
         timePickerDialog.show();
     }
 

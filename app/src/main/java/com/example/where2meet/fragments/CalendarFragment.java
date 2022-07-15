@@ -73,12 +73,12 @@ public class CalendarFragment extends Fragment {
         query.include(Invite.KEY_SENDER);
         query.include(Invite.KEY_RECEIVER);
         query.or(queries);
-        query.whereEqualTo(Invite.KEY_FLAG, true);
+        query.whereEqualTo(Invite.KEY_FLAG, 2);
+        query.addAscendingOrder(Invite.KEY_INVITATION_DATE);
         query.findInBackground(new FindCallback<Invite>() {
             @Override
             public void done(List<Invite> objects, ParseException e) {
                 if(e != null){
-                    Log.e("check this ", "Issue with getting posts", e);
                     return;
                 }
                 inviteList.addAll(objects);

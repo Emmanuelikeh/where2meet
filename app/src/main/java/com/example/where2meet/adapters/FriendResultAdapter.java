@@ -87,6 +87,6 @@ public class FriendResultAdapter extends RecyclerView.Adapter<FriendResultAdapte
 
     public void clear() {
          parseUserList.clear();
-        notifyDataSetChanged();
+         notifyDataSetChanged();
     }
 }

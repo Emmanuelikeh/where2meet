@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.where2meet.R;
 import com.example.where2meet.adapters.SentInviteAdapter;
@@ -66,12 +67,11 @@ public class SentInviteFragment extends Fragment {
         // include data referred by user key
         query.include(Invite.KEY_RECEIVER);
         query.whereEqualTo(Invite.KEY_SENDER, ParseUser.getCurrentUser());
-        query.whereNotEqualTo(Invite.KEY_FLAG,true);
         query.findInBackground(new FindCallback<Invite>() {
             @Override
             public void done(List<Invite> objects, ParseException e) {
                 if(e != null){
-                    Log.e("check this ", "Issue with getting posts", e);
+                    Toast.makeText(getContext(),getString(R.string.error_info), Toast.LENGTH_SHORT).show();
                     return;
                 }
                 inviteList.addAll(objects);

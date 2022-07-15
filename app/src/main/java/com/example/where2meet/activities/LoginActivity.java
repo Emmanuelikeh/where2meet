@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.where2meet.R;
 import com.example.where2meet.databinding.ActivityLoginBinding;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
@@ -56,11 +57,11 @@ public class LoginActivity extends AppCompatActivity {
                 // parse always takes in exception, if there wasn't any problem
                 // the exception will be null;
                 if(e != null) {
-                    Toast.makeText(LoginActivity.this, "Issue with Login", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this,getString(R.string.failure_login), Toast.LENGTH_SHORT).show();
                     return;
                 }
                 goMainActivity();
-                Toast.makeText(LoginActivity.this,"Login Success", Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this,getString(R.string.succes_login), Toast.LENGTH_SHORT).show();
 
             }
         });

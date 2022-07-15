@@ -28,7 +28,7 @@ public class Invite extends ParseObject {
         put(KEY_RECEIVER, receiver);
     }
 
-    public void setFlag(Boolean flag){
+    public void setFlag(int flag){
         put(KEY_FLAG,flag);
     }
 
@@ -51,6 +51,7 @@ public class Invite extends ParseObject {
     public ParseUser getSender(){
         return  getParseUser(KEY_SENDER);
     }
+    public Integer getFlag() { return  getInt(KEY_FLAG);}
 
 
     public  ParseUser getReceiver(){

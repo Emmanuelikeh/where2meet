@@ -56,4 +56,24 @@
         app:layout_constraintStart_toEndOf="@+id/ivRequestsentUserImage"
         app:layout_constraintTop_toBottomOf="@+id/tvRequestedInviteDate"
         tools:text="10-19-21" />
+
+    <TextView
+        android:id="@+id/tvInviteStatusTittle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="16dp"
+        android:text="InviteStatus"
+        app:layout_constraintEnd_toStartOf="@+id/tvInviteStatus"
+        app:layout_constraintTop_toBottomOf="@+id/tvInviteRequestComposeDate" />
+
+    <TextView
+        android:id="@+id/tvInviteStatus"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvInviteRequestComposeDate"
+        tools:text="some stuff would go here" />
 </androidx.constraintlayout.widget.ConstraintLayout>

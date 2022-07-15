@@ -5,19 +5,18 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
+import com.example.where2meet.R;
 import com.example.where2meet.utils.httpUtils;
 import com.example.where2meet.models.Reviews;
 import com.example.where2meet.adapters.ReviewsAdapter;
 import com.example.where2meet.SearchResult;
 import com.example.where2meet.databinding.ActivityDetailBinding;
 import com.parse.ParseException;
-import com.parse.ParseObject;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
@@ -57,7 +56,6 @@ public class DetailActivity extends AppCompatActivity {
         activityDetailBinding.flBtnInvite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(DetailActivity.this,"this works", Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(DetailActivity.this, ComposeActivity.class);
                 i.putExtra("FormattedAddress", searchResult.getFormattedAddress());
                 startActivity(i);
@@ -77,7 +75,7 @@ public class DetailActivity extends AppCompatActivity {
                         }
                         else{
                             activityDetailBinding.btnVisited.setBackgroundColor(-65536);
-                            activityDetailBinding.btnVisited.setText("ViSITED");
+                            activityDetailBinding.btnVisited.setText(R.string.visited);
                         }
                     }
                 });
@@ -104,13 +102,12 @@ public class DetailActivity extends AppCompatActivity {
             }
             @Override
             public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
-                Log.d("check this ", "Failed ");
             }
         });
     }
 
-    private String formHostLink(String id, String baselink, String endlink) {
-        return baselink + id + endlink;
+    private String formHostLink(String id, String baseLink, String endLink) {
+        return baseLink + id + endLink;
     }
 
 
@@ -130,7 +127,6 @@ public class DetailActivity extends AppCompatActivity {
             }
             @Override
             public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
-                Log.i("check this", "onFailure");
 
             }
         });
@@ -145,8 +141,7 @@ public class DetailActivity extends AppCompatActivity {
             for(int i= 0; i < visited.length(); i++){
                 try {
                     if(visited.get(i).toString().equals(searchResult.getFormattedAddress())){
-                        Log.i("check this", "objects: " + visited.get(i));
-                        activityDetailBinding.btnVisited.setText("ViSITED");
+                        activityDetailBinding.btnVisited.setText(R.string.visited);
                         activityDetailBinding.btnVisited.setBackgroundColor(-65536);
 
                     }

@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.where2meet.R;
 import com.example.where2meet.adapters.PendingInviteAdapter;
@@ -36,7 +37,6 @@ public class PendingInviteFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-//        return inflater.inflate(R.layout.fragment_pending_invite, container, false);
         fragmentPendingInviteBinding = FragmentPendingInviteBinding.inflate(inflater,container,false);
         return fragmentPendingInviteBinding.getRoot();
     }
@@ -65,12 +65,12 @@ public class PendingInviteFragment extends Fragment {
         // include data referred by user key
         query.include(Invite.KEY_SENDER);
         query.whereEqualTo(Invite.KEY_RECEIVER, ParseUser.getCurrentUser());
-        query.whereNotEqualTo(Invite.KEY_FLAG,true);
+        query.whereEqualTo(Invite.KEY_FLAG,0);
         query.findInBackground(new FindCallback<Invite>() {
             @Override
             public void done(List<Invite> objects, ParseException e) {
                 if(e != null){
-                    Log.e("check this ", "Issue with getting posts", e);
+                    Toast.makeText(getContext(),getString(R.string.error_info), Toast.LENGTH_SHORT).show();
                     return;
                 }
                 inviteList.addAll(objects);

@@ -13,17 +13,15 @@ import com.bumptech.glide.Glide;
 import com.example.where2meet.models.Invite;
 import com.example.where2meet.R;
 import com.example.where2meet.databinding.ItemPendingInviteBinding;
-import com.parse.DeleteCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
-import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class PendingInviteAdapter extends RecyclerView.Adapter<PendingInviteAdapter.ViewHolder> {
     private Context context;
@@ -60,29 +58,20 @@ public class PendingInviteAdapter extends RecyclerView.Adapter<PendingInviteAdap
         public ViewHolder(@NonNull ItemPendingInviteBinding itemPendingInviteBinding) {
             super(itemPendingInviteBinding.getRoot());
             this.itemPendingInviteBinding = itemPendingInviteBinding;
+
         }
 
         public void bind(Invite invite) {
             itemPendingInviteBinding.tvPendingInviteTitle.setText(invite.getTitle());
             itemPendingInviteBinding.tvPendingInviteSendersName.setText(invite.getSender().getUsername());
             itemPendingInviteBinding.tvPendingUsersAddress.setText(invite.getAddress());
-            Date inviteDate = invite.getInvitationDate();
-            DateFormat dateFormat = new SimpleDateFormat("EEE MMM d hh:mm:ss z yyyy");
-            String strDate = dateFormat.format(inviteDate);
-            itemPendingInviteBinding.tvPendingInviteInvitationDate.setText(strDate);
 
-            ParseFile image = invite.getSender().getParseFile("profileImage");
-
-            if(image == null){
-                Glide.with(context).load(R.drawable.ic_baseline_person_24).override(100,200).centerCrop().into(itemPendingInviteBinding.ivPendingInviteSendersProfileImage);
-            }
-            else{
-                Glide.with(context).load(image.getUrl()).override(100,200).centerCrop().into(itemPendingInviteBinding.ivPendingInviteSendersProfileImage);
-            }
+            getDateFromInvite(invite);
+            loadImageFromInvite(invite);
 
             itemPendingInviteBinding.btnInviteReject.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v) {deleteInvite(invite);
+                public void onClick(View v) {rejectInvite(invite);
                 }
             });
 
@@ -95,11 +84,7 @@ public class PendingInviteAdapter extends RecyclerView.Adapter<PendingInviteAdap
         }
 
         private void acceptInvite(Invite invite){
-            queryMoveToAcceptInvitation(invite);
-        }
-
-        private void queryMoveToAcceptInvitation(Invite invite) {
-            invite.setFlag(true);
+            invite.setFlag(2);
             invite.saveInBackground(new SaveCallback() {
                 @Override
                 public void done(ParseException e) {
@@ -113,14 +98,12 @@ public class PendingInviteAdapter extends RecyclerView.Adapter<PendingInviteAdap
                     }
                 }
 
-            });
+            });;
         }
 
-
-
-
-        private void deleteInvite(Invite invite) {
-            invite.deleteInBackground(new DeleteCallback() {
+        private void rejectInvite(Invite invite) {
+            invite.setFlag(1);
+            invite.saveInBackground(new SaveCallback() {
                 @Override
                 public void done(ParseException e) {
                     if(e==null){
@@ -131,6 +114,25 @@ public class PendingInviteAdapter extends RecyclerView.Adapter<PendingInviteAdap
                 }
             });
         }
+
+        private void getDateFromInvite(Invite invite){
+            Date inviteDate = invite.getInvitationDate();
+            DateFormat dateFormat = new SimpleDateFormat("EEE MMM d hh:mm:ss z yyyy",Locale.getDefault());
+            String strDate = dateFormat.format(inviteDate);
+            itemPendingInviteBinding.tvPendingInviteInvitationDate.setText(strDate);
+        }
+
+        private  void loadImageFromInvite(Invite invite){
+            ParseFile image = invite.getSender().getParseFile("profileImage");
+
+            if(image == null){
+                Glide.with(context).load(R.drawable.ic_baseline_person_24).override(100,200).centerCrop().into(itemPendingInviteBinding.ivPendingInviteSendersProfileImage);
+            }
+            else{
+                Glide.with(context).load(image.getUrl()).override(100,200).centerCrop().into(itemPendingInviteBinding.ivPendingInviteSendersProfileImage);
+            }
+        }
+
 
     }
 

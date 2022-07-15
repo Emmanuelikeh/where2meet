@@ -5,7 +5,6 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,18 +13,13 @@ import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
 import com.example.where2meet.adapters.ViewPagerAdapter;
-import com.example.where2meet.models.Invite;
-import com.example.where2meet.adapters.PendingInviteAdapter;
 import com.example.where2meet.R;
 import com.example.where2meet.databinding.FragmentProfileBinding;
-import com.parse.FindCallback;
-import com.parse.ParseException;
 import com.parse.ParseFile;
-import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.text.DateFormat;
+import java.util.Calendar;
 
 
 public class ProfileFragment extends Fragment {
@@ -49,15 +43,16 @@ public class ProfileFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         getCurrentUserInformation();
-        getlocationfromactivity();
+
         addFragment();
+
 
     }
 
     private void addFragment() {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
-        adapter.addFragment(new PendingInviteFragment(), "PendingInvite");
-        adapter.addFragment(new SentInviteFragment(), "SentInvite");
+        adapter.addFragment(new PendingInviteFragment(),getString(R.string.invite_Sent_to_you));
+        adapter.addFragment(new SentInviteFragment(), getString(R.string.pending_sent_invites));
         fragmentProfileBinding.viewPager.setAdapter(adapter);
         fragmentProfileBinding.tabLayout.setupWithViewPager(fragmentProfileBinding.viewPager);
 
@@ -70,15 +65,6 @@ public class ProfileFragment extends Fragment {
         fragmentProfileBinding = null;
     }
 
-
-    private void getlocationfromactivity(){
-        Bundle args = getArguments();
-       if (args != null){
-            String location = args.getString("currentLocation");
-            fragmentProfileBinding.tvUsersLocation.setText(location);
-        }
-
-    }
 
     public void getCurrentUserInformation(){
         ParseUser currentUser = ParseUser.getCurrentUser();
