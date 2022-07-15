@@ -1,5 +1,7 @@
 package com.example.where2meet.activities;
 
+import static com.google.android.gms.location.Priority.PRIORITY_BALANCED_POWER_ACCURACY;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -14,6 +16,7 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,7 +27,13 @@ import com.example.where2meet.databinding.ActivityMainBinding;
 import com.example.where2meet.fragments.CalendarFragment;
 import com.example.where2meet.fragments.ProfileFragment;
 import com.example.where2meet.fragments.SearchFragment;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.LocationSettingsRequest;
+import com.google.android.gms.location.LocationSettingsResponse;
+import com.google.android.gms.location.SettingsClient;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -40,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
     final FragmentManager fragmentManager = getSupportFragmentManager();
     public static final int REQUEST_CODE = 100;
 
+    public Location usersLocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,16 +114,15 @@ public class MainActivity extends AppCompatActivity {
 
     private void getLocation() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            Task<Location> fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this).getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
+            Task<Location> fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this).getCurrentLocation(PRIORITY_BALANCED_POWER_ACCURACY,null).addOnSuccessListener(new OnSuccessListener<Location>() {
                 @Override
                 public void onSuccess(Location location) {
                     if (location != null) {
-                        Geocoder geocoder = new Geocoder(MainActivity.this, Locale.getDefault());
-                        try {
-                            List<Address> addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
-                   } catch (IOException e) {
-                            e.printStackTrace();
-                        }}
+                        usersLocation = location;
+                    }
+                    else{
+                        Toast.makeText(MainActivity.this, R.string.location_failure, Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
         } else {
@@ -139,6 +148,13 @@ public class MainActivity extends AppCompatActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
+    public Location getUsersLocation() {
+        return usersLocation;
+    }
+
+    public void setUsersLocation(Location usersLocation) {
+        this.usersLocation = usersLocation;
+    }
 
 
 }
