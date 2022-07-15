@@ -65,7 +65,7 @@ public class PendingInviteFragment extends Fragment {
         // include data referred by user key
         query.include(Invite.KEY_SENDER);
         query.whereEqualTo(Invite.KEY_RECEIVER, ParseUser.getCurrentUser());
-        query.whereEqualTo(Invite.KEY_FLAG,null);
+        query.whereEqualTo(Invite.KEY_FLAG,0);
         query.findInBackground(new FindCallback<Invite>() {
             @Override
             public void done(List<Invite> objects, ParseException e) {

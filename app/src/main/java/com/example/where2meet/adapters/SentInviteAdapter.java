@@ -65,6 +65,14 @@ public class SentInviteAdapter extends RecyclerView.Adapter<SentInviteAdapter.Vi
             itemRequestedInviteBinding.tvRequestedInviteeName.setText(invite.getReceiver().getUsername());
             ParseFile image = invite.getReceiver().getParseFile("profileImage");
             getImage(image);
+            getStatus(invite);
+        }
+
+        private void getStatus(Invite invite) {
+            int flag = invite.getFlag();
+            if(flag == 0){itemRequestedInviteBinding.tvInviteStatus.setText(R.string.pending_status);}
+            if(flag == 1){itemRequestedInviteBinding.tvInviteStatus.setText(R.string.rejected_status);}
+            if(flag == 2){itemRequestedInviteBinding.tvInviteStatus.setText(R.string.accepted_status);}
         }
 
         private String getDate(Date date ) {
@@ -81,4 +89,6 @@ public class SentInviteAdapter extends RecyclerView.Adapter<SentInviteAdapter.Vi
             }
         }
     }
+
+
 }

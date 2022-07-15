@@ -58,6 +58,7 @@ public class PendingInviteAdapter extends RecyclerView.Adapter<PendingInviteAdap
         public ViewHolder(@NonNull ItemPendingInviteBinding itemPendingInviteBinding) {
             super(itemPendingInviteBinding.getRoot());
             this.itemPendingInviteBinding = itemPendingInviteBinding;
+
         }
 
         public void bind(Invite invite) {
@@ -83,7 +84,7 @@ public class PendingInviteAdapter extends RecyclerView.Adapter<PendingInviteAdap
         }
 
         private void acceptInvite(Invite invite){
-            invite.setFlag(true);
+            invite.setFlag(2);
             invite.saveInBackground(new SaveCallback() {
                 @Override
                 public void done(ParseException e) {
@@ -101,7 +102,7 @@ public class PendingInviteAdapter extends RecyclerView.Adapter<PendingInviteAdap
         }
 
         private void rejectInvite(Invite invite) {
-            invite.setFlag(false);
+            invite.setFlag(1);
             invite.saveInBackground(new SaveCallback() {
                 @Override
                 public void done(ParseException e) {
