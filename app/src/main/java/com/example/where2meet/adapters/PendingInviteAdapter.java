@@ -10,6 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+
+import com.example.where2meet.OnSwipeTouchListener;
 import com.example.where2meet.models.Invite;
 import com.example.where2meet.R;
 import com.example.where2meet.databinding.ItemPendingInviteBinding;
@@ -81,6 +83,19 @@ public class PendingInviteAdapter extends RecyclerView.Adapter<PendingInviteAdap
                 }
             });
 
+            itemView.setOnTouchListener(new OnSwipeTouchListener(context){
+                @Override
+                public void onSwipeRight() {
+                    super.onSwipeRight();
+                    Toast.makeText(context, "right", Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                public void onSwipeLeft() {
+                    super.onSwipeLeft();
+                    Toast.makeText(context, "left", Toast.LENGTH_SHORT).show();
+                }
+            });
         }
 
         private void acceptInvite(Invite invite){
@@ -98,7 +113,7 @@ public class PendingInviteAdapter extends RecyclerView.Adapter<PendingInviteAdap
                     }
                 }
 
-            });;
+            });
         }
 
         private void rejectInvite(Invite invite) {

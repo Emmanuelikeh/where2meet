@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.where2meet.OnSwipeTouchListener;
 import com.example.where2meet.R;
 import com.example.where2meet.activities.ChatActivity;
 import com.example.where2meet.databinding.ItemAcceptedInviteBinding;
@@ -90,6 +91,21 @@ public class AcceptedInviteAdapter extends RecyclerView.Adapter<AcceptedInviteAd
                 }
             });
             queryUpdatedVisited(invite);
+
+            itemView.setOnTouchListener(new OnSwipeTouchListener(context){
+                @Override
+                public void onSwipeRight() {
+                    super.onSwipeRight();
+                    Toast.makeText(context, "right", Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                public void onSwipeLeft() {
+                    super.onSwipeLeft();
+                    Toast.makeText(context, "left", Toast.LENGTH_SHORT).show();
+                }
+            });
+
 
         }
 
