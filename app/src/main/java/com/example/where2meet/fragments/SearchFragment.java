@@ -90,6 +90,7 @@ public class SearchFragment extends Fragment {
         params.put("query", query);
         params.put("limit",limit);
         Location userLocal = getUserLocation();
+
         if(userLocal != null){
             String longitutde = String.valueOf(userLocal.getLongitude());
             String latitude = String.valueOf(userLocal.getLatitude());

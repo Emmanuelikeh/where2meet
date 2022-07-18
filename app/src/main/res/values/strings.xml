@@ -6,7 +6,7 @@
     <string name="back4app_client_key">JMRkIwQPjjZrGoER328NM6aoYvko8WXpFJv9tv7b</string>
     <string name="invite_Sent_to_you">Invites sent to you</string>
     <string name="ComposeTextTo">To</string>
-    <string name="pending_sent_invites">Pending Sent Invites</string>
+    <string name="sent_invite_status">Sent Invite Status</string>
     <string name="Select_Time">Select Time</string>
     <string name="multiple_user_warning">Can\'t send to multiple people at once</string>
     <string name="saving_error_message">Error while saving</string>
@@ -51,4 +51,5 @@
     <string name="accepted_status">Accepted</string>
     <string name="similar_places_message">Similar places filter: activated</string>
     <string name="location_failure">Failed to get location</string>
+    <string name="distance_in_km_message">Distance selected in Km</string>
 </resources>
