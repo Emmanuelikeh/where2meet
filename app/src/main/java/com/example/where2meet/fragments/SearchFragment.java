@@ -76,6 +76,13 @@ public class SearchFragment extends Fragment {
                 performSearch();
             }
         });
+        fragmentSearchBinding.imgbtnPlaceFilter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PlaceFilterDialog placeFilterDialog = new PlaceFilterDialog();
+                placeFilterDialog.show(getChildFragmentManager(), "placefilter");
+            }
+        });
         saveLocation();
     }
 

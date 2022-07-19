@@ -52,4 +52,16 @@
     <string name="similar_places_message">Similar places filter: activated</string>
     <string name="location_failure">Failed to get location</string>
     <string name="distance_in_km_message">Distance selected in Km</string>
+    <string name="title_price">Price</string>
+    <string name="title_categories">Categories</string>
+    <string name="one_dollar_sign">$</string>
+    <string name="two_dollar_signs">$$</string>
+    <string name="three_dollar_signs">$$$</string>
+    <string name="open_now">Open Now</string>
+    <string name="sort_based_on">Sort based on</string>
+    <string name="apply">Apply</string>
+    <string name="cancel">Cancel</string>
+    <string name="similar_visited_places">Similar Visited Places</string>
+    <string name="similar_visited">Similar visited</string>
+    <string name="distance_in_km">Distance in km</string>
 </resources>
