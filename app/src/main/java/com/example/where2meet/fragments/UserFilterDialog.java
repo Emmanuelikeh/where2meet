@@ -65,17 +65,14 @@ public class UserFilterDialog extends DialogFragment {
             Toast.makeText(getContext(), "please select your distance limits", Toast.LENGTH_SHORT).show();
             return;
         }
-
         if(!distance.equals("")){
             friendSearchActivity.activityFriendSearchBinding.cvDistance.setVisibility(View.VISIBLE);
             friendSearchActivity.activityFriendSearchBinding.tvFilterInputs.setText(distance);
         }
-
         if(sameBackgroundResource){
             friendSearchActivity.activityFriendSearchBinding.cvSimilarPlace.setVisibility(View.VISIBLE);
             friendSearchActivity.activityFriendSearchBinding.tvSimilarPlaceInputs.setText(R.string.similar_places_message);
         }
-
         dismiss();
     }
 
