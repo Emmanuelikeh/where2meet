@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="Categories">
+        <item></item>
         <item>Arts and Entertainment</item>
         <item>Business and Professional Services</item>
         <item>Community and Government</item>
@@ -14,6 +15,7 @@
     </string-array>
     
     <string-array name="sortingOptions">
+        <item></item>
         <item>relevance</item>
         <item>rating</item>
         <item>distance</item>
