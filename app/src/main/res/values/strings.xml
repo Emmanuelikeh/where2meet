@@ -64,4 +64,7 @@
     <string name="similar_visited_places">Similar Visited Places</string>
     <string name="similar_visited">Similar visited</string>
     <string name="distance_in_km">Distance in km</string>
+    <string name="availability">Availability:</string>
+    <string name="price_tag">Price tag</string>
+    <string name="category">Category:</string>
 </resources>
