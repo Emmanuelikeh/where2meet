@@ -4,13 +4,10 @@ import java.util.Dictionary;
 import java.util.Hashtable;
 
 public class CategoriesDictionary {
-
     public Dictionary<String, String> getCategoriesDictionary() {
         return categoriesDictionary;
     }
-
     public Dictionary<String, String> categoriesDictionary;
-
     public CategoriesDictionary(){
         categoriesDictionary = new Hashtable<String, String>();
         categoriesDictionary.put("Arts and Entertainment","10000");
