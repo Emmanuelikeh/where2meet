@@ -42,10 +42,8 @@ public class ProfileFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         getCurrentUserInformation();
-
         addFragment();
-
-
+        fragmentProfileBinding.viewPager.setPagingEnabled(false);
     }
 
     private void addFragment() {
@@ -55,14 +53,11 @@ public class ProfileFragment extends Fragment {
         fragmentProfileBinding.viewPager.setAdapter(adapter);
         fragmentProfileBinding.tabLayout.setupWithViewPager(fragmentProfileBinding.viewPager);
     }
-
-
     @Override
     public void onDestroy() {
         super.onDestroy();
         fragmentProfileBinding = null;
     }
-
 
     public void getCurrentUserInformation(){
         ParseUser currentUser = ParseUser.getCurrentUser();
