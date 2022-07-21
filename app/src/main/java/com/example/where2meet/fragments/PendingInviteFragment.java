@@ -17,6 +17,7 @@ import com.example.where2meet.R;
 import com.example.where2meet.adapters.PendingInviteAdapter;
 import com.example.where2meet.databinding.FragmentPendingInviteBinding;
 import com.example.where2meet.models.Invite;
+import com.example.where2meet.utils.CustomItemAnimator;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
@@ -48,6 +49,7 @@ public class PendingInviteFragment extends Fragment {
         adapter = new PendingInviteAdapter(getContext(),inviteList);
         fragmentPendingInviteBinding.rvPendingInvities.setAdapter(adapter);
         fragmentPendingInviteBinding.rvPendingInvities.setLayoutManager(new LinearLayoutManager(getContext()));
+        fragmentPendingInviteBinding.rvPendingInvities.setItemAnimator(new CustomItemAnimator());
         queryInvite();
     }
 
