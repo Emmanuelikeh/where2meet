@@ -53,8 +53,6 @@ public class PendingInviteFragment extends Fragment {
         queryInvite();
     }
 
-
-
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -76,6 +74,7 @@ public class PendingInviteFragment extends Fragment {
                     return;
                 }
                 inviteList.addAll(objects);
+
                 adapter.notifyDataSetChanged();
             }
         });

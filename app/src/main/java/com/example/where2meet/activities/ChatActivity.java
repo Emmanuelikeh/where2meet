@@ -74,9 +74,6 @@ public class ChatActivity extends AppCompatActivity{
         rescheduleDialogFragment.show(getSupportFragmentManager(),"checkthis");
     }
 
-
-
-
     private void liveQueries() {
         ParseLiveQueryClient parseLiveQueryClient = null;
         try {

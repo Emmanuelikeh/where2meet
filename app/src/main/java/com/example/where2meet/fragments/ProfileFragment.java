@@ -62,6 +62,7 @@ public class ProfileFragment extends Fragment {
     public void getCurrentUserInformation(){
         ParseUser currentUser = ParseUser.getCurrentUser();
         ParseFile image = currentUser.getParseFile("profileImage");
+        fragmentProfileBinding.tvUsersLocation.setText(ParseUser.getCurrentUser().getEmail());
         fragmentProfileBinding.tvCurrentUsersName.setText(currentUser.getUsername());
         if(image == null){
             Glide.with(getContext()).load(R.drawable.ic_baseline_person_24).override(100,200).centerCrop().into(fragmentProfileBinding.ivCurrentUserProfileImage);

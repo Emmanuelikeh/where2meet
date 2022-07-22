@@ -21,6 +21,7 @@ import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 
@@ -28,6 +29,7 @@ public class CalendarFragment extends Fragment {
     public FragmentCalendarBinding fragmentCalendarBinding;
     protected List<Invite> inviteList;
     protected AcceptedInviteAdapter adapter;
+    private List<Calendar> upComingEventsList = new ArrayList<>();
 
     public CalendarFragment() {
         // Required empty public constructor
@@ -58,6 +60,19 @@ public class CalendarFragment extends Fragment {
         queryInvite();
     }
 
+    private void updateCalender() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(2022, Calendar.JULY, 24);
+        upComingEventsList.add(calendar);
+        fragmentCalendarBinding.cvUpcomingevents.setHighlightedDays(upComingEventsList);
+    }
+
+
+    private void refreshView(){
+        fragmentCalendarBinding.cvUpcomingevents.setVisibility(View.GONE);
+        fragmentCalendarBinding.cvUpcomingevents.setVisibility(View.VISIBLE);
+    }
+
     private void queryInvite() {
         ParseQuery<Invite> sender = ParseQuery.getQuery(Invite.class);
         sender.whereEqualTo(Invite.KEY_RECEIVER,ParseUser.getCurrentUser());
@@ -83,6 +98,8 @@ public class CalendarFragment extends Fragment {
                 }
                 inviteList.addAll(objects);
                 adapter.notifyDataSetChanged();
+                updateCalender();
+                refreshView();
             }
         });
 
