@@ -50,5 +50,6 @@ dependencies {
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
     implementation 'com.github.tizisdeepan:eventscalendar:1.6.1'
     implementation 'com.applandeo:material-calendar-view:1.7.0'
+    implementation 'org.apache.commons:commons-lang3:3.12.0'
 
 }

@@ -1,5 +1,6 @@
 package com.example.where2meet.fragments;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -7,11 +8,14 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.applandeo.materialcalendarview.EventDay;
+import com.applandeo.materialcalendarview.listeners.OnDayClickListener;
+import com.example.where2meet.R;
 import com.example.where2meet.adapters.AcceptedInviteAdapter;
 import com.example.where2meet.databinding.FragmentCalendarBinding;
 import com.example.where2meet.models.Invite;
@@ -19,6 +23,9 @@ import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
+
+
+
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -29,7 +36,7 @@ public class CalendarFragment extends Fragment {
     public FragmentCalendarBinding fragmentCalendarBinding;
     protected List<Invite> inviteList;
     protected AcceptedInviteAdapter adapter;
-    private List<Calendar> upComingEventsList = new ArrayList<>();
+
 
     public CalendarFragment() {
         // Required empty public constructor
@@ -40,8 +47,7 @@ public class CalendarFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         fragmentCalendarBinding = FragmentCalendarBinding.inflate(inflater,container,false);
-        View view = fragmentCalendarBinding.getRoot();
-        return view;
+        return fragmentCalendarBinding.getRoot();
     }
 
     @Override
@@ -57,17 +63,51 @@ public class CalendarFragment extends Fragment {
         adapter = new AcceptedInviteAdapter(getContext(),inviteList);
         fragmentCalendarBinding.rvUpcomingEvents.setAdapter(adapter);
         fragmentCalendarBinding.rvUpcomingEvents.setLayoutManager(new LinearLayoutManager(getContext()));
+        fragmentCalendarBinding.cvUpcomingevents.setOnDayClickListener(new OnDayClickListener() {
+            @SuppressLint("RestrictedApi")
+            @Override
+            public void onDayClick(EventDay eventDay) {
+                if(eventDay.getImageDrawable() != null){
+                    Toast.makeText(getContext(), "events on this day", Toast.LENGTH_SHORT).show();
+                    scrollToPosition(eventDay);
+                }
+            }
+        });
         queryInvite();
     }
 
-    private void updateCalender() {
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(2022, Calendar.JULY, 24);
-        upComingEventsList.add(calendar);
-        fragmentCalendarBinding.cvUpcomingevents.setHighlightedDays(upComingEventsList);
+    private void scrollToPosition(EventDay eventDay) {
+        int position;
+        Calendar calendar = eventDay.getCalendar();
+        for(int i = 0; i < inviteList.size(); i++){
+            Calendar inviteCalendar = Calendar.getInstance();
+            inviteCalendar.setTime(inviteList.get(i).getInvitationDate());
+            boolean sameDay = isSameDay(calendar, inviteCalendar);
+            if(sameDay){
+                position = i;
+                fragmentCalendarBinding.rvUpcomingEvents.scrollToPosition(position);
+                break;
+            }
+        }
+    }
+    public static boolean isSameDay(final Calendar cal1, final Calendar cal2) {
+        return cal1.get(Calendar.ERA) == cal2.get(Calendar.ERA) &&
+                cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR) &&
+                cal1.get(Calendar.DAY_OF_YEAR) == cal2.get(Calendar.DAY_OF_YEAR);
     }
 
-
+    private void updateCalender(List<Invite> inviteList) {
+        List<Calendar> upComingEventsList = new ArrayList<>();
+        List<EventDay> events = new ArrayList<>();
+        for (Invite invite: inviteList) {
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(invite.getInvitationDate());
+            upComingEventsList.add(calendar);
+            events.add(new EventDay(calendar, R.drawable.filter));
+        }
+        fragmentCalendarBinding.cvUpcomingevents.setEvents(events);
+        fragmentCalendarBinding.cvUpcomingevents.setHighlightedDays(upComingEventsList);
+    }
     private void refreshView(){
         fragmentCalendarBinding.cvUpcomingevents.setVisibility(View.GONE);
         fragmentCalendarBinding.cvUpcomingevents.setVisibility(View.VISIBLE);
@@ -97,13 +137,10 @@ public class CalendarFragment extends Fragment {
                     return;
                 }
                 inviteList.addAll(objects);
-                adapter.notifyDataSetChanged();
-                updateCalender();
+                updateCalender(inviteList);
                 refreshView();
+                adapter.notifyDataSetChanged();
             }
         });
-
-
-
     }
 }
