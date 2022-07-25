@@ -1,80 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:orientation="vertical"
     android:layout_height="match_parent"
     tools:context=".activities.DetailActivity">
-
-    <ImageView
-        android:id="@+id/ivPlaceImage"
-        android:layout_width="match_parent"
-        android:layout_height="170dp"
-        android:layout_marginTop="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvDetailName"
-        tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
         android:id="@+id/tvDetailName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="10dp"
         android:gravity="center"
         android:textSize="30sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:textStyle="bold"
         tools:text="Facebook" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/flBtnInvite"
-        android:layout_width="wrap_content"
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="160dp"
-        android:layout_marginEnd="36dp"
-        android:src="@drawable/account_star_outline"
-        app:fabSize="normal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivPlaceImage"
-        tools:ignore="SpeakableTextPresentCheck" />
+        app:cardCornerRadius="8dp"
+        android:layout_margin="5dp"
+        android:elevation="15dp">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvReviews"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_margin="10dp"
-        android:layout_marginTop="80dp"
-        android:padding="5dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.21"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvFormattedAddress"
-        app:layout_constraintVertical_bias="0.737" />
-
-    <Button
-        android:id="@+id/btnVisited"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/not_visited"
-        app:layout_constraintBottom_toTopOf="@+id/tvFormattedAddress"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivPlaceImage"
-        app:layout_constraintVertical_bias="0.428" />
+        <ImageView
+            android:id="@+id/ivPlaceImage"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:scaleType="center"
+            app:layout_constraintTop_toBottomOf="@+id/tvDetailName"
+            tools:srcCompat="@tools:sample/avatars" />
+    </androidx.cardview.widget.CardView>
 
     <TextView
         android:id="@+id/tvFormattedAddress"
         android:layout_width="match_parent"
+        android:gravity="center"
+        android:layout_margin="5dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="76dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivPlaceImage"
-        tools:text="menloPark " />
+        tools:text="@string/park" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+  <TextView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:gravity="center"
+      android:textStyle="bold"
+      android:textSize="20sp"
+      android:layout_marginTop="15dp"
+      android:text="@string/reviews">
+  </TextView>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvReviews"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:layout_marginTop="0dp"
+        android:padding="5dp"/>
+</LinearLayout>
