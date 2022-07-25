@@ -68,7 +68,7 @@ public class ProfileFragment extends Fragment {
             Glide.with(getContext()).load(R.drawable.ic_baseline_person_24).override(100,200).centerCrop().into(fragmentProfileBinding.ivCurrentUserProfileImage);
         }
         else{
-            Glide.with(getContext()).load(image.getUrl()).override(100,200).centerCrop().into(fragmentProfileBinding.ivCurrentUserProfileImage);
+            Glide.with(getContext()).load(image.getUrl()).override(96,96).into(fragmentProfileBinding.ivCurrentUserProfileImage);
         }
 
     }
