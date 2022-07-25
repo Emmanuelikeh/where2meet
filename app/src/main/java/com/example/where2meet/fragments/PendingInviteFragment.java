@@ -11,8 +11,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.example.where2meet.R;
 import com.example.where2meet.adapters.PendingInviteAdapter;
 import com.example.where2meet.databinding.FragmentPendingInviteBinding;
@@ -71,11 +73,16 @@ public class PendingInviteFragment extends Fragment {
             public void done(List<Invite> objects, ParseException e) {
                 if(e != null){
                     Toast.makeText(getContext(),getString(R.string.error_info), Toast.LENGTH_SHORT).show();
+                    Log.e("pendingInviteFragment","error is: ",e);
                     return;
                 }
+//                Log.e("pendingInviteFragment", e.toString());
                 inviteList.addAll(objects);
-
                 adapter.notifyDataSetChanged();
+                if(!inviteList.isEmpty()){
+                    fragmentPendingInviteBinding.tvNoInvites.setVisibility(View.GONE);
+                    fragmentPendingInviteBinding.animationView.setVisibility(View.GONE);
+                }
             }
         });
     }
