@@ -49,7 +49,6 @@ public class PendingInviteAdapter extends RecyclerView.Adapter<PendingInviteAdap
     public void onBindViewHolder(@NonNull PendingInviteAdapter.ViewHolder holder, int position) {
         Invite invite = inviteList.get(position);
         holder.bind(invite);
-
     }
 
     @Override
@@ -62,29 +61,24 @@ public class PendingInviteAdapter extends RecyclerView.Adapter<PendingInviteAdap
         public ViewHolder(@NonNull ItemPendingInviteBinding itemPendingInviteBinding) {
             super(itemPendingInviteBinding.getRoot());
             this.itemPendingInviteBinding = itemPendingInviteBinding;
-
         }
 
         public void bind(Invite invite) {
             itemPendingInviteBinding.tvPendingInviteTitle.setText(invite.getTitle());
             itemPendingInviteBinding.tvPendingInviteSendersName.setText(invite.getSender().getUsername());
             itemPendingInviteBinding.tvPendingUsersAddress.setText(invite.getAddress());
-
             getDateFromInvite(invite);
             loadImageFromInvite(invite);
-
             itemPendingInviteBinding.btnInviteReject.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {rejectInvite(invite);
                 }
             });
-
             itemPendingInviteBinding.btnInviteAccept.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {acceptInvite(invite);
                 }
             });
-
             itemView.setOnTouchListener(new OnSwipeTouchListener(context){
                 @Override
                 public void onSwipeRight() {
@@ -100,7 +94,6 @@ public class PendingInviteAdapter extends RecyclerView.Adapter<PendingInviteAdap
                 }
             });
         }
-
         private void acceptInvite(Invite invite){
             invite.setFlag(2);
             invite.saveInBackground(new SaveCallback() {
@@ -117,7 +110,6 @@ public class PendingInviteAdapter extends RecyclerView.Adapter<PendingInviteAdap
                 }
             });
         }
-
         private void rejectInvite(Invite invite) {
             invite.setFlag(1);
             invite.saveInBackground(new SaveCallback() {
