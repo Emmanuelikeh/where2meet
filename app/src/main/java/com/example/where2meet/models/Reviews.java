@@ -4,8 +4,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class Reviews {
     String createdAt;
@@ -24,11 +29,21 @@ public class Reviews {
         return reviews;
     }
 
-    public String getCreatedAt(){
-        return  createdAt;
+    public String getCreatedAt() throws ParseException {
+        return  formatDateFromReviews(createdAt);
     }
 
     public String getCommentary(){
         return commentary;
     }
+
+
+    private String formatDateFromReviews(String createdAt) throws ParseException {
+        DateFormat parser = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+       Date parse =  parser.parse(createdAt);
+       String formattedDate = formatter.format(parse);
+       return  formattedDate;
+    }
+
 }

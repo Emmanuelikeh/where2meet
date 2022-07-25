@@ -67,4 +67,8 @@
     <string name="availability">Availability:</string>
     <string name="price_tag">Price tag</string>
     <string name="category">Category:</string>
+    <string name="place_search_message">where do you want to go?</string>
+    <string name="no_new_invites">No New Invites</string>
+    <string name="park">Park</string>
+    <string name="reviews">Reviews</string>
 </resources>

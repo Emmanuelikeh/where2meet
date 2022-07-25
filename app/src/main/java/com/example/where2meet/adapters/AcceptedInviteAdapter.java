@@ -105,8 +105,6 @@ public class AcceptedInviteAdapter extends RecyclerView.Adapter<AcceptedInviteAd
                     Toast.makeText(context, "left", Toast.LENGTH_SHORT).show();
                 }
             });
-
-
         }
 
         public boolean inviteNotFromCurrentUser(Invite invite){

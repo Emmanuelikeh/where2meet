@@ -10,7 +10,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.where2meet.models.Reviews;
 import com.example.where2meet.databinding.ItemReviewBinding;
 
+import java.text.ParseException;
 import java.util.List;
+import java.util.Objects;
 
 public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ViewHolder> {
     private Context context;
@@ -30,9 +32,13 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ViewHold
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ReviewsAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ReviewsAdapter.ViewHolder holder, int position){
         Reviews review = reviews.get(position);
-        holder.bind(review);
+        try {
+            Objects.requireNonNull(holder).bind(review);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -49,7 +55,7 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ViewHold
 
         }
 
-        public void bind(Reviews review) {
+        public void bind(Reviews review) throws ParseException {
             itemReviewBinding.etCommentary.setText(review.getCommentary());
             itemReviewBinding.tvCreatedAt.setText(review.getCreatedAt());
         }

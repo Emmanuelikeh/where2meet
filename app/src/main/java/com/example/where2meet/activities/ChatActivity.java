@@ -17,6 +17,7 @@ import com.example.where2meet.databinding.FragmentRescheduleDialogBinding;
 import com.example.where2meet.fragments.RescheduleDialogFragment;
 import com.example.where2meet.models.Invite;
 import com.example.where2meet.models.Messages;
+import com.example.where2meet.utils.CustomItemAnimator;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
@@ -39,8 +40,6 @@ public class ChatActivity extends AppCompatActivity{
     private ActivityChatBinding activityChatBinding;
     private List<Messages> messagesList;
     private ChatAdapter adapter;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,15 +67,10 @@ public class ChatActivity extends AppCompatActivity{
         queryChats();
         liveQueries();
     }
-
     private void openResheduleDialog() {
         RescheduleDialogFragment rescheduleDialogFragment = new RescheduleDialogFragment();
-        rescheduleDialogFragment.show(getSupportFragmentManager(),"checkthis");
+        rescheduleDialogFragment.show(getSupportFragmentManager(),"Checkthis");
     }
-
-
-
-
     private void liveQueries() {
         ParseLiveQueryClient parseLiveQueryClient = null;
         try {
@@ -103,8 +97,6 @@ public class ChatActivity extends AppCompatActivity{
             }
         });
     }
-
-
     private void processMessage() {
         String userInputChat = activityChatBinding.etChatBox.getText().toString();
         Invite specificGroup = getGroup();
@@ -127,17 +119,13 @@ public class ChatActivity extends AppCompatActivity{
             }
         });
     }
-
     public Invite getGroup() {
         return (Invite) getIntent().getExtras().get("inviteInfo");
     }
-
-
     public void chatAccessibility(){
         Invite invite = getGroup();
         Date invitationDate = invite.getInvitationDate();
         Date date  = new Date();
-
         if(date.compareTo(invitationDate) > 0){
             Log.i("Dates", "value : " + date.compareTo(invitationDate));
             activityChatBinding.etChatBox.setVisibility(View.GONE);
@@ -145,9 +133,6 @@ public class ChatActivity extends AppCompatActivity{
             activityChatBinding.btnRescheduleInvite.setVisibility(View.GONE);
         }
     }
-
-
-
     private void queryChats() {
         ParseQuery<Messages> query = ParseQuery.getQuery(Messages.class);
         Invite currentGroupId = getGroup();

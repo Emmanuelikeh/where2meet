@@ -1,10 +1,15 @@
 package com.example.where2meet.activities;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
@@ -51,43 +56,14 @@ public class DetailActivity extends AppCompatActivity {
         String id = searchResult.getFsqId();
         String hostLink = formHostLink(id,"https://api.foursquare.com/v3/places/","/photos" );
         queryOtherDetails(hostLink);
-        checkVisited();
-
-        activityDetailBinding.flBtnInvite.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(DetailActivity.this, ComposeActivity.class);
-                i.putExtra("FormattedAddress", searchResult.getFormattedAddress());
-                startActivity(i);
-            }
-        });
-
-        activityDetailBinding.btnVisited.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ParseUser currentUser = ParseUser.getCurrentUser();
-                currentUser.addAllUnique("Visited", Arrays.asList(searchResult.getFormattedAddress()));
-                currentUser.saveInBackground(new SaveCallback() {
-                    @Override
-                    public void done(ParseException e) {
-                        if(e != null){
-                            Toast.makeText(DetailActivity.this, "Failed: " + e,Toast.LENGTH_SHORT).show();
-                        }
-                        else{
-                            activityDetailBinding.btnVisited.setBackgroundColor(-65536);
-                            activityDetailBinding.btnVisited.setText(R.string.visited);
-                        }
-                    }
-                });
-
-            }
-        });
-
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle("Place Details");
         String reviewLink = formHostLink(id,"https://api.foursquare.com/v3/places/", "/tips");
         reviewList = new ArrayList<>();
         adapter = new ReviewsAdapter(this, reviewList);
         activityDetailBinding.rvReviews.setAdapter(adapter);
         activityDetailBinding.rvReviews.setLayoutManager(new LinearLayoutManager(DetailActivity.this));
+        activityDetailBinding.rvReviews.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
 
         httpUtils.getRequest(reviewLink, new JsonHttpResponseHandler() {
             @Override
@@ -106,10 +82,25 @@ public class DetailActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.detail_menu,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId() == R.id.flBtnInvite){
+            Intent i = new Intent(DetailActivity.this, ComposeActivity.class);
+            i.putExtra("FormattedAddress", searchResult.getFormattedAddress());
+            startActivity(i);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
     private String formHostLink(String id, String baseLink, String endLink) {
         return baseLink + id + endLink;
     }
-
 
     private void queryOtherDetails(String hostLink) {
         httpUtils.getRequest(hostLink, new JsonHttpResponseHandler() {
@@ -127,30 +118,8 @@ public class DetailActivity extends AppCompatActivity {
             }
             @Override
             public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
-
             }
         });
-
-    }
-
-
-    private void checkVisited(){
-        ParseUser currentUser = ParseUser.getCurrentUser();
-        JSONArray visited = currentUser.getJSONArray("Visited");
-        if (visited != null ){
-            for(int i= 0; i < visited.length(); i++){
-                try {
-                    if(visited.get(i).toString().equals(searchResult.getFormattedAddress())){
-                        activityDetailBinding.btnVisited.setText(R.string.visited);
-                        activityDetailBinding.btnVisited.setBackgroundColor(-65536);
-
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-
 
     }
 }

@@ -29,8 +29,6 @@ public class SignupActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-
         activitySignupBinding.btnSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -41,22 +39,18 @@ public class SignupActivity extends AppCompatActivity {
                 signUpUser(signupUsername,signupEmail,signupPassword,signupRePassword);
             }
         });
-
     }
-
     private void signUpUser(String signupUsername, String signupEmail, String signupPassword, String signupRePassword) {
         // check if password and re-entered passwords match
         if (!signupPassword.equals(signupRePassword) && !signupPassword.equals("")){
             Toast.makeText(this, getString(R.string.password_mismatch), Toast.LENGTH_SHORT).show();
             return;
         }
-
         ParseUser user = new ParseUser();
         //Set fields for the user to be created
         user.setEmail(signupEmail);
         user.setUsername(signupUsername);
         user.setPassword(signupPassword);
-
         user.signUpInBackground(new SignUpCallback() {
             @Override
             public void done(ParseException e) {
@@ -72,7 +66,6 @@ public class SignupActivity extends AppCompatActivity {
             }
         });
     }
-
     private void goLoginActivity() {
         Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
         startActivity(intent);

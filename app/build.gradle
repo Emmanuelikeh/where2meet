@@ -49,5 +49,7 @@ dependencies {
     implementation 'com.github.parse-community:ParseLiveQuery-Android:1.2.2'
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
     implementation 'com.github.tizisdeepan:eventscalendar:1.6.1'
-
+    implementation 'com.applandeo:material-calendar-view:1.7.0'
+    implementation 'org.apache.commons:commons-lang3:3.12.0'
+    implementation "com.airbnb.android:lottie:3.4.0"
 }
