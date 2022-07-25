@@ -5,40 +5,46 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:gravity="center_horizontal"
     tools:context=".fragments.SearchFragment">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
+        android:layout_width="320dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         app:cardCornerRadius="8dp"
         app:cardElevation="8dp"
-        android:clickable="true"
         android:foreground="?android:attr/selectableItemBackground">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:orientation="horizontal">
+            <ImageButton
+                android:id="@+id/imgBtnSearchBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:layout_marginEnd="10dp"
+                android:src="@android:drawable/ic_menu_search"
+                tools:ignore="SpeakableTextPresentCheck" />
+
             <EditText
                 android:id="@+id/etSearchBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
+                android:hint="@string/place_search_message"
                 android:inputType="textPersonName"
                 android:minHeight="48dp"
-                android:layout_marginTop="10dp"
+                android:background="@android:color/transparent"
                 android:layout_marginEnd="10dp"
                 tools:text="Where do you want to go?" />
-            <ImageButton
-                android:id="@+id/imgBtnSearchBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:src="@android:drawable/ic_menu_search"
-                tools:ignore="SpeakableTextPresentCheck" />
+
             <ImageButton
                 android:id="@+id/imgBtnPlaceFilter"
-                android:layout_marginTop="10dp"
                 android:layout_width="wrap_content"
+                android:background="@android:color/transparent"
                 android:layout_height="match_parent"
                 android:src="@drawable/ic_filter_and_sort_24"
                 />
@@ -184,6 +190,7 @@
     </LinearLayout>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvSearchItems"
+        android:layout_marginTop="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         />
