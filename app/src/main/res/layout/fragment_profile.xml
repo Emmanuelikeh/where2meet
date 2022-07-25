@@ -20,8 +20,9 @@
 
     <TextView
         android:id="@+id/tvCurrentUsersName"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="@dimen/average_text_Size"
         android:layout_marginStart="203dp"
         android:layout_marginTop="48dp"
         android:layout_marginEnd="100dp"
@@ -76,12 +77,12 @@
             app:tabGravity="center"
             app:tabIndicator="@android:color/white"
             app:tabIndicatorHeight="2dp"
-            app:tabMode="scrollable" />
+            app:tabMode="fixed" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
 
-    <androidx.viewpager.widget.ViewPager
+    <com.example.where2meet.utils.CustomViewPager
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="0dp"

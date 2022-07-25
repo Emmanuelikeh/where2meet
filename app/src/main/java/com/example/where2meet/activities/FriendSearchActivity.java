@@ -8,7 +8,7 @@ import android.view.View;
 
 import com.example.where2meet.adapters.FriendResultAdapter;
 import com.example.where2meet.databinding.ActivityFriendSearchBinding;
-import com.example.where2meet.fragments.FilterDialog;
+import com.example.where2meet.fragments.UserFilterDialog;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseGeoPoint;
@@ -52,7 +52,7 @@ public class FriendSearchActivity extends AppCompatActivity {
         activityFriendSearchBinding.btnFilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FilterDialog filterDialog = new FilterDialog();
+                UserFilterDialog filterDialog = new UserFilterDialog();
                 filterDialog.show(getSupportFragmentManager(),"checkthis");
             }
         });

@@ -3,16 +3,16 @@ package com.example.where2meet.fragments;
 import android.location.Location;
 import android.os.Bundle;
 
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.codepath.asynchttpclient.AsyncHttpClient;
 import com.codepath.asynchttpclient.RequestHeaders;
@@ -22,6 +22,8 @@ import com.example.where2meet.SearchResult;
 import com.example.where2meet.activities.MainActivity;
 import com.example.where2meet.adapters.SearchResultAdapter;
 import com.example.where2meet.databinding.FragmentSearchBinding;
+import com.example.where2meet.utils.CategoriesDictionary;
+import com.example.where2meet.utils.PriceTagDictionary;
 import com.parse.ParseException;
 import com.parse.ParseGeoPoint;
 import com.parse.ParseUser;
@@ -32,21 +34,20 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Dictionary;
 import java.util.List;
 
 import okhttp3.Headers;
 
 
 public class SearchFragment extends Fragment {
-    private FragmentSearchBinding fragmentSearchBinding;
+    public FragmentSearchBinding fragmentSearchBinding;
     private String TAG = "SearchFragment";
     protected List<SearchResult> searchResultList;
     protected SearchResultAdapter adapter;
-
     public SearchFragment() {
         // Required empty public constructor
     }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -55,13 +56,11 @@ public class SearchFragment extends Fragment {
         View view = fragmentSearchBinding.getRoot();
         return view;
     }
-
     @Override
     public void onDestroy() {
         super.onDestroy();
         fragmentSearchBinding = null;
     }
-
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -76,29 +75,30 @@ public class SearchFragment extends Fragment {
                 performSearch();
             }
         });
+        fragmentSearchBinding.imgBtnPlaceFilter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PlaceFilterDialog placeFilterDialog = new PlaceFilterDialog();
+                placeFilterDialog.show(getChildFragmentManager(), "placeFilter");
+            }
+        });
         saveLocation();
     }
-
-
-
     public void querySearchResults(String query, String hostLink){
         int limit = 10;
-
         AsyncHttpClient client = new AsyncHttpClient();
         RequestHeaders headers = new RequestHeaders();
         RequestParams params = new RequestParams();
         params.put("query", query);
         params.put("limit",limit);
         Location userLocal = getUserLocation();
-        if(userLocal != null){
-            String longitutde = String.valueOf(userLocal.getLongitude());
-            String latitude = String.valueOf(userLocal.getLatitude());
-            String ll = latitude+","+longitutde;
-            params.put("ll",ll);
-        }
-
+        if(userLocal != null){params.put("ll",getLatitudeAndLongitude(userLocal));}
+        if(fragmentSearchBinding.tvDistanceInKm.isShown()){params.put("radius", Integer.parseInt(fragmentSearchBinding.tvDistanceInKm.getText().toString()) * 1000);}
+        if(fragmentSearchBinding.tvSortSelection.isShown()){params.put("sort", fragmentSearchBinding.tvSortSelection.getText().toString().toUpperCase());}
+        if(fragmentSearchBinding.tvAvailability.isShown()){params.put("open_now",true);}
+        if(fragmentSearchBinding.tvCategory.isShown()){params.put("categories", getCategoryIdString(fragmentSearchBinding.tvCategory.getText().toString()));}
+        if(fragmentSearchBinding.tvPriceTag.isShown()){params.put("min_price", getPriceTagValue(fragmentSearchBinding.tvPriceTag.getText().toString()));}
         headers.put("Authorization", "fsq3HapICxpWstVvgaSOAlrzGLoCv7IypLnr82Q3c0AVzDk=");
-
         client.get(hostLink,headers,params, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Headers headers, JSON json) {
@@ -112,27 +112,38 @@ public class SearchFragment extends Fragment {
                     e.printStackTrace();
                 }
             }
-
             @Override
             public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
                 Log.d(TAG,"onFailure");
             }
         });
     }
-
+    private String getLatitudeAndLongitude(Location location){
+        String longitude = String.valueOf(location.getLongitude());
+        String latitude = String.valueOf(location.getLatitude());
+        return latitude+","+ longitude;
+    }
+    private String getPriceTagValue(String priceTag) {
+        PriceTagDictionary priceTagDictionary = new PriceTagDictionary();
+        Dictionary<String, String> tagDictionary = priceTagDictionary.getPriceTagDictionary();
+        return  tagDictionary.get(priceTag);
+    }
+    private String getCategoryIdString(String category) {
+        CategoriesDictionary dictionary = new CategoriesDictionary();
+        Dictionary<String,String> categoriesDictionary = dictionary.getCategoriesDictionary();
+        return categoriesDictionary.get(category);
+    }
     private void performSearch(){
-        String searchquery = fragmentSearchBinding.etSearchBox.getText().toString();
+        String searchQuery = fragmentSearchBinding.etSearchBox.getText().toString();
         fragmentSearchBinding.etSearchBox.setText("");
         adapter.clear();
-        querySearchResults(searchquery, "https://api.foursquare.com/v3/places/search");
+        querySearchResults(searchQuery, "https://api.foursquare.com/v3/places/search");
     }
-
     private void saveLocation() {
         Location currentUsersLocation = getUserLocation();
         if(currentUsersLocation == null){
             return;
         }
-
         ParseGeoPoint location = new ParseGeoPoint(currentUsersLocation.getLatitude(),currentUsersLocation.getLongitude());
         ParseUser currentUser = ParseUser.getCurrentUser();
         currentUser.put("LastRecordedLocation",location);
@@ -145,11 +156,8 @@ public class SearchFragment extends Fragment {
             }
         });
     }
-
     public Location getUserLocation(){
         MainActivity activity = (MainActivity) getActivity();
         return  activity.usersLocation;
     }
-
-
 }

@@ -35,14 +35,11 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
         ItemSearchresultBinding itemSearchresultBinding = ItemSearchresultBinding.inflate(layoutInflater,parent,false);
         return new ViewHolder(itemSearchresultBinding);
     }
-
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         SearchResult searchResult = searchResults.get(position);
         holder.bind(searchResult);
-
     }
-
     @Override
     public int getItemCount() {
         return searchResults.size();

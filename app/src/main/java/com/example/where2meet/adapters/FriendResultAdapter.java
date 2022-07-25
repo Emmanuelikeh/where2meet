@@ -28,7 +28,6 @@ public class FriendResultAdapter extends RecyclerView.Adapter<FriendResultAdapte
          this.context = context;
          this.parseUserList = parseUserList;
      }
-
     @NonNull
     @Override
     public FriendResultAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -36,19 +35,16 @@ public class FriendResultAdapter extends RecyclerView.Adapter<FriendResultAdapte
         ItemFriendBinding itemFriendBinding = ItemFriendBinding.inflate(inflater,parent,false);
         return new ViewHolder(itemFriendBinding);
     }
-
     @Override
     public void onBindViewHolder(@NonNull FriendResultAdapter.ViewHolder holder, int position) {
          ParseUser parseUser = parseUserList.get(position);
          holder.bind(parseUser);
 
     }
-
     @Override
     public int getItemCount() {
         return parseUserList.size();
     }
-
     public class ViewHolder extends RecyclerView.ViewHolder implements  View.OnClickListener{
         private ItemFriendBinding itemFriendBinding;
         public ViewHolder(@NonNull ItemFriendBinding itemFriendBinding) {
@@ -56,7 +52,6 @@ public class FriendResultAdapter extends RecyclerView.Adapter<FriendResultAdapte
             this.itemFriendBinding = itemFriendBinding;
             itemView.setOnClickListener(this);
         }
-
         public void bind(ParseUser parseUser) {
             itemFriendBinding.tvFriendName.setText(parseUser.getUsername());
             itemFriendBinding.tvFriendEmail.setText(parseUser.getEmail());
@@ -69,7 +64,6 @@ public class FriendResultAdapter extends RecyclerView.Adapter<FriendResultAdapte
                 Glide.with(context).load(R.drawable.ic_baseline_person_24).override(100,200).centerCrop().into(itemFriendBinding.ivFriendImage);
             }
         }
-
         @Override
         public void onClick(View v) {
             int position = getAdapterPosition();
@@ -84,7 +78,6 @@ public class FriendResultAdapter extends RecyclerView.Adapter<FriendResultAdapte
             }
         }
     }
-
     public void clear() {
          parseUserList.clear();
          notifyDataSetChanged();

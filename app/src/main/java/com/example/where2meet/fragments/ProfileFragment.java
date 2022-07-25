@@ -29,7 +29,6 @@ public class ProfileFragment extends Fragment {
         // Required empty public constructor
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -43,28 +42,22 @@ public class ProfileFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         getCurrentUserInformation();
-
         addFragment();
-
-
+        fragmentProfileBinding.viewPager.setPagingEnabled(false);
     }
 
     private void addFragment() {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
         adapter.addFragment(new PendingInviteFragment(),getString(R.string.invite_Sent_to_you));
-        adapter.addFragment(new SentInviteFragment(), getString(R.string.pending_sent_invites));
+        adapter.addFragment(new SentInviteFragment(), getString(R.string.sent_invite_status));
         fragmentProfileBinding.viewPager.setAdapter(adapter);
         fragmentProfileBinding.tabLayout.setupWithViewPager(fragmentProfileBinding.viewPager);
-
     }
-
-
     @Override
     public void onDestroy() {
         super.onDestroy();
         fragmentProfileBinding = null;
     }
-
 
     public void getCurrentUserInformation(){
         ParseUser currentUser = ParseUser.getCurrentUser();

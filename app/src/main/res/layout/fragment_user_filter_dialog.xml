@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".fragments.FilterDialog">
+    tools:context=".fragments.UserFilterDialog">
 
 
     <SeekBar
@@ -27,7 +27,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="13dp"
         android:layout_marginTop="62dp"
-        android:text="Distance in km" />
+        android:text="@string/distance_in_km" />
 
     <Button
         android:id="@+id/btnSimilarVisited"
@@ -37,7 +37,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="187dp"
         android:layout_marginTop="139dp"
-        android:text="Similar visited" />
+        android:text="@string/similar_visited" />
 
     <TextView
         android:id="@+id/tvVisitedplace"
@@ -47,7 +47,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="5dp"
         android:layout_marginTop="156dp"
-        android:text="Similar Visited Places" />
+        android:text="@string/similar_visited_places" />
 
     <Button
         android:id="@+id/btnCancelFilterDialog"
@@ -58,7 +58,7 @@
         android:layout_marginTop="263dp"
         android:layout_marginEnd="165dp"
         android:layout_marginBottom="8dp"
-        android:text="Cancel" />
+        android:text="@string/cancel" />
 
     <Button
         android:id="@+id/btnApply"
@@ -68,7 +68,7 @@
         android:layout_alignParentEnd="true"
         android:layout_marginTop="268dp"
         android:layout_marginEnd="32dp"
-        android:text="Apply" />
+        android:text="@string/apply" />
 
     <TextView
         android:id="@+id/tvDistanceValue"

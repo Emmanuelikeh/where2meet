@@ -4,12 +4,16 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+
+import com.example.where2meet.models.OnSwipeTouchListener;
 import com.example.where2meet.models.Invite;
 import com.example.where2meet.R;
 import com.example.where2meet.databinding.ItemPendingInviteBinding;
@@ -81,6 +85,20 @@ public class PendingInviteAdapter extends RecyclerView.Adapter<PendingInviteAdap
                 }
             });
 
+            itemView.setOnTouchListener(new OnSwipeTouchListener(context){
+                @Override
+                public void onSwipeRight() {
+                    super.onSwipeRight();
+                    Toast.makeText(context, "Accepted", Toast.LENGTH_SHORT).show();
+                    acceptInvite(invite);
+                }
+                @Override
+                public void onSwipeLeft() {
+                    super.onSwipeLeft();
+                    Toast.makeText(context, "Rejected", Toast.LENGTH_SHORT).show();
+                    rejectInvite(invite);
+                }
+            });
         }
 
         private void acceptInvite(Invite invite){
@@ -94,11 +112,10 @@ public class PendingInviteAdapter extends RecyclerView.Adapter<PendingInviteAdap
                     else{
                         int pos = getAdapterPosition();
                         inviteList.remove(pos);
-                        notifyDataSetChanged();
+                        notifyItemRemoved(pos);
                     }
                 }
-
-            });;
+            });
         }
 
         private void rejectInvite(Invite invite) {
@@ -109,7 +126,7 @@ public class PendingInviteAdapter extends RecyclerView.Adapter<PendingInviteAdap
                     if(e==null){
                         int pos = getAdapterPosition();
                         inviteList.remove(pos);
-                        notifyDataSetChanged();
+                        notifyItemRemoved(pos);
                     }
                 }
             });
@@ -132,8 +149,6 @@ public class PendingInviteAdapter extends RecyclerView.Adapter<PendingInviteAdap
                 Glide.with(context).load(image.getUrl()).override(100,200).centerCrop().into(itemPendingInviteBinding.ivPendingInviteSendersProfileImage);
             }
         }
-
-
     }
 
 

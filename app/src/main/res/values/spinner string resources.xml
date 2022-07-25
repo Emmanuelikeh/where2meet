@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="Categories">
+        <item></item>
+        <item>Arts and Entertainment</item>
+        <item>Business and Professional Services</item>
+        <item>Community and Government</item>
+        <item>Dining and Drinking</item>
+        <item>Event</item>
+        <item>Health and Medicine</item>
+        <item>Landmarks and Outdoors</item>
+        <item>Retail</item>
+        <item>Sports and Recreation</item>
+        <item>Travel and Transportation</item>
+    </string-array>
+    
+    <string-array name="sortingOptions">
+        <item></item>
+        <item>relevance</item>
+        <item>rating</item>
+        <item>distance</item>
+    </string-array>
+
+</resources>

@@ -13,11 +13,11 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="216dp"
         android:ems="10"
+        android:textSize="@dimen/average_text_Size"
         android:hint="@string/username_hint"
         android:inputType="textPersonName"
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

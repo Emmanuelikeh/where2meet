@@ -5,9 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,14 +14,15 @@ import android.widget.Toast;
 
 import com.example.where2meet.R;
 import com.example.where2meet.activities.FriendSearchActivity;
-import com.example.where2meet.databinding.FragmentFilterDialogBinding;
+import com.example.where2meet.databinding.FragmentUserFilterDialogBinding;
+import com.example.where2meet.databinding.FragmentUserFilterDialogBinding;
 
 import java.util.Objects;
 
 
-public class FilterDialog extends DialogFragment {
+public class UserFilterDialog extends DialogFragment {
 
-    private FragmentFilterDialogBinding fragmentFilterDialogBinding;
+    private FragmentUserFilterDialogBinding fragmentUserFilterDialogBinding;
 
 
     @Override
@@ -31,50 +30,49 @@ public class FilterDialog extends DialogFragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 //        return inflater.inflate(R.layout.fragment_filter_dialog, container, false);
-        fragmentFilterDialogBinding = FragmentFilterDialogBinding.inflate(inflater,container,false);
+        fragmentUserFilterDialogBinding = FragmentUserFilterDialogBinding.inflate(inflater,container,false);
 
-        fragmentFilterDialogBinding.btnCancelFilterDialog.setOnClickListener(new View.OnClickListener() {
+        fragmentUserFilterDialogBinding.btnCancelFilterDialog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dismiss();
             }
         });
 
-        fragmentFilterDialogBinding.btnSimilarVisited.setOnClickListener(new View.OnClickListener() {
+        fragmentUserFilterDialogBinding.btnSimilarVisited.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                fragmentFilterDialogBinding.btnSimilarVisited.setBackgroundResource(R.drawable.button_border);
+                fragmentUserFilterDialogBinding.btnSimilarVisited.setBackgroundResource(R.drawable.button_border);
             }
         });
 
-        fragmentFilterDialogBinding.btnApply.setOnClickListener(new View.OnClickListener() {
+        fragmentUserFilterDialogBinding.btnApply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 checkSelection();
             }
         });
 
-        return fragmentFilterDialogBinding.getRoot();
+        return fragmentUserFilterDialogBinding.getRoot();
     }
 
     private void checkSelection() {
-        String distance = fragmentFilterDialogBinding.tvDistanceValue.getText().toString();
+        String distance = fragmentUserFilterDialogBinding.tvDistanceValue.getText().toString();
         FriendSearchActivity friendSearchActivity = (FriendSearchActivity) getActivity();
-        boolean sameBackgroundResource = Objects.equals(fragmentFilterDialogBinding.btnSimilarVisited.getBackground().getConstantState(), getActivity().getResources().getDrawable(R.drawable.button_border).getConstantState());
+        boolean sameBackgroundResource = Objects.equals(fragmentUserFilterDialogBinding.btnSimilarVisited.getBackground().getConstantState(), getActivity().getResources().getDrawable(R.drawable.button_border).getConstantState());
 
         if(distance.equals("") && !sameBackgroundResource){
             Toast.makeText(getContext(), "please select your distance limits", Toast.LENGTH_SHORT).show();
             return;
         }
-
         if(!distance.equals("")){
+            friendSearchActivity.activityFriendSearchBinding.cvDistance.setVisibility(View.VISIBLE);
             friendSearchActivity.activityFriendSearchBinding.tvFilterInputs.setText(distance);
         }
-
         if(sameBackgroundResource){
+            friendSearchActivity.activityFriendSearchBinding.cvSimilarPlace.setVisibility(View.VISIBLE);
             friendSearchActivity.activityFriendSearchBinding.tvSimilarPlaceInputs.setText(R.string.similar_places_message);
         }
-
         dismiss();
     }
 
@@ -82,10 +80,10 @@ public class FilterDialog extends DialogFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        fragmentFilterDialogBinding.seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+        fragmentUserFilterDialogBinding.seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                fragmentFilterDialogBinding.tvDistanceValue.setText("" + progress);
+                fragmentUserFilterDialogBinding.tvDistanceValue.setText("" + progress);
             }
 
             @Override
