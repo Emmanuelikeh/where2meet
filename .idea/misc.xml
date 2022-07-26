@@ -26,7 +26,7 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.33061594202898553" />
         <entry key="app/src/main/res/layout/activity_signup.xml" value="0.1889564336372847" />
         <entry key="app/src/main/res/layout/dialog_invite.xml" value="0.375" />
-        <entry key="app/src/main/res/layout/fragment_calendar.xml" value="0.353713768115942" />
+        <entry key="app/src/main/res/layout/fragment_calendar.xml" value="0.335" />
         <entry key="app/src/main/res/layout/fragment_chat.xml" value="0.1646403242147923" />
         <entry key="app/src/main/res/layout/fragment_filter_dialog.xml" value="0.21693840579710144" />
         <entry key="app/src/main/res/layout/fragment_invite_dialog.xml" value="0.29393115942028986" />
