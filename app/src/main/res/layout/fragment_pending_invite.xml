@@ -7,16 +7,14 @@
     android:layout_height="match_parent"
     tools:context=".fragments.PendingInviteFragment">
 
-
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvPendingInvities"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+            android:id="@+id/rvPendingInvities"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/animationView"
         android:visibility="visible"
@@ -35,4 +33,7 @@
         android:text="@string/no_new_invites"
         android:textSize="20sp">
     </TextView>
+
+
+
 </LinearLayout>
