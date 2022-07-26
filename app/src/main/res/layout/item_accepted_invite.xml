@@ -5,68 +5,87 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-
-    <ImageView
-        android:id="@+id/ivAcceptedInviteFreindProfileImage"
-        android:layout_width="wrap_content"
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
-
-    <TextView
-        android:id="@+id/tvAccptedInviteName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_margin="10dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="13dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="sample text" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/tvAcceptedInviteTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintStart_toEndOf="@+id/ivAcceptedInviteFreindProfileImage"
-        app:layout_constraintTop_toBottomOf="@+id/tvAccptedInviteName"
-        tools:text="sample text" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10dp">
+            <ImageView
+                android:id="@+id/ivAcceptedInviteFreindProfileImage"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/circle_background"
+                android:clipToOutline="true"
+                android:outlineProvider="background"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:srcCompat="@tools:sample/avatars" />
 
-    <TextView
-        android:id="@+id/tvAcceptedInviteDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintStart_toEndOf="@+id/ivAcceptedInviteFreindProfileImage"
-        app:layout_constraintTop_toBottomOf="@+id/tvAcceptedInviteTitle"
-        tools:text="sample text" />
+            <TextView
+                android:id="@+id/tvAccptedInviteName"
+                android:layout_width="wrap_content"
+                android:textStyle="bold"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintStart_toEndOf="@+id/ivAcceptedInviteFreindProfileImage"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="sample text" />
 
-    <TextView
-        android:id="@+id/tvAcceptedInviteAddress"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/ivAcceptedInviteFreindProfileImage"
-        app:layout_constraintTop_toBottomOf="@+id/tvAcceptedInviteDate"
-        tools:text="sample text" />
+            <TextView
+                android:id="@+id/tvAcceptedInviteTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintStart_toEndOf="@+id/ivAcceptedInviteFreindProfileImage"
+                app:layout_constraintTop_toBottomOf="@+id/tvAccptedInviteName"
+                tools:text="sample text" />
 
-    <ImageButton
-        android:id="@+id/btnInviteChat"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:minHeight="48dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.955"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvAcceptedInviteAddress"
-        app:srcCompat="@drawable/ic_baseline_chat_24" />
+            <TextView
+                android:id="@+id/tvAcceptedInviteDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintStart_toEndOf="@+id/ivAcceptedInviteFreindProfileImage"
+                app:layout_constraintTop_toBottomOf="@+id/tvAcceptedInviteTitle"
+                tools:text="sample text" />
+
+            <TextView
+                android:id="@+id/tvAcceptedInviteAddress"
+                android:layout_width="200dp"
+                android:textStyle="italic"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintStart_toEndOf="@+id/ivAcceptedInviteFreindProfileImage"
+                app:layout_constraintTop_toBottomOf="@+id/tvAcceptedInviteDate"
+                tools:text="sample text" />
+
+            <ImageButton
+                android:id="@+id/btnInviteChat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="8dp"
+                android:minHeight="48dp"
+                android:background="@android:color/transparent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ivAcceptedInviteFreindProfileImage"
+                app:srcCompat="@drawable/ic_baseline_chat_24" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>
