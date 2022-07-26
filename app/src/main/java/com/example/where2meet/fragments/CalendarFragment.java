@@ -103,7 +103,7 @@ public class CalendarFragment extends Fragment {
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(invite.getInvitationDate());
             upComingEventsList.add(calendar);
-            events.add(new EventDay(calendar, R.drawable.filter));
+            events.add(new EventDay(calendar, R.drawable.three_dots));
         }
         fragmentCalendarBinding.cvUpcomingevents.setEvents(events);
         fragmentCalendarBinding.cvUpcomingevents.setHighlightedDays(upComingEventsList);
