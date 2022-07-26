@@ -135,10 +135,10 @@ public class PendingInviteAdapter extends RecyclerView.Adapter<PendingInviteAdap
             ParseFile image = invite.getSender().getParseFile("profileImage");
 
             if(image == null){
-                Glide.with(context).load(R.drawable.ic_baseline_person_24).override(100,200).centerCrop().into(itemPendingInviteBinding.ivPendingInviteSendersProfileImage);
+                Glide.with(context).load(R.drawable.ic_baseline_person_24).override(80,80).into(itemPendingInviteBinding.ivPendingInviteSendersProfileImage);
             }
             else{
-                Glide.with(context).load(image.getUrl()).override(100,200).centerCrop().into(itemPendingInviteBinding.ivPendingInviteSendersProfileImage);
+                Glide.with(context).load(image.getUrl()).override(80,80).circleCrop().into(itemPendingInviteBinding.ivPendingInviteSendersProfileImage);
             }
         }
     }

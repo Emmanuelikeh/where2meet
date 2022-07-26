@@ -58,10 +58,10 @@ public class FriendResultAdapter extends RecyclerView.Adapter<FriendResultAdapte
             ParseFile image = parseUser.getParseFile("profileImage");
             // check if user has a profile image and sets a default image if not
             if(image != null){
-                Glide.with(context).load(image.getUrl()).override(100,200).centerCrop().into(itemFriendBinding.ivFriendImage);
+                Glide.with(context).load(image.getUrl()).override(96,96).circleCrop().into(itemFriendBinding.ivFriendImage);
             }
             else{
-                Glide.with(context).load(R.drawable.ic_baseline_person_24).override(100,200).centerCrop().into(itemFriendBinding.ivFriendImage);
+                Glide.with(context).load(R.drawable.ic_baseline_person_24).override(96,96).into(itemFriendBinding.ivFriendImage);
             }
         }
         @Override
@@ -74,7 +74,6 @@ public class FriendResultAdapter extends RecyclerView.Adapter<FriendResultAdapte
                 i.putExtra("parseUser", parseUser);
                 ((Activity) context).setResult(Activity.RESULT_OK,i);
                 ((Activity) context).finish();
-
             }
         }
     }

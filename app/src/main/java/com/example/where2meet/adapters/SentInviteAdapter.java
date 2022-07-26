@@ -82,10 +82,10 @@ public class SentInviteAdapter extends RecyclerView.Adapter<SentInviteAdapter.Vi
 
         private void getImage(ParseFile image) {
             if(image == null){
-                Glide.with(context).load(R.drawable.ic_baseline_person_24).override(100,200).centerCrop().into(itemRequestedInviteBinding.ivRequestsentUserImage);
+                Glide.with(context).load(R.drawable.ic_baseline_person_24).override(80,80).into(itemRequestedInviteBinding.ivRequestsentUserImage);
             }
             else{
-                Glide.with(context).load(image.getUrl()).override(100,200).centerCrop().into(itemRequestedInviteBinding.ivRequestsentUserImage);
+                Glide.with(context).load(image.getUrl()).override(80,80).centerCrop().circleCrop().into(itemRequestedInviteBinding.ivRequestsentUserImage);
             }
         }
     }
