@@ -5,89 +5,112 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <ImageView
-        android:id="@+id/ivPendingInviteSendersProfileImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="4dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
 
-    <TextView
-        android:id="@+id/tvPendingInviteTitle"
-        android:layout_width="wrap_content"
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_margin="10dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="13dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.603"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="Meet me at our spot" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/tvPendingInviteSendersName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvPendingInviteTitle"
-        tools:text="Emmanuel" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="5dp">
 
-    <TextView
-        android:id="@+id/tvPendingInviteInvitationDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.599"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvPendingInviteSendersName"
-        tools:text="September 24 2022" />
+            <ImageView
+                android:id="@+id/ivPendingInviteSendersProfileImage"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="36dp"
+                android:background="@drawable/circle_background"
+                android:clipToOutline="true"
+                android:outlineProvider="background"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:srcCompat="@tools:sample/avatars" />
+            <TextView
+                android:id="@+id/tvPendingInviteTitle"
+                android:layout_width="wrap_content"
+                android:textStyle="bold"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:textSize="@dimen/average_text_Size"
+                app:layout_constraintStart_toEndOf="@+id/ivPendingInviteSendersProfileImage"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Meet me at our spot" />
+            <TextView
+                android:id="@+id/tvPendingInviteSendersName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:textSize="@dimen/average_text_Size"
+                app:layout_constraintStart_toEndOf="@+id/ivPendingInviteSendersProfileImage"
+                app:layout_constraintTop_toBottomOf="@+id/tvPendingInviteTitle"
+                tools:text="Emmanuel" />
 
-    <TextView
-        android:id="@+id/tvPendingInviteTime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="64dp"
-        app:layout_constraintStart_toEndOf="@+id/tvPendingInviteInvitationDate"
-        app:layout_constraintTop_toBottomOf="@+id/tvPendingInviteTitle"
-        tools:text="8:00pm" />
-
-    <TextView
-        android:id="@+id/tvPendingUsersAddress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="172dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvPendingInviteSendersName"
-        tools:text="Menlo Park" />
-
-    <Button
-        android:id="@+id/btnInviteAccept"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="172dp"
-        android:layout_marginTop="32dp"
-        android:text="@string/accept"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvPendingInviteInvitationDate" />
-
-    <Button
-        android:id="@+id/btnInviteReject"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="40dp"
-        android:text="@string/reject"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/btnInviteAccept"
-        app:layout_constraintTop_toBottomOf="@+id/tvPendingInviteTime"
-        tools:text="Reject" />
+            <TextView
+                android:id="@+id/tvPendingInviteInvitationDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:textSize="@dimen/average_text_Size"
+                app:layout_constraintStart_toEndOf="@+id/ivPendingInviteSendersProfileImage"
+                app:layout_constraintTop_toBottomOf="@+id/tvPendingUsersAddress"
+                tools:text="September 24 2022" />
+            <TextView
+                android:id="@+id/tvPendingInviteTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:textSize="@dimen/average_text_Size"
+                app:layout_constraintStart_toEndOf="@+id/tvPendingInviteInvitationDate"
+                app:layout_constraintTop_toBottomOf="@+id/tvPendingUsersAddress"
+                tools:text="8:00pm" />
+            <TextView
+                android:id="@+id/tvPendingUsersAddress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:textSize="@dimen/average_text_Size"
+                app:layout_constraintStart_toEndOf="@+id/ivPendingInviteSendersProfileImage"
+                app:layout_constraintTop_toBottomOf="@+id/tvPendingInviteSendersName"
+                tools:text="Menlo Park" />
+            <Button
+                android:id="@+id/btnInviteAccept"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="20dp"
+                android:drawableStart="@drawable/ic_baseline_check_24"
+                android:drawablePadding="6dp"
+                android:drawableTint="@color/teal_200"
+                android:text="@string/accept"
+                app:layout_constraintStart_toStartOf="@+id/tvPendingUsersAddress"
+                app:layout_constraintTop_toBottomOf="@+id/tvPendingInviteInvitationDate" />
+            <Button
+                android:id="@+id/btnInviteReject"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="20dp"
+                android:drawableStart="@drawable/ic_baseline_cancel_24"
+                android:drawablePadding="6dp"
+                android:drawableTint="@color/stop_sign_red"
+                android:text="@string/reject"
+                app:layout_constraintStart_toEndOf="@+id/btnInviteAccept"
+                app:layout_constraintTop_toBottomOf="@+id/tvPendingInviteInvitationDate"
+                tools:text="Reject" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>
