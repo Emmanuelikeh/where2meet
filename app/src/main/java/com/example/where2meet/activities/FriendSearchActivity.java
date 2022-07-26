@@ -96,7 +96,6 @@ public class FriendSearchActivity extends AppCompatActivity {
             double km = Double.parseDouble(kilometre);
             query.whereWithinKilometers("LastRecordedLocation",geoPoint,km);
         }
-
         if(!search.equals("")){
             ParseUser user = ParseUser.getCurrentUser();
             JSONArray visitedJsonArray =   user.getJSONArray("Visited");
@@ -105,7 +104,6 @@ public class FriendSearchActivity extends AppCompatActivity {
                 query.whereContainedIn("Visited", visitedArray);
             }
         }
-
         query.findInBackground(new FindCallback<ParseUser>() {
             @Override
             public void done(List<ParseUser> objects, ParseException e) {
@@ -116,7 +114,6 @@ public class FriendSearchActivity extends AppCompatActivity {
             }
         });
     }
-
     private ArrayList<String> convertToArray(JSONArray visitedJsonArray) throws JSONException {
         ArrayList<String> listdata = new ArrayList<String>();
         for(int i=0; i< visitedJsonArray.length(); i++){

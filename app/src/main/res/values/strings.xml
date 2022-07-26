@@ -5,7 +5,7 @@
     <string name="back4app_app_id">UvJIIvdunkGtVfUcfzx6UBAAdPtwhRagNvqQ7IVw</string>
     <string name="back4app_client_key">JMRkIwQPjjZrGoER328NM6aoYvko8WXpFJv9tv7b</string>
     <string name="invite_Sent_to_you">Invites sent to you</string>
-    <string name="ComposeTextTo">To</string>
+    <string name="ComposeTextTo">To:</string>
     <string name="sent_invite_status">Sent Invite Status</string>
     <string name="Select_Time">Select Time</string>
     <string name="multiple_user_warning">Can\'t send to multiple people at once</string>
@@ -71,4 +71,7 @@
     <string name="no_new_invites">No New Invites</string>
     <string name="park">Park</string>
     <string name="reviews">Reviews</string>
+    <string name="title">Title</string>
+    <string name="who_do_you_want_to_go_with">who do you want to go with?</string>
+    <string name="invitestatus">Invite status</string>
 </resources>

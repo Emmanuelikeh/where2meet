@@ -65,7 +65,6 @@ public class ComposeActivity extends AppCompatActivity implements DatePickerDial
             }
         });
     }
-
     private void querySend() throws ParseException {
         Date inviteDate = getDateAndTime();
         String title = activityComposeBinding.etComposeTitle.getText().toString();
@@ -95,7 +94,6 @@ public class ComposeActivity extends AppCompatActivity implements DatePickerDial
             }
         });
     }
-
     private Date getDateAndTime() throws ParseException {
         String date = activityComposeBinding.tvComposeDate.getText().toString();
         String time = activityComposeBinding.tvComposeTime.getText().toString();
@@ -115,6 +113,7 @@ public class ComposeActivity extends AppCompatActivity implements DatePickerDial
                 receiversList.add(0,parseUser);
             }
             else{
+                receiversList.add(0,parseUser);
                 Toast.makeText(this,getString(R.string.multiple_user_warning), Toast.LENGTH_SHORT).show();
             }
         }
