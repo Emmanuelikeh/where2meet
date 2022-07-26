@@ -6,54 +6,40 @@
     android:layout_height="match_parent"
     tools:context=".fragments.CalendarFragment">
 
-
-<!--    <CalendarView-->
-<!--        android:id="@+id/cvUpcomingevents"-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.0"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        app:layout_constraintVertical_bias="0.0" />-->
-
     <com.applandeo.materialcalendarview.CalendarView
         android:id="@+id/cvUpcomingevents"
         android:layout_width="0dp"
         android:layout_height="300dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
         app:abbreviationsBarColor="@color/gray"
         app:abbreviationsLabelsColor="@color/white"
         app:daysLabelsColor="@color/white"
         app:headerColor="@color/white"
         app:headerLabelColor="@color/black"
         app:highlightedDaysLabelsColor="@color/teal_200"
-        app:pagesColor="@color/gray"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:pagesColor="@color/gray" />
 
     <TextView
-            android:id="@+id/tvEventsHeader"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:text="@string/upcoming_events_text"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cvUpcomingevents"
-            app:layout_constraintVertical_bias="0.018" />
+        android:id="@+id/tvEventsHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="@string/upcoming_events_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cvUpcomingevents" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvUpcomingEvents"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvEventsHeader"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintTop_toBottomOf="@+id/tvEventsHeader" />
     </androidx.constraintlayout.widget.ConstraintLayout>
