@@ -16,6 +16,7 @@ import com.example.where2meet.R;
 import com.example.where2meet.activities.ChatActivity;
 import com.example.where2meet.databinding.ItemAcceptedInviteBinding;
 import com.example.where2meet.models.Invite;
+import com.example.where2meet.utils.DateUtils;
 import com.example.where2meet.utils.GlideUtil;
 import com.example.where2meet.utils.ToastUtils;
 import com.parse.ParseException;
@@ -68,10 +69,7 @@ public class AcceptedInviteAdapter extends RecyclerView.Adapter<AcceptedInviteAd
         public void bind(Invite invite) {
             itemAcceptedInviteBinding.tvAcceptedInviteTitle.setText(invite.getTitle());
             itemAcceptedInviteBinding.tvAcceptedInviteAddress.setText(invite.getAddress());
-            Date inviteDate = invite.getInvitationDate();
-            DateFormat dateFormat = new SimpleDateFormat("EEE, MMM d, yyyy 'at' hh:mm a", Locale.getDefault());
-            String strDate = dateFormat.format(inviteDate);
-            itemAcceptedInviteBinding.tvAcceptedInviteDate.setText(strDate);
+            DateUtils.setDate("EEE, MMM d, yyyy 'at' hh:mm a",itemAcceptedInviteBinding.tvAcceptedInviteDate,null,invite.getInvitationDate());
             if(inviteNotFromCurrentUser(invite)){
                 itemAcceptedInviteBinding.tvAccptedInviteName.setText(invite.getSender().getUsername());
                 ParseFile image = invite.getSender().getParseFile("profileImage");

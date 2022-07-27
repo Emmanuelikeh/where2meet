@@ -13,6 +13,7 @@ import com.bumptech.glide.Glide;
 import com.example.where2meet.R;
 import com.example.where2meet.databinding.ItemRequestedInviteBinding;
 import com.example.where2meet.models.Invite;
+import com.example.where2meet.utils.DateUtils;
 import com.example.where2meet.utils.GlideUtil;
 import com.parse.ParseFile;
 
@@ -58,10 +59,8 @@ public class SentInviteAdapter extends RecyclerView.Adapter<SentInviteAdapter.Vi
         }
         public void bind(Invite invite) {
             itemRequestedInviteBinding.tvRequestedInviteTitle.setText(invite.getTitle());
-            Date inviteDate = invite.getInvitationDate();
-            itemRequestedInviteBinding.tvRequestedInviteDate.setText("For: " + getDate(inviteDate));
-            Date createdAt = invite.getCreatedAt();
-            itemRequestedInviteBinding.tvInviteRequestComposeDate.setText("Sent at: "+ getDate(createdAt));
+            DateUtils.setDate("EEE, MMM d, yyyy 'at' hh:mm a",itemRequestedInviteBinding.tvRequestedInviteDate,"For: ", invite.getInvitationDate());
+            DateUtils.setDate("EEE, MMM d, yyyy 'at' hh:mm a",  itemRequestedInviteBinding.tvInviteRequestComposeDate,"Sent at:",invite.getCreatedAt());
             itemRequestedInviteBinding.tvRequestedInviteeName.setText(invite.getReceiver().getUsername());
             ParseFile image = invite.getReceiver().getParseFile("profileImage");
             GlideUtil.getImage(80,80, itemRequestedInviteBinding.ivRequestsentUserImage,image,context);
@@ -72,10 +71,6 @@ public class SentInviteAdapter extends RecyclerView.Adapter<SentInviteAdapter.Vi
             if(flag == 0){itemRequestedInviteBinding.tvInviteStatus.setText(R.string.pending_status);}
             if(flag == 1){itemRequestedInviteBinding.tvInviteStatus.setText(R.string.rejected_status);}
             if(flag == 2){itemRequestedInviteBinding.tvInviteStatus.setText(R.string.accepted_status);}
-        }
-        private String getDate(Date date ) {
-            DateFormat dateFormat = new SimpleDateFormat("EEE, MMM d, yyyy 'at' hh:mm a", Locale.getDefault());
-            return dateFormat.format(date);
         }
     }
 }

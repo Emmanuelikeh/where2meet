@@ -17,6 +17,7 @@ import com.example.where2meet.models.OnSwipeTouchListener;
 import com.example.where2meet.models.Invite;
 import com.example.where2meet.R;
 import com.example.where2meet.databinding.ItemPendingInviteBinding;
+import com.example.where2meet.utils.DateUtils;
 import com.example.where2meet.utils.GlideUtil;
 import com.example.where2meet.utils.ToastUtils;
 import com.parse.ParseException;
@@ -68,7 +69,7 @@ public class PendingInviteAdapter extends RecyclerView.Adapter<PendingInviteAdap
             itemPendingInviteBinding.tvPendingInviteTitle.setText(invite.getTitle());
             itemPendingInviteBinding.tvPendingInviteSendersName.setText(invite.getSender().getUsername());
             itemPendingInviteBinding.tvPendingUsersAddress.setText(invite.getAddress());
-            getDateFromInvite(invite);
+            DateUtils.setDate("EEE MMM d hh:mm z yyyy",itemPendingInviteBinding.tvPendingInviteInvitationDate,null, invite.getInvitationDate());
             ParseFile image = invite.getSender().getParseFile("profileImage");
             GlideUtil.getImage(80,80, itemPendingInviteBinding.ivPendingInviteSendersProfileImage, image,context);
             itemPendingInviteBinding.btnInviteReject.setOnClickListener(new View.OnClickListener() {
@@ -122,12 +123,6 @@ public class PendingInviteAdapter extends RecyclerView.Adapter<PendingInviteAdap
                     }
                 }
             });
-        }
-        private void getDateFromInvite(Invite invite){
-            Date inviteDate = invite.getInvitationDate();
-            DateFormat dateFormat = new SimpleDateFormat("EEE MMM d hh:mm:ss z yyyy",Locale.getDefault());
-            String strDate = dateFormat.format(inviteDate);
-            itemPendingInviteBinding.tvPendingInviteInvitationDate.setText(strDate);
         }
     }
 
