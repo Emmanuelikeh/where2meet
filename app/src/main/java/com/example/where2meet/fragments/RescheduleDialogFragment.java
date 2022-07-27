@@ -64,7 +64,6 @@ public class RescheduleDialogFragment extends DialogFragment{
         assert activity != null;
         Invite invite =  activity.getGroup();
         Date oldInvitationDate = invite.getInvitationDate();
-
         if(newDate.equals("")){
             Toast.makeText(getContext(),R.string.pick_date_message, Toast.LENGTH_SHORT).show();
             return;
@@ -104,7 +103,6 @@ public class RescheduleDialogFragment extends DialogFragment{
             mCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
             String selectedDate = DateFormat.getDateInstance(DateFormat.FULL).format(mCalendar.getTime());
             fragmentRescheduleDialogBinding.tvNewDate.setText(selectedDate);
-
         }
     }, year, month, dayOfMonth);
         dialog.getDatePicker().setMinDate(System.currentTimeMillis() -1000);

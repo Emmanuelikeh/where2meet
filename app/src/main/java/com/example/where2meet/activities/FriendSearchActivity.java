@@ -74,15 +74,11 @@ public class FriendSearchActivity extends AppCompatActivity {
             }
         });
     }
-
-
     private void performFriendSearch() throws JSONException {
         String friendLook =  activityFriendSearchBinding.etFriendSearchBox.getText().toString();
         adapter.clear();
         querySearch(friendLook);
     }
-
-
     private void querySearch(String friend) throws JSONException {
         String currentUser = ParseUser.getCurrentUser().getUsername();
         String kilometre = activityFriendSearchBinding.tvFilterInputs.getText().toString();
@@ -120,16 +116,10 @@ public class FriendSearchActivity extends AppCompatActivity {
             listdata.add(visitedJsonArray.getString(i));
         }
         return listdata;
-
     }
-
     public ParseGeoPoint getCurrentUsersLocation(ParseUser user){
               return user.getParseGeoPoint("LastRecordedLocation");
         }
-
-
-
-
 }
 
 
