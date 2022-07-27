@@ -15,6 +15,7 @@ import com.bumptech.glide.Glide;
 import com.example.where2meet.adapters.ViewPagerAdapter;
 import com.example.where2meet.R;
 import com.example.where2meet.databinding.FragmentProfileBinding;
+import com.example.where2meet.utils.GlideUtil;
 import com.parse.ParseFile;
 import com.parse.ParseUser;
 
@@ -64,13 +65,7 @@ public class ProfileFragment extends Fragment {
         ParseFile image = currentUser.getParseFile("profileImage");
         fragmentProfileBinding.tvUsersLocation.setText(ParseUser.getCurrentUser().getEmail());
         fragmentProfileBinding.tvCurrentUsersName.setText(currentUser.getUsername());
-        if(image == null){
-            Glide.with(getContext()).load(R.drawable.ic_baseline_person_24).override(96,96).circleCrop().into(fragmentProfileBinding.ivCurrentUserProfileImage);
-        }
-        else{
-            Glide.with(getContext()).load(image.getUrl()).override(96,96).circleCrop().into(fragmentProfileBinding.ivCurrentUserProfileImage);
-        }
-
+        GlideUtil.getImage(96,96, fragmentProfileBinding.ivCurrentUserProfileImage, image,getContext());
     }
 
 

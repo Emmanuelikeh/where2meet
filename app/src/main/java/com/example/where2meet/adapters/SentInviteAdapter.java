@@ -13,6 +13,7 @@ import com.bumptech.glide.Glide;
 import com.example.where2meet.R;
 import com.example.where2meet.databinding.ItemRequestedInviteBinding;
 import com.example.where2meet.models.Invite;
+import com.example.where2meet.utils.GlideUtil;
 import com.parse.ParseFile;
 
 import java.text.DateFormat;
@@ -64,7 +65,7 @@ public class SentInviteAdapter extends RecyclerView.Adapter<SentInviteAdapter.Vi
             itemRequestedInviteBinding.tvInviteRequestComposeDate.setText("Sent at: "+ getDate(createdAt));
             itemRequestedInviteBinding.tvRequestedInviteeName.setText(invite.getReceiver().getUsername());
             ParseFile image = invite.getReceiver().getParseFile("profileImage");
-            getImage(image);
+            GlideUtil.getImage(80,80, itemRequestedInviteBinding.ivRequestsentUserImage,image,context);
             getStatus(invite);
         }
 
@@ -78,15 +79,6 @@ public class SentInviteAdapter extends RecyclerView.Adapter<SentInviteAdapter.Vi
         private String getDate(Date date ) {
             DateFormat dateFormat = new SimpleDateFormat("EEE, MMM d, yyyy 'at' hh:mm a", Locale.getDefault());
             return dateFormat.format(date);
-        }
-
-        private void getImage(ParseFile image) {
-            if(image == null){
-                Glide.with(context).load(R.drawable.ic_baseline_person_24).override(80,80).into(itemRequestedInviteBinding.ivRequestsentUserImage);
-            }
-            else{
-                Glide.with(context).load(image.getUrl()).override(80,80).centerCrop().circleCrop().into(itemRequestedInviteBinding.ivRequestsentUserImage);
-            }
         }
     }
 

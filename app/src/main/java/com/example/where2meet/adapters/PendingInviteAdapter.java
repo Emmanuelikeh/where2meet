@@ -17,6 +17,7 @@ import com.example.where2meet.models.OnSwipeTouchListener;
 import com.example.where2meet.models.Invite;
 import com.example.where2meet.R;
 import com.example.where2meet.databinding.ItemPendingInviteBinding;
+import com.example.where2meet.utils.GlideUtil;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.SaveCallback;
@@ -68,7 +69,8 @@ public class PendingInviteAdapter extends RecyclerView.Adapter<PendingInviteAdap
             itemPendingInviteBinding.tvPendingInviteSendersName.setText(invite.getSender().getUsername());
             itemPendingInviteBinding.tvPendingUsersAddress.setText(invite.getAddress());
             getDateFromInvite(invite);
-            loadImageFromInvite(invite);
+            ParseFile image = invite.getSender().getParseFile("profileImage");
+            GlideUtil.getImage(80,80, itemPendingInviteBinding.ivPendingInviteSendersProfileImage, image,context);
             itemPendingInviteBinding.btnInviteReject.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {rejectInvite(invite);
@@ -83,13 +85,11 @@ public class PendingInviteAdapter extends RecyclerView.Adapter<PendingInviteAdap
                 @Override
                 public void onSwipeRight() {
                     super.onSwipeRight();
-                    Toast.makeText(context, "Accepted", Toast.LENGTH_SHORT).show();
                     acceptInvite(invite);
                 }
                 @Override
                 public void onSwipeLeft() {
                     super.onSwipeLeft();
-                    Toast.makeText(context, "Rejected", Toast.LENGTH_SHORT).show();
                     rejectInvite(invite);
                 }
             });
@@ -100,7 +100,7 @@ public class PendingInviteAdapter extends RecyclerView.Adapter<PendingInviteAdap
                 @Override
                 public void done(ParseException e) {
                     if(e!= null){
-                        Toast.makeText(itemView.getContext(), "Error while saving ",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(itemView.getContext(), "Error while saving",Toast.LENGTH_SHORT).show();
                     }
                     else{
                         int pos = getAdapterPosition();
@@ -123,23 +123,11 @@ public class PendingInviteAdapter extends RecyclerView.Adapter<PendingInviteAdap
                 }
             });
         }
-
         private void getDateFromInvite(Invite invite){
             Date inviteDate = invite.getInvitationDate();
             DateFormat dateFormat = new SimpleDateFormat("EEE MMM d hh:mm:ss z yyyy",Locale.getDefault());
             String strDate = dateFormat.format(inviteDate);
             itemPendingInviteBinding.tvPendingInviteInvitationDate.setText(strDate);
-        }
-
-        private  void loadImageFromInvite(Invite invite){
-            ParseFile image = invite.getSender().getParseFile("profileImage");
-
-            if(image == null){
-                Glide.with(context).load(R.drawable.ic_baseline_person_24).override(80,80).into(itemPendingInviteBinding.ivPendingInviteSendersProfileImage);
-            }
-            else{
-                Glide.with(context).load(image.getUrl()).override(80,80).circleCrop().into(itemPendingInviteBinding.ivPendingInviteSendersProfileImage);
-            }
         }
     }
 

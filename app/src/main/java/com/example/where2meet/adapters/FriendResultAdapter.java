@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.where2meet.R;
 import com.example.where2meet.databinding.ItemFriendBinding;
+import com.example.where2meet.utils.GlideUtil;
 import com.parse.ParseFile;
 import com.parse.ParseUser;
 
@@ -57,12 +58,7 @@ public class FriendResultAdapter extends RecyclerView.Adapter<FriendResultAdapte
             itemFriendBinding.tvFriendEmail.setText(parseUser.getEmail());
             ParseFile image = parseUser.getParseFile("profileImage");
             // check if user has a profile image and sets a default image if not
-            if(image != null){
-                Glide.with(context).load(image.getUrl()).override(96,96).circleCrop().into(itemFriendBinding.ivFriendImage);
-            }
-            else{
-                Glide.with(context).load(R.drawable.ic_baseline_person_24).override(96,96).into(itemFriendBinding.ivFriendImage);
-            }
+            GlideUtil.getImage(96,96, itemFriendBinding.ivFriendImage, image,context);
         }
         @Override
         public void onClick(View v) {
