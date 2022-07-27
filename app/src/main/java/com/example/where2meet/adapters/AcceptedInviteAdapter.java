@@ -16,6 +16,7 @@ import com.example.where2meet.R;
 import com.example.where2meet.activities.ChatActivity;
 import com.example.where2meet.databinding.ItemAcceptedInviteBinding;
 import com.example.where2meet.models.Invite;
+import com.example.where2meet.utils.GlideUtil;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseUser;
@@ -75,15 +76,13 @@ public class AcceptedInviteAdapter extends RecyclerView.Adapter<AcceptedInviteAd
             if(inviteNotFromCurrentUser(invite)){
                 itemAcceptedInviteBinding.tvAccptedInviteName.setText(invite.getSender().getUsername());
                 ParseFile image = invite.getSender().getParseFile("profileImage");
-                getImage(image);
+                GlideUtil.getImage(80,80, itemAcceptedInviteBinding.ivAcceptedInviteFreindProfileImage, image,context);
             }
             else{
                 itemAcceptedInviteBinding.tvAccptedInviteName.setText("You sent an invite to: " + invite.getReceiver().getUsername());
                 ParseFile image = invite.getReceiver().getParseFile("profileImage");
-                getImage(image);
+                GlideUtil.getImage(80,80, itemAcceptedInviteBinding.ivAcceptedInviteFreindProfileImage, image,context);
             }
-
-
             itemAcceptedInviteBinding.btnInviteChat.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -91,14 +90,12 @@ public class AcceptedInviteAdapter extends RecyclerView.Adapter<AcceptedInviteAd
                 }
             });
             queryUpdatedVisited(invite);
-
             itemView.setOnTouchListener(new OnSwipeTouchListener(context){
                 @Override
                 public void onSwipeRight() {
                     super.onSwipeRight();
                     Toast.makeText(context, "right", Toast.LENGTH_SHORT).show();
                 }
-
                 @Override
                 public void onSwipeLeft() {
                     super.onSwipeLeft();
@@ -106,17 +103,14 @@ public class AcceptedInviteAdapter extends RecyclerView.Adapter<AcceptedInviteAd
                 }
             });
         }
-
         public boolean inviteNotFromCurrentUser(Invite invite){
             return !Objects.equals(invite.getSender().getUsername(), ParseUser.getCurrentUser().getUsername());
         }
-
         private void openChatActivity(Invite invite) {
             Intent intent = new Intent(context, ChatActivity.class);
             intent.putExtra("inviteInfo",invite);
             context.startActivity(intent);
         }
-
         private void queryUpdatedVisited(Invite invite) {
             ParseUser currentUser = ParseUser.getCurrentUser();
             currentUser.addAllUnique("Visited", Arrays.asList(invite.getAddress()));
@@ -128,15 +122,6 @@ public class AcceptedInviteAdapter extends RecyclerView.Adapter<AcceptedInviteAd
                     }
                 }
             });
-        }
-
-        private void getImage(ParseFile image) {
-            if(image == null){
-                Glide.with(context).load(R.drawable.ic_baseline_person_24).override(80,80).circleCrop().into(itemAcceptedInviteBinding.ivAcceptedInviteFreindProfileImage);
-            }
-            else{
-                Glide.with(context).load(image.getUrl()).override(80,80).circleCrop().into(itemAcceptedInviteBinding.ivAcceptedInviteFreindProfileImage);
-            }
         }
     }
 
