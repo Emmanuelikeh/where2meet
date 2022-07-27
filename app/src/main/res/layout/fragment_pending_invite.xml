@@ -22,11 +22,10 @@
         android:layout_height="200dp"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
-        app:lottie_url="https://assets8.lottiefiles.com/packages/lf20_sxaqcuay.json"/>
-
+        app:lottie_url="https://assets5.lottiefiles.com/packages/lf20_l9bcfk19.json"/>
     <TextView
         android:id="@+id/tvNoInvites"
-        android:visibility="visible"
+        android:visibility="gone"
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -79,8 +79,13 @@ public class PendingInviteFragment extends Fragment {
 //                Log.e("pendingInviteFragment", e.toString());
                 inviteList.addAll(objects);
                 adapter.notifyDataSetChanged();
-                if(!inviteList.isEmpty()){
-                    fragmentPendingInviteBinding.tvNoInvites.setVisibility(View.GONE);
+                if(inviteList.isEmpty() && fragmentPendingInviteBinding != null){
+                    fragmentPendingInviteBinding.tvNoInvites.setVisibility(View.VISIBLE);
+                    fragmentPendingInviteBinding.animationView.setVisibility(View.GONE);
+                    fragmentPendingInviteBinding.animationView.setAnimationFromUrl("https://assets8.lottiefiles.com/packages/lf20_sxaqcuay.json");
+                    fragmentPendingInviteBinding.animationView.setVisibility(View.VISIBLE);
+                }
+                if(!inviteList.isEmpty() && fragmentPendingInviteBinding != null){
                     fragmentPendingInviteBinding.animationView.setVisibility(View.GONE);
                 }
             }
