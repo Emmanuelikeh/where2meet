@@ -17,6 +17,7 @@ import com.example.where2meet.activities.ChatActivity;
 import com.example.where2meet.databinding.ItemAcceptedInviteBinding;
 import com.example.where2meet.models.Invite;
 import com.example.where2meet.utils.GlideUtil;
+import com.example.where2meet.utils.ToastUtils;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseUser;
@@ -64,7 +65,6 @@ public class AcceptedInviteAdapter extends RecyclerView.Adapter<AcceptedInviteAd
             super(itemAcceptedInviteBinding.getRoot());
             this.itemAcceptedInviteBinding = itemAcceptedInviteBinding;
         }
-
         public void bind(Invite invite) {
             itemAcceptedInviteBinding.tvAcceptedInviteTitle.setText(invite.getTitle());
             itemAcceptedInviteBinding.tvAcceptedInviteAddress.setText(invite.getAddress());
@@ -72,7 +72,6 @@ public class AcceptedInviteAdapter extends RecyclerView.Adapter<AcceptedInviteAd
             DateFormat dateFormat = new SimpleDateFormat("EEE, MMM d, yyyy 'at' hh:mm a", Locale.getDefault());
             String strDate = dateFormat.format(inviteDate);
             itemAcceptedInviteBinding.tvAcceptedInviteDate.setText(strDate);
-
             if(inviteNotFromCurrentUser(invite)){
                 itemAcceptedInviteBinding.tvAccptedInviteName.setText(invite.getSender().getUsername());
                 ParseFile image = invite.getSender().getParseFile("profileImage");
@@ -90,18 +89,6 @@ public class AcceptedInviteAdapter extends RecyclerView.Adapter<AcceptedInviteAd
                 }
             });
             queryUpdatedVisited(invite);
-            itemView.setOnTouchListener(new OnSwipeTouchListener(context){
-                @Override
-                public void onSwipeRight() {
-                    super.onSwipeRight();
-                    Toast.makeText(context, "right", Toast.LENGTH_SHORT).show();
-                }
-                @Override
-                public void onSwipeLeft() {
-                    super.onSwipeLeft();
-                    Toast.makeText(context, "left", Toast.LENGTH_SHORT).show();
-                }
-            });
         }
         public boolean inviteNotFromCurrentUser(Invite invite){
             return !Objects.equals(invite.getSender().getUsername(), ParseUser.getCurrentUser().getUsername());
@@ -118,7 +105,7 @@ public class AcceptedInviteAdapter extends RecyclerView.Adapter<AcceptedInviteAd
                 @Override
                 public void done(ParseException e) {
                     if(e != null){
-                        Toast.makeText(context, "Failed: " + e,Toast.LENGTH_SHORT).show();
+                        ToastUtils.presentMessageToUser(context,"Failed: " + e);
                     }
                 }
             });

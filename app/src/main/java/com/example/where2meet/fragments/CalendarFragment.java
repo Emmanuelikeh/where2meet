@@ -41,7 +41,6 @@ public class CalendarFragment extends Fragment {
     public CalendarFragment() {
         // Required empty public constructor
     }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -49,13 +48,11 @@ public class CalendarFragment extends Fragment {
         fragmentCalendarBinding = FragmentCalendarBinding.inflate(inflater,container,false);
         return fragmentCalendarBinding.getRoot();
     }
-
     @Override
     public void onDestroy() {
         super.onDestroy();
         fragmentCalendarBinding = null;
     }
-
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -75,7 +72,6 @@ public class CalendarFragment extends Fragment {
         });
         queryInvite();
     }
-
     private void scrollToPosition(EventDay eventDay) {
         int position;
         Calendar calendar = eventDay.getCalendar();
@@ -95,7 +91,6 @@ public class CalendarFragment extends Fragment {
                 cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR) &&
                 cal1.get(Calendar.DAY_OF_YEAR) == cal2.get(Calendar.DAY_OF_YEAR);
     }
-
     private void updateCalender(List<Invite> inviteList) {
         List<Calendar> upComingEventsList = new ArrayList<>();
         List<EventDay> events = new ArrayList<>();
@@ -112,7 +107,6 @@ public class CalendarFragment extends Fragment {
         fragmentCalendarBinding.cvUpcomingevents.setVisibility(View.GONE);
         fragmentCalendarBinding.cvUpcomingevents.setVisibility(View.VISIBLE);
     }
-
     private void queryInvite() {
         ParseQuery<Invite> sender = ParseQuery.getQuery(Invite.class);
         sender.whereEqualTo(Invite.KEY_RECEIVER,ParseUser.getCurrentUser());

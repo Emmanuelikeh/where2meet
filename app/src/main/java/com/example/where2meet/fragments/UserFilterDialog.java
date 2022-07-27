@@ -16,6 +16,7 @@ import com.example.where2meet.R;
 import com.example.where2meet.activities.FriendSearchActivity;
 import com.example.where2meet.databinding.FragmentUserFilterDialogBinding;
 import com.example.where2meet.databinding.FragmentUserFilterDialogBinding;
+import com.example.where2meet.utils.ToastUtils;
 
 import java.util.Objects;
 
@@ -62,7 +63,7 @@ public class UserFilterDialog extends DialogFragment {
         boolean sameBackgroundResource = Objects.equals(fragmentUserFilterDialogBinding.btnSimilarVisited.getBackground().getConstantState(), getActivity().getResources().getDrawable(R.drawable.button_border).getConstantState());
 
         if(distance.equals("") && !sameBackgroundResource){
-            Toast.makeText(getContext(), "please select your distance limits", Toast.LENGTH_SHORT).show();
+            ToastUtils.presentMessageToUser(getContext(), getString(R.string.select_distance_or_similar));
             return;
         }
         if(!distance.equals("")){
@@ -75,7 +76,6 @@ public class UserFilterDialog extends DialogFragment {
         }
         dismiss();
     }
-
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -85,12 +85,10 @@ public class UserFilterDialog extends DialogFragment {
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 fragmentUserFilterDialogBinding.tvDistanceValue.setText("" + progress);
             }
-
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
 
             }
-
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
 

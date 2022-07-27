@@ -48,7 +48,6 @@ public class FriendSearchActivity extends AppCompatActivity {
                 }
             }
         });
-
         activityFriendSearchBinding.btnFilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

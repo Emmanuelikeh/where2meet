@@ -18,6 +18,7 @@ import com.example.where2meet.fragments.RescheduleDialogFragment;
 import com.example.where2meet.models.Invite;
 import com.example.where2meet.models.Messages;
 import com.example.where2meet.utils.CustomItemAnimator;
+import com.example.where2meet.utils.ToastUtils;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
@@ -54,7 +55,6 @@ public class ChatActivity extends AppCompatActivity{
         activityChatBinding.btnRescheduleInvite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(ChatActivity.this,R.string.item_clicked,Toast.LENGTH_SHORT).show();
                 openResheduleDialog();
 
             }
@@ -112,7 +112,7 @@ public class ChatActivity extends AppCompatActivity{
             @Override
             public void done(ParseException e) {
                 if(e != null){
-                    Toast.makeText(ChatActivity.this, getString(R.string.sending_failure),Toast.LENGTH_SHORT).show();
+                    ToastUtils.presentMessageToUser(ChatActivity.this,getString(R.string.sending_failure));
                     return;
                 }
                 activityChatBinding.etChatBox.setText("");
@@ -127,7 +127,6 @@ public class ChatActivity extends AppCompatActivity{
         Date invitationDate = invite.getInvitationDate();
         Date date  = new Date();
         if(date.compareTo(invitationDate) > 0){
-            Log.i("Dates", "value : " + date.compareTo(invitationDate));
             activityChatBinding.etChatBox.setVisibility(View.GONE);
             activityChatBinding.btnSendChat.setVisibility(View.GONE);
             activityChatBinding.btnRescheduleInvite.setVisibility(View.GONE);
@@ -142,7 +141,7 @@ public class ChatActivity extends AppCompatActivity{
             @Override
             public void done(List<Messages> objects, ParseException e) {
                 if(e != null){
-                    Toast.makeText(ChatActivity.this,getString(R.string.error_info), Toast.LENGTH_SHORT).show();
+                    ToastUtils.presentMessageToUser(ChatActivity.this,getString(R.string.error_info));
                     return;
                 }
                 messagesList.addAll(objects);

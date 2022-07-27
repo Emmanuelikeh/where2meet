@@ -52,7 +52,6 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ViewHold
         public ViewHolder(@NonNull ItemReviewBinding itemReviewBinding) {
             super(itemReviewBinding.getRoot());
             this.itemReviewBinding = itemReviewBinding;
-
         }
 
         public void bind(Reviews review) throws ParseException {

@@ -75,7 +75,6 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
         return Objects.equals(message.getMessageSender().getObjectId(), currentUser.getObjectId());
     }
 
-
     public abstract class ViewHolder extends RecyclerView.ViewHolder{
 
         public ViewHolder(@NonNull View itemView) {
@@ -110,7 +109,6 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
             super(outgoingMessagesBinding.getRoot());
             this.outgoingMessagesBinding = outgoingMessagesBinding;
         }
-
         //specific method definition
         @Override
         public void bind(Messages messages) {

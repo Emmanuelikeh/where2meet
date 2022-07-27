@@ -18,6 +18,7 @@ import com.example.where2meet.models.Invite;
 import com.example.where2meet.R;
 import com.example.where2meet.databinding.ItemPendingInviteBinding;
 import com.example.where2meet.utils.GlideUtil;
+import com.example.where2meet.utils.ToastUtils;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.SaveCallback;
@@ -63,7 +64,6 @@ public class PendingInviteAdapter extends RecyclerView.Adapter<PendingInviteAdap
             super(itemPendingInviteBinding.getRoot());
             this.itemPendingInviteBinding = itemPendingInviteBinding;
         }
-
         public void bind(Invite invite) {
             itemPendingInviteBinding.tvPendingInviteTitle.setText(invite.getTitle());
             itemPendingInviteBinding.tvPendingInviteSendersName.setText(invite.getSender().getUsername());
@@ -100,7 +100,7 @@ public class PendingInviteAdapter extends RecyclerView.Adapter<PendingInviteAdap
                 @Override
                 public void done(ParseException e) {
                     if(e!= null){
-                        Toast.makeText(itemView.getContext(), "Error while saving",Toast.LENGTH_SHORT).show();
+                        ToastUtils.presentMessageToUser(itemView.getContext(), context.getString(R.string.error_saving));
                     }
                     else{
                         int pos = getAdapterPosition();

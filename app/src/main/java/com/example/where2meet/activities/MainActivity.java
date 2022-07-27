@@ -27,6 +27,7 @@ import com.example.where2meet.databinding.ActivityMainBinding;
 import com.example.where2meet.fragments.CalendarFragment;
 import com.example.where2meet.fragments.ProfileFragment;
 import com.example.where2meet.fragments.SearchFragment;
+import com.example.where2meet.utils.ToastUtils;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
@@ -97,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if(item.getItemId() == R.id.logout){
-            Toast.makeText(MainActivity.this,R.string.log_out_success, Toast.LENGTH_SHORT).show();
+            ToastUtils.presentMessageToUser(MainActivity.this, getString(R.string.log_out_success));
             onLogout();
             return true;
         }
@@ -121,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
                         usersLocation = location;
                     }
                     else{
-                        Toast.makeText(MainActivity.this, R.string.location_failure, Toast.LENGTH_SHORT).show();
+                        ToastUtils.presentMessageToUser(MainActivity.this, getString(R.string.location_failure));
                     }
                 }
             });
@@ -142,7 +143,7 @@ public class MainActivity extends AppCompatActivity {
                 getLocation();
             }
             else{
-                Toast.makeText(this, "Required permissions", Toast.LENGTH_SHORT).show();
+                ToastUtils.presentMessageToUser(MainActivity.this, getString(R.string.loaction_request_message));
             }
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);

@@ -44,7 +44,6 @@ public class SentInviteFragment extends Fragment {
         fragmentSentInviteBinding = FragmentSentInviteBinding.inflate(inflater,container,false);
         return fragmentSentInviteBinding.getRoot();
     }
-
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -54,7 +53,6 @@ public class SentInviteFragment extends Fragment {
         fragmentSentInviteBinding.rvRequestedInvites.setLayoutManager(new LinearLayoutManager(getContext()));
         querySentInvite();
     }
-
     @Override
     public void onDestroy() {
         super.onDestroy();

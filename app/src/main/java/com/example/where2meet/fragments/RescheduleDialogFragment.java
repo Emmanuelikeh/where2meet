@@ -57,7 +57,6 @@ public class RescheduleDialogFragment extends DialogFragment{
         });
         return fragmentRescheduleDialogBinding.getRoot();
     }
-
     private void updateDate(){
         String newDate = fragmentRescheduleDialogBinding.tvNewDate.getText().toString();
         ChatActivity activity = (ChatActivity) getActivity();
@@ -88,7 +87,6 @@ public class RescheduleDialogFragment extends DialogFragment{
             e.printStackTrace();
         }
     }
-
     public Dialog popDatePicker() {
         Calendar mCalendar = Calendar.getInstance();
         int year = mCalendar.get(Calendar.YEAR);

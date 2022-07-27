@@ -56,7 +56,6 @@ public class SentInviteAdapter extends RecyclerView.Adapter<SentInviteAdapter.Vi
             super(itemRequestedInviteBinding.getRoot());
             this.itemRequestedInviteBinding = itemRequestedInviteBinding;
         }
-
         public void bind(Invite invite) {
             itemRequestedInviteBinding.tvRequestedInviteTitle.setText(invite.getTitle());
             Date inviteDate = invite.getInvitationDate();
@@ -68,19 +67,15 @@ public class SentInviteAdapter extends RecyclerView.Adapter<SentInviteAdapter.Vi
             GlideUtil.getImage(80,80, itemRequestedInviteBinding.ivRequestsentUserImage,image,context);
             getStatus(invite);
         }
-
         private void getStatus(Invite invite) {
             int flag = invite.getFlag();
             if(flag == 0){itemRequestedInviteBinding.tvInviteStatus.setText(R.string.pending_status);}
             if(flag == 1){itemRequestedInviteBinding.tvInviteStatus.setText(R.string.rejected_status);}
             if(flag == 2){itemRequestedInviteBinding.tvInviteStatus.setText(R.string.accepted_status);}
         }
-
         private String getDate(Date date ) {
             DateFormat dateFormat = new SimpleDateFormat("EEE, MMM d, yyyy 'at' hh:mm a", Locale.getDefault());
             return dateFormat.format(date);
         }
     }
-
-
 }

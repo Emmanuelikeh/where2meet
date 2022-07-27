@@ -25,11 +25,9 @@ import java.util.Calendar;
 
 public class ProfileFragment extends Fragment {
     private FragmentProfileBinding fragmentProfileBinding;
-
     public ProfileFragment() {
         // Required empty public constructor
     }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -38,7 +36,6 @@ public class ProfileFragment extends Fragment {
         View view = fragmentProfileBinding.getRoot();
         return view;
     }
-
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -46,7 +43,6 @@ public class ProfileFragment extends Fragment {
         addFragment();
         fragmentProfileBinding.viewPager.setPagingEnabled(false);
     }
-
     private void addFragment() {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
         adapter.addFragment(new PendingInviteFragment(),getString(R.string.invite_Sent_to_you));
@@ -59,7 +55,6 @@ public class ProfileFragment extends Fragment {
         super.onDestroy();
         fragmentProfileBinding = null;
     }
-
     public void getCurrentUserInformation(){
         ParseUser currentUser = ParseUser.getCurrentUser();
         ParseFile image = currentUser.getParseFile("profileImage");
