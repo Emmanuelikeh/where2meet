@@ -78,7 +78,6 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
         }
         @Override
         public void onClick(View v) {
-            Toast.makeText(context, "this clicks", Toast.LENGTH_SHORT).show();
             int position = getAdapterPosition();
             if (position != RecyclerView.NO_POSITION) {
                 SearchResult searchResult = searchResults.get(position);
