@@ -16,7 +16,7 @@ import android.widget.Toast;
 import com.applandeo.materialcalendarview.EventDay;
 import com.applandeo.materialcalendarview.listeners.OnDayClickListener;
 import com.example.where2meet.R;
-import com.example.where2meet.adapters.AcceptedInviteAdapter;
+import com.example.where2meet.adapters.InviteAdapter;
 import com.example.where2meet.databinding.FragmentCalendarBinding;
 import com.example.where2meet.models.Invite;
 import com.parse.FindCallback;
@@ -35,7 +35,7 @@ import java.util.List;
 public class CalendarFragment extends Fragment {
     public FragmentCalendarBinding fragmentCalendarBinding;
     protected List<Invite> inviteList;
-    protected AcceptedInviteAdapter adapter;
+    protected InviteAdapter adapter;
 
 
     public CalendarFragment() {
@@ -57,7 +57,7 @@ public class CalendarFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         inviteList = new ArrayList<>();
-        adapter = new AcceptedInviteAdapter(getContext(),inviteList);
+        adapter = new InviteAdapter(getContext(),inviteList, InviteAdapter.ScreenTypes.ACCEPTEDINVITE);
         fragmentCalendarBinding.rvUpcomingEvents.setAdapter(adapter);
         fragmentCalendarBinding.rvUpcomingEvents.setLayoutManager(new LinearLayoutManager(getContext()));
         fragmentCalendarBinding.cvUpcomingevents.setOnDayClickListener(new OnDayClickListener() {
