@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,16 +50,23 @@ public class CalendarFragment extends Fragment {
         return fragmentCalendarBinding.getRoot();
     }
     @Override
-    public void onDestroy() {
-        super.onDestroy();
-        fragmentCalendarBinding = null;
-    }
-    @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         inviteList = new ArrayList<>();
         adapter = new InviteAdapter(getContext(),inviteList, InviteAdapter.ScreenTypes.ACCEPTEDINVITE);
         fragmentCalendarBinding.rvUpcomingEvents.setAdapter(adapter);
+        fragmentCalendarBinding.swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                adapter.clear();
+                queryInvite();
+                fragmentCalendarBinding.swipeContainer.setRefreshing(false);
+            }
+        });
+        fragmentCalendarBinding.swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
         fragmentCalendarBinding.rvUpcomingEvents.setLayoutManager(new LinearLayoutManager(getContext()));
         fragmentCalendarBinding.cvUpcomingevents.setOnDayClickListener(new OnDayClickListener() {
             @SuppressLint("RestrictedApi")

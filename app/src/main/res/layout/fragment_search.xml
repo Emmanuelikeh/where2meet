@@ -54,7 +54,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal">
         <androidx.cardview.widget.CardView
             android:id="@+id/cvDistanceInKm"
             android:layout_width="wrap_content"
@@ -80,6 +81,13 @@
                     android:layout_marginStart="5dp"
                     tools:text="some stuff would go here ">
                 </TextView>
+                <ImageButton
+                    android:id="@+id/imgBtnDistanceInKm"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/ic_baseline_cancel_24">
+                </ImageButton>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
@@ -108,8 +116,52 @@
                     android:layout_height="wrap_content"
                     tools:text="some stuff would go here">
                 </TextView>
+                <ImageButton
+                    android:id="@+id/imgBtnAvailability"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/ic_baseline_cancel_24">
+                </ImageButton>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvSortSelection"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="0dp"
+            android:visibility="gone"
+            app:cardPreventCornerOverlap="false"
+            app:cardUseCompatPadding="true">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/tvSortSelection"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="some stuff would go here ">
+                </TextView>
+                <ImageButton
+                    android:id="@+id/imgBtnSortSelection"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/ic_baseline_cancel_24">
+                </ImageButton>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cvPriceTag"
@@ -136,6 +188,13 @@
                     android:layout_height="wrap_content"
                     tools:text="some stuff would go here ">
                 </TextView>
+                <ImageButton
+                    android:id="@+id/imgBtnPriceTag"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/ic_baseline_cancel_24">
+                </ImageButton>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
         <androidx.cardview.widget.CardView
@@ -163,30 +222,15 @@
                     android:layout_height="wrap_content"
                     tools:text="some stuff would go here ">
                 </TextView>
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cvSortSelection"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="0dp"
-            android:visibility="gone"
-            app:cardPreventCornerOverlap="false"
-            app:cardUseCompatPadding="true">
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <TextView
-                    android:id="@+id/tvSortSelection"
+                <ImageButton
+                    android:id="@+id/imgBtnCategory"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    tools:text="some stuff would go here ">
-                </TextView>
+                    android:layout_height="match_parent"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/ic_baseline_cancel_24">
+                </ImageButton>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
-
     </LinearLayout>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvSearchItems"
@@ -194,4 +238,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         />
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/loadingResultsAnimation"
+        android:visibility="visible"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_url="https://assets5.lottiefiles.com/packages/lf20_l9bcfk19.json"/>
 </LinearLayout>

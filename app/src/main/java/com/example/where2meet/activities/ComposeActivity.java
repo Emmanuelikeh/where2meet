@@ -1,6 +1,7 @@
 package com.example.where2meet.activities;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
@@ -44,6 +45,8 @@ public class ComposeActivity extends AppCompatActivity implements DatePickerDial
         activityComposeBinding = ActivityComposeBinding.inflate(getLayoutInflater());
         setContentView(activityComposeBinding.getRoot());
         String formattedAddress = getFormattedAddress();
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle("Compose Invite");
         activityComposeBinding.etComposeAddress.setText(formattedAddress);
         activityComposeBinding.btnFriendSelect.setOnClickListener(new View.OnClickListener() {
             @Override

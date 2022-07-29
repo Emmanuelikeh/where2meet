@@ -1,63 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="200dp"
     tools:context=".fragments.RescheduleDialogFragment">
+        <Button
+            android:id="@+id/btnSelectReschuduledDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:text="change Date"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvRescheduleDate" />
 
+        <TextView
+            android:id="@+id/tvRescheduleDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="30dp"
+            android:text="Select New Date"
+            android:textSize="@dimen/average_text_Size"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/btnSelectReschuduledDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_centerVertical="true"
-        android:layout_marginStart="34dp"
-        android:layout_marginTop="48dp"
-        android:text="change Date" />
+        <Button
+            android:id="@+id/btnUpdateNewDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:text="Send"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnSelectReschuduledDate" />
 
-    <TextView
-        android:id="@+id/tvRescheduleDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="14dp"
-        android:layout_marginTop="9dp"
-        android:text="Select New Date" />
+        <Button
+            android:id="@+id/btnCancelReschedule"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:text="Cancel"
+            app:layout_constraintEnd_toStartOf="@+id/btnUpdateNewDate"
+            app:layout_constraintTop_toBottomOf="@+id/btnSelectReschuduledDate" />
 
-    <Button
-        android:id="@+id/btnCancelReschedule"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="135dp"
-        android:layout_marginEnd="161dp"
-        android:text="Cancel" />
-
-    <Button
-        android:id="@+id/btnUpdateNewDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="128dp"
-        android:layout_marginEnd="29dp"
-        android:text="Send" />
-
-    <TextView
-        android:id="@+id/tvNewDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="181dp"
-        android:layout_marginTop="65dp"
-        android:layout_marginEnd="25dp"
-        tools:text="some random text would go here" />
-
-</RelativeLayout>
+        <TextView
+            android:id="@+id/tvNewDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="10dp"
+            android:textSize="@dimen/average_text_Size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/btnSelectReschuduledDate"
+            app:layout_constraintTop_toBottomOf="@+id/tvRescheduleDate"
+            tools:text="some random text would go here" />
+</androidx.constraintlayout.widget.ConstraintLayout>

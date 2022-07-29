@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.where2meet.R;
 import com.example.where2meet.adapters.FriendResultAdapter;
 import com.example.where2meet.databinding.ActivityFriendSearchBinding;
 import com.example.where2meet.fragments.UserFilterDialog;
@@ -53,6 +54,20 @@ public class FriendSearchActivity extends AppCompatActivity {
             public void onClick(View v) {
                 UserFilterDialog filterDialog = new UserFilterDialog();
                 filterDialog.show(getSupportFragmentManager(),"checkthis");
+            }
+        });
+        activityFriendSearchBinding.imgBtnDistance.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                activityFriendSearchBinding.cvDistance.setVisibility(View.GONE);
+                activityFriendSearchBinding.tvFilterInputs.setText("");
+            }
+        });
+        activityFriendSearchBinding.imgBtnSimilarPlaces.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                activityFriendSearchBinding.cvSimilarPlace.setVisibility(View.GONE);
+                activityFriendSearchBinding.tvSimilarPlaceInputs.setText("");
             }
         });
     }

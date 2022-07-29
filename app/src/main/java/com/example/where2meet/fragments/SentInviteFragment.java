@@ -62,6 +62,7 @@ public class SentInviteFragment extends Fragment {
         ParseQuery<Invite> query = ParseQuery.getQuery(Invite.class);
         // include data referred by user key
         query.include(Invite.KEY_RECEIVER);
+        query.addDescendingOrder("createdAt");
         query.whereEqualTo(Invite.KEY_SENDER, ParseUser.getCurrentUser());
         query.findInBackground(new FindCallback<Invite>() {
             @Override

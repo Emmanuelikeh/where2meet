@@ -1,5 +1,6 @@
 package com.example.where2meet.activities;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -56,13 +57,13 @@ public class ChatActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 openResheduleDialog();
-
             }
         });
         messagesList = new ArrayList<>();
         adapter = new ChatAdapter(ChatActivity.this,messagesList);
         activityChatBinding.rvChats.setAdapter(adapter);
         activityChatBinding.rvChats.setLayoutManager(new LinearLayoutManager(ChatActivity.this));
+        customChatTitle();
         chatAccessibility();
         queryChats();
         liveQueries();
@@ -127,10 +128,15 @@ public class ChatActivity extends AppCompatActivity{
         Date invitationDate = invite.getInvitationDate();
         Date date  = new Date();
         if(date.compareTo(invitationDate) > 0){
-            activityChatBinding.etChatBox.setVisibility(View.GONE);
+            activityChatBinding.etChatBox.setHint("You cannot continue messaging");
             activityChatBinding.btnSendChat.setVisibility(View.GONE);
             activityChatBinding.btnRescheduleInvite.setVisibility(View.GONE);
         }
+    }
+    private void customChatTitle(){
+        String chatTitle = getGroup().getTitle().toUpperCase() + " - " + getGroup().getSender().getUsername() + "&" + getGroup().getReceiver().getUsername();
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle(chatTitle);
     }
     private void queryChats() {
         ParseQuery<Messages> query = ParseQuery.getQuery(Messages.class);

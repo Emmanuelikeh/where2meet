@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -78,13 +79,17 @@ public class SearchFragment extends Fragment {
         fragmentSearchBinding.imgBtnPlaceFilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 PlaceFilterDialog placeFilterDialog = new PlaceFilterDialog();
                 placeFilterDialog.show(getChildFragmentManager(), "placeFilter");
             }
         });
+        fliterClickListeners(fragmentSearchBinding);
         saveLocation();
     }
+
     public void querySearchResults(String query, String hostLink){
+        fragmentSearchBinding.loadingResultsAnimation.setVisibility(View.VISIBLE);
         int limit = 10;
         AsyncHttpClient client = new AsyncHttpClient();
         RequestHeaders headers = new RequestHeaders();
@@ -107,6 +112,12 @@ public class SearchFragment extends Fragment {
                 try {
                     JSONArray results = jsonObject.getJSONArray("results");
                     searchResultList.addAll(SearchResult.fromJsonArray(results));
+                    if(fragmentSearchBinding != null && searchResultList.isEmpty()){
+                        fragmentSearchBinding.loadingResultsAnimation.setAnimationFromUrl("https://assets5.lottiefiles.com/packages/lf20_shvej97v.json");
+                    }
+                    if(!searchResultList.isEmpty() && fragmentSearchBinding != null){
+                        fragmentSearchBinding.loadingResultsAnimation.setVisibility(View.GONE);
+                    }
                     adapter.notifyDataSetChanged();
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -160,4 +171,42 @@ public class SearchFragment extends Fragment {
         MainActivity activity = (MainActivity) getActivity();
         return  activity.usersLocation;
     }
+
+    private void fliterClickListeners(FragmentSearchBinding fragmentSearchBinding) {
+        fragmentSearchBinding.imgBtnDistanceInKm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                removeFilter(fragmentSearchBinding.cvDistanceInKm);
+            }
+        });
+        fragmentSearchBinding.imgBtnAvailability.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                removeFilter(fragmentSearchBinding.cvAvailability);
+            }
+        });
+        fragmentSearchBinding.imgBtnCategory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                removeFilter(fragmentSearchBinding.cvCategory);
+            }
+        });
+        fragmentSearchBinding.imgBtnSortSelection.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                removeFilter(fragmentSearchBinding.cvSortSelection);
+            }
+        });
+        fragmentSearchBinding.imgBtnPriceTag.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                removeFilter(fragmentSearchBinding.cvPriceTag);
+            }
+        });
+    }
+
+    public void removeFilter(CardView cardView){
+        cardView.setVisibility(View.GONE);
+    }
+
 }

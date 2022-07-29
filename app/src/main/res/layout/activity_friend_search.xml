@@ -54,6 +54,7 @@
 
     <LinearLayout
         android:layout_width="wrap_content"
+        android:layout_marginTop="10dp"
         android:layout_height="wrap_content">
         <androidx.cardview.widget.CardView
             android:id="@+id/cvDistance"
@@ -85,13 +86,20 @@
                     android:paddingTop="8dp"
                     android:paddingRight="12dp"
                     tools:text="400km" />
+                <ImageButton
+                    android:id="@+id/imgBtnDistance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/ic_baseline_cancel_24">
+                </ImageButton>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cvSimilarPlace"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:visibility="gone"
             app:cardCornerRadius="12dp"
             app:cardElevation="0dp"
@@ -100,17 +108,22 @@
 
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/tvSimilarPlaceInputs"
-                    android:layout_width="wrap_content"
+                    android:layout_width="140dp"
                     android:layout_height="wrap_content"
                     android:maxWidth="260dp"
-                    android:paddingLeft="12dp"
-                    android:paddingRight="12dp"
-                    tools:text="similar place" />
+                    tools:text="@string/similar_places_message" />
+                <ImageButton
+                    android:id="@+id/imgBtnSimilarPlaces"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/ic_baseline_cancel_24">
+                </ImageButton>
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>

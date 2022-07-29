@@ -19,6 +19,7 @@ import com.example.where2meet.R;
 import com.example.where2meet.activities.ChatActivity;
 import com.example.where2meet.databinding.FragmentRescheduleDialogBinding;
 import com.example.where2meet.models.Invite;
+import com.example.where2meet.utils.ToastUtils;
 import com.parse.SaveCallback;
 
 import java.text.DateFormat;
@@ -78,7 +79,7 @@ public class RescheduleDialogFragment extends DialogFragment{
                 @Override
                 public void done(com.parse.ParseException e) {
                     if(e == null){
-                        Toast.makeText(getContext(),R.string.saved_success, Toast.LENGTH_SHORT).show();
+                        ToastUtils.presentMessageToUser(getContext(),"New Date set");
                         dismiss();
                     }
                 }

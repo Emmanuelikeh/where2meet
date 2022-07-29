@@ -220,4 +220,9 @@ public class InviteAdapter extends RecyclerView.Adapter<InviteAdapter.ViewHolder
             if(flag == 2){itemRequestedInviteBinding.tvInviteStatus.setText(R.string.accepted_status);}
         }
     }
+
+    public void clear() {
+        inviteList.clear();
+        notifyDataSetChanged();
+    }
 }
