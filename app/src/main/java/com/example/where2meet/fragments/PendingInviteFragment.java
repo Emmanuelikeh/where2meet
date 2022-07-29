@@ -11,12 +11,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.airbnb.lottie.LottieAnimationView;
 import com.example.where2meet.R;
-import com.example.where2meet.adapters.PendingInviteAdapter;
+import com.example.where2meet.adapters.InviteAdapter;
 import com.example.where2meet.databinding.FragmentPendingInviteBinding;
 import com.example.where2meet.models.Invite;
 import com.example.where2meet.utils.CustomItemAnimator;
@@ -32,7 +30,7 @@ import java.util.List;
 public class PendingInviteFragment extends Fragment {
     private FragmentPendingInviteBinding fragmentPendingInviteBinding;
     protected List<Invite> inviteList;
-    protected PendingInviteAdapter adapter;
+    protected InviteAdapter adapter;
 
 
 
@@ -48,7 +46,7 @@ public class PendingInviteFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         inviteList = new ArrayList<>();
-        adapter = new PendingInviteAdapter(getContext(),inviteList);
+        adapter = new InviteAdapter(getContext(),inviteList, InviteAdapter.ScreenTypes.PENDINGINVITE);
         fragmentPendingInviteBinding.rvPendingInvities.setAdapter(adapter);
         fragmentPendingInviteBinding.rvPendingInvities.setLayoutManager(new LinearLayoutManager(getContext()));
         fragmentPendingInviteBinding.rvPendingInvities.setItemAnimator(new CustomItemAnimator());
@@ -79,8 +77,13 @@ public class PendingInviteFragment extends Fragment {
 //                Log.e("pendingInviteFragment", e.toString());
                 inviteList.addAll(objects);
                 adapter.notifyDataSetChanged();
-                if(!inviteList.isEmpty()){
-                    fragmentPendingInviteBinding.tvNoInvites.setVisibility(View.GONE);
+                if(inviteList.isEmpty() && fragmentPendingInviteBinding != null){
+                    fragmentPendingInviteBinding.tvNoInvites.setVisibility(View.VISIBLE);
+                    fragmentPendingInviteBinding.animationView.setVisibility(View.GONE);
+                    fragmentPendingInviteBinding.animationView.setAnimationFromUrl("https://assets8.lottiefiles.com/packages/lf20_sxaqcuay.json");
+                    fragmentPendingInviteBinding.animationView.setVisibility(View.VISIBLE);
+                }
+                if(!inviteList.isEmpty() && fragmentPendingInviteBinding != null){
                     fragmentPendingInviteBinding.animationView.setVisibility(View.GONE);
                 }
             }

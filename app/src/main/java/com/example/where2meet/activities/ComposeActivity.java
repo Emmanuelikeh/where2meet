@@ -1,6 +1,7 @@
 package com.example.where2meet.activities;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
@@ -17,6 +18,7 @@ import com.example.where2meet.fragments.DatePicker;
 
 import com.example.where2meet.models.Invite;
 import com.example.where2meet.databinding.ActivityComposeBinding;
+import com.example.where2meet.utils.ToastUtils;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
@@ -43,8 +45,9 @@ public class ComposeActivity extends AppCompatActivity implements DatePickerDial
         activityComposeBinding = ActivityComposeBinding.inflate(getLayoutInflater());
         setContentView(activityComposeBinding.getRoot());
         String formattedAddress = getFormattedAddress();
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle("Compose Invite");
         activityComposeBinding.etComposeAddress.setText(formattedAddress);
-
         activityComposeBinding.btnFriendSelect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,7 +55,6 @@ public class ComposeActivity extends AppCompatActivity implements DatePickerDial
                 startActivityForResult(i, REQUEST_CODE);
             }
         });
-
         activityComposeBinding.btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,7 +67,6 @@ public class ComposeActivity extends AppCompatActivity implements DatePickerDial
             }
         });
     }
-
     private void querySend() throws ParseException {
         Date inviteDate = getDateAndTime();
         String title = activityComposeBinding.etComposeTitle.getText().toString();
@@ -84,10 +85,10 @@ public class ComposeActivity extends AppCompatActivity implements DatePickerDial
             @Override
             public void done(com.parse.ParseException e) {
                 if(e != null){
-                    Toast.makeText(ComposeActivity.this,getString(R.string.saving_error_message),Toast.LENGTH_SHORT).show();
+                    ToastUtils.presentMessageToUser(ComposeActivity.this,getString(R.string.saving_error_message));
                 }
                 else{
-                    Toast.makeText(ComposeActivity.this,getString(R.string.saved_success),Toast.LENGTH_SHORT).show();
+                    ToastUtils.presentMessageToUser(ComposeActivity.this,getString(R.string.saved_success));
                     Intent intent = new Intent(ComposeActivity.this, MainActivity.class);
                     startActivity(intent);
                     finish();
@@ -95,7 +96,6 @@ public class ComposeActivity extends AppCompatActivity implements DatePickerDial
             }
         });
     }
-
     private Date getDateAndTime() throws ParseException {
         String date = activityComposeBinding.tvComposeDate.getText().toString();
         String time = activityComposeBinding.tvComposeTime.getText().toString();
@@ -115,7 +115,8 @@ public class ComposeActivity extends AppCompatActivity implements DatePickerDial
                 receiversList.add(0,parseUser);
             }
             else{
-                Toast.makeText(this,getString(R.string.multiple_user_warning), Toast.LENGTH_SHORT).show();
+                receiversList.add(0,parseUser);
+                ToastUtils.presentMessageToUser(this,getString(R.string.multiple_user_warning));
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
@@ -123,19 +124,19 @@ public class ComposeActivity extends AppCompatActivity implements DatePickerDial
 
     private void inviteCheck() throws ParseException {
         if(receiversList.size() == 0){
-            Toast.makeText(ComposeActivity.this, "please select a user", Toast.LENGTH_SHORT).show();
+            ToastUtils.presentMessageToUser(ComposeActivity.this,getString(R.string.select_user) );
             return;
         }
         if(activityComposeBinding.etComposeTitle.getText().toString().equals("")){
-            Toast.makeText(ComposeActivity.this, "please enter a valid title", Toast.LENGTH_SHORT).show();
+            ToastUtils.presentMessageToUser(ComposeActivity.this, getString(R.string.enter_title));
             return;
         }
         if(activityComposeBinding.tvComposeDate.getText().toString().equals("")){
-            Toast.makeText(ComposeActivity.this, "please enter a valid date", Toast.LENGTH_SHORT).show();
+            ToastUtils.presentMessageToUser(ComposeActivity.this, getString(R.string.enter_date));
             return;
         }
         if(activityComposeBinding.tvComposeTime.getText().toString().equals("")){
-            Toast.makeText(ComposeActivity.this, "please enter a valid time", Toast.LENGTH_SHORT).show();
+            ToastUtils.presentMessageToUser(ComposeActivity.this, getString(R.string.enter_title));
             return;
         }
         querySend();

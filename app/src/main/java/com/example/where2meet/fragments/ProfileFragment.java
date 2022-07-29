@@ -15,6 +15,7 @@ import com.bumptech.glide.Glide;
 import com.example.where2meet.adapters.ViewPagerAdapter;
 import com.example.where2meet.R;
 import com.example.where2meet.databinding.FragmentProfileBinding;
+import com.example.where2meet.utils.GlideUtil;
 import com.parse.ParseFile;
 import com.parse.ParseUser;
 
@@ -24,11 +25,9 @@ import java.util.Calendar;
 
 public class ProfileFragment extends Fragment {
     private FragmentProfileBinding fragmentProfileBinding;
-
     public ProfileFragment() {
         // Required empty public constructor
     }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -37,7 +36,6 @@ public class ProfileFragment extends Fragment {
         View view = fragmentProfileBinding.getRoot();
         return view;
     }
-
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -45,7 +43,6 @@ public class ProfileFragment extends Fragment {
         addFragment();
         fragmentProfileBinding.viewPager.setPagingEnabled(false);
     }
-
     private void addFragment() {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
         adapter.addFragment(new PendingInviteFragment(),getString(R.string.invite_Sent_to_you));
@@ -58,19 +55,12 @@ public class ProfileFragment extends Fragment {
         super.onDestroy();
         fragmentProfileBinding = null;
     }
-
     public void getCurrentUserInformation(){
         ParseUser currentUser = ParseUser.getCurrentUser();
         ParseFile image = currentUser.getParseFile("profileImage");
         fragmentProfileBinding.tvUsersLocation.setText(ParseUser.getCurrentUser().getEmail());
         fragmentProfileBinding.tvCurrentUsersName.setText(currentUser.getUsername());
-        if(image == null){
-            Glide.with(getContext()).load(R.drawable.ic_baseline_person_24).override(100,200).centerCrop().into(fragmentProfileBinding.ivCurrentUserProfileImage);
-        }
-        else{
-            Glide.with(getContext()).load(image.getUrl()).override(96,96).into(fragmentProfileBinding.ivCurrentUserProfileImage);
-        }
-
+        GlideUtil.getImage(96,96, fragmentProfileBinding.ivCurrentUserProfileImage, image,getContext());
     }
 
 

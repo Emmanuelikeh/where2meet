@@ -1,5 +1,6 @@
 package com.example.where2meet.activities;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -18,6 +19,7 @@ import com.example.where2meet.fragments.RescheduleDialogFragment;
 import com.example.where2meet.models.Invite;
 import com.example.where2meet.models.Messages;
 import com.example.where2meet.utils.CustomItemAnimator;
+import com.example.where2meet.utils.ToastUtils;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
@@ -54,15 +56,14 @@ public class ChatActivity extends AppCompatActivity{
         activityChatBinding.btnRescheduleInvite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(ChatActivity.this,R.string.item_clicked,Toast.LENGTH_SHORT).show();
                 openResheduleDialog();
-
             }
         });
         messagesList = new ArrayList<>();
         adapter = new ChatAdapter(ChatActivity.this,messagesList);
         activityChatBinding.rvChats.setAdapter(adapter);
         activityChatBinding.rvChats.setLayoutManager(new LinearLayoutManager(ChatActivity.this));
+        customChatTitle();
         chatAccessibility();
         queryChats();
         liveQueries();
@@ -112,7 +113,7 @@ public class ChatActivity extends AppCompatActivity{
             @Override
             public void done(ParseException e) {
                 if(e != null){
-                    Toast.makeText(ChatActivity.this, getString(R.string.sending_failure),Toast.LENGTH_SHORT).show();
+                    ToastUtils.presentMessageToUser(ChatActivity.this,getString(R.string.sending_failure));
                     return;
                 }
                 activityChatBinding.etChatBox.setText("");
@@ -127,11 +128,15 @@ public class ChatActivity extends AppCompatActivity{
         Date invitationDate = invite.getInvitationDate();
         Date date  = new Date();
         if(date.compareTo(invitationDate) > 0){
-            Log.i("Dates", "value : " + date.compareTo(invitationDate));
-            activityChatBinding.etChatBox.setVisibility(View.GONE);
+            activityChatBinding.etChatBox.setHint("You cannot continue messaging");
             activityChatBinding.btnSendChat.setVisibility(View.GONE);
             activityChatBinding.btnRescheduleInvite.setVisibility(View.GONE);
         }
+    }
+    private void customChatTitle(){
+        String chatTitle = getGroup().getTitle().toUpperCase() + " - " + getGroup().getSender().getUsername() + "&" + getGroup().getReceiver().getUsername();
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle(chatTitle);
     }
     private void queryChats() {
         ParseQuery<Messages> query = ParseQuery.getQuery(Messages.class);
@@ -142,7 +147,7 @@ public class ChatActivity extends AppCompatActivity{
             @Override
             public void done(List<Messages> objects, ParseException e) {
                 if(e != null){
-                    Toast.makeText(ChatActivity.this,getString(R.string.error_info), Toast.LENGTH_SHORT).show();
+                    ToastUtils.presentMessageToUser(ChatActivity.this,getString(R.string.error_info));
                     return;
                 }
                 messagesList.addAll(objects);

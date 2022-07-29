@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,7 +17,7 @@ import android.widget.Toast;
 import com.applandeo.materialcalendarview.EventDay;
 import com.applandeo.materialcalendarview.listeners.OnDayClickListener;
 import com.example.where2meet.R;
-import com.example.where2meet.adapters.AcceptedInviteAdapter;
+import com.example.where2meet.adapters.InviteAdapter;
 import com.example.where2meet.databinding.FragmentCalendarBinding;
 import com.example.where2meet.models.Invite;
 import com.parse.FindCallback;
@@ -35,13 +36,12 @@ import java.util.List;
 public class CalendarFragment extends Fragment {
     public FragmentCalendarBinding fragmentCalendarBinding;
     protected List<Invite> inviteList;
-    protected AcceptedInviteAdapter adapter;
+    protected InviteAdapter adapter;
 
 
     public CalendarFragment() {
         // Required empty public constructor
     }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -49,19 +49,24 @@ public class CalendarFragment extends Fragment {
         fragmentCalendarBinding = FragmentCalendarBinding.inflate(inflater,container,false);
         return fragmentCalendarBinding.getRoot();
     }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        fragmentCalendarBinding = null;
-    }
-
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         inviteList = new ArrayList<>();
-        adapter = new AcceptedInviteAdapter(getContext(),inviteList);
+        adapter = new InviteAdapter(getContext(),inviteList, InviteAdapter.ScreenTypes.ACCEPTEDINVITE);
         fragmentCalendarBinding.rvUpcomingEvents.setAdapter(adapter);
+        fragmentCalendarBinding.swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                adapter.clear();
+                queryInvite();
+                fragmentCalendarBinding.swipeContainer.setRefreshing(false);
+            }
+        });
+        fragmentCalendarBinding.swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
         fragmentCalendarBinding.rvUpcomingEvents.setLayoutManager(new LinearLayoutManager(getContext()));
         fragmentCalendarBinding.cvUpcomingevents.setOnDayClickListener(new OnDayClickListener() {
             @SuppressLint("RestrictedApi")
@@ -75,7 +80,6 @@ public class CalendarFragment extends Fragment {
         });
         queryInvite();
     }
-
     private void scrollToPosition(EventDay eventDay) {
         int position;
         Calendar calendar = eventDay.getCalendar();
@@ -95,7 +99,6 @@ public class CalendarFragment extends Fragment {
                 cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR) &&
                 cal1.get(Calendar.DAY_OF_YEAR) == cal2.get(Calendar.DAY_OF_YEAR);
     }
-
     private void updateCalender(List<Invite> inviteList) {
         List<Calendar> upComingEventsList = new ArrayList<>();
         List<EventDay> events = new ArrayList<>();
@@ -103,7 +106,7 @@ public class CalendarFragment extends Fragment {
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(invite.getInvitationDate());
             upComingEventsList.add(calendar);
-            events.add(new EventDay(calendar, R.drawable.filter));
+            events.add(new EventDay(calendar, R.drawable.three_dots));
         }
         fragmentCalendarBinding.cvUpcomingevents.setEvents(events);
         fragmentCalendarBinding.cvUpcomingevents.setHighlightedDays(upComingEventsList);
@@ -112,7 +115,6 @@ public class CalendarFragment extends Fragment {
         fragmentCalendarBinding.cvUpcomingevents.setVisibility(View.GONE);
         fragmentCalendarBinding.cvUpcomingevents.setVisibility(View.VISIBLE);
     }
-
     private void queryInvite() {
         ParseQuery<Invite> sender = ParseQuery.getQuery(Invite.class);
         sender.whereEqualTo(Invite.KEY_RECEIVER,ParseUser.getCurrentUser());

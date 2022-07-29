@@ -64,7 +64,6 @@ public class DetailActivity extends AppCompatActivity {
         activityDetailBinding.rvReviews.setAdapter(adapter);
         activityDetailBinding.rvReviews.setLayoutManager(new LinearLayoutManager(DetailActivity.this));
         activityDetailBinding.rvReviews.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
-
         httpUtils.getRequest(reviewLink, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Headers headers, JSON json) {
@@ -81,13 +80,11 @@ public class DetailActivity extends AppCompatActivity {
             }
         });
     }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.detail_menu,menu);
         return true;
     }
-
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if(item.getItemId() == R.id.flBtnInvite){
@@ -101,7 +98,6 @@ public class DetailActivity extends AppCompatActivity {
     private String formHostLink(String id, String baseLink, String endLink) {
         return baseLink + id + endLink;
     }
-
     private void queryOtherDetails(String hostLink) {
         httpUtils.getRequest(hostLink, new JsonHttpResponseHandler() {
             @Override

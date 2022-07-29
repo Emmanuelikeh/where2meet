@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.where2meet.R;
 import com.example.where2meet.adapters.FriendResultAdapter;
 import com.example.where2meet.databinding.ActivityFriendSearchBinding;
 import com.example.where2meet.fragments.UserFilterDialog;
@@ -48,12 +49,25 @@ public class FriendSearchActivity extends AppCompatActivity {
                 }
             }
         });
-
         activityFriendSearchBinding.btnFilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 UserFilterDialog filterDialog = new UserFilterDialog();
                 filterDialog.show(getSupportFragmentManager(),"checkthis");
+            }
+        });
+        activityFriendSearchBinding.imgBtnDistance.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                activityFriendSearchBinding.cvDistance.setVisibility(View.GONE);
+                activityFriendSearchBinding.tvFilterInputs.setText("");
+            }
+        });
+        activityFriendSearchBinding.imgBtnSimilarPlaces.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                activityFriendSearchBinding.cvSimilarPlace.setVisibility(View.GONE);
+                activityFriendSearchBinding.tvSimilarPlaceInputs.setText("");
             }
         });
     }
@@ -74,15 +88,11 @@ public class FriendSearchActivity extends AppCompatActivity {
             }
         });
     }
-
-
     private void performFriendSearch() throws JSONException {
         String friendLook =  activityFriendSearchBinding.etFriendSearchBox.getText().toString();
         adapter.clear();
         querySearch(friendLook);
     }
-
-
     private void querySearch(String friend) throws JSONException {
         String currentUser = ParseUser.getCurrentUser().getUsername();
         String kilometre = activityFriendSearchBinding.tvFilterInputs.getText().toString();
@@ -96,7 +106,6 @@ public class FriendSearchActivity extends AppCompatActivity {
             double km = Double.parseDouble(kilometre);
             query.whereWithinKilometers("LastRecordedLocation",geoPoint,km);
         }
-
         if(!search.equals("")){
             ParseUser user = ParseUser.getCurrentUser();
             JSONArray visitedJsonArray =   user.getJSONArray("Visited");
@@ -105,7 +114,6 @@ public class FriendSearchActivity extends AppCompatActivity {
                 query.whereContainedIn("Visited", visitedArray);
             }
         }
-
         query.findInBackground(new FindCallback<ParseUser>() {
             @Override
             public void done(List<ParseUser> objects, ParseException e) {
@@ -116,23 +124,16 @@ public class FriendSearchActivity extends AppCompatActivity {
             }
         });
     }
-
     private ArrayList<String> convertToArray(JSONArray visitedJsonArray) throws JSONException {
         ArrayList<String> listdata = new ArrayList<String>();
         for(int i=0; i< visitedJsonArray.length(); i++){
             listdata.add(visitedJsonArray.getString(i));
         }
         return listdata;
-
     }
-
     public ParseGeoPoint getCurrentUsersLocation(ParseUser user){
               return user.getParseGeoPoint("LastRecordedLocation");
         }
-
-
-
-
 }
 
 
